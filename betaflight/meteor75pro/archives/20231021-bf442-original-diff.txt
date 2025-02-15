@@ -1,0 +1,130 @@
+# 
+
+# diff all
+
+# version
+# Betaflight / STM32F411 (S411) 4.4.2 Jun  1 2023 / 02:20:34 (23d066d08) MSP API: 1.45
+
+# config: YES
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name CRAZYBEEF4SX1280
+manufacturer_id HAMO
+mcu_id 003000465547501620333332
+signature 
+
+# feature
+feature -RX_SERIAL
+feature RX_SPI
+
+# serial
+serial 0 128 115200 57600 0 2000000
+serial 1 131073 115200 57600 0 115200
+
+# master
+set gyro_lpf1_static_hz = 300
+set gyro_lpf2_static_hz = 600
+set dyn_notch_count = 2
+set dyn_notch_min_hz = 125
+set dyn_notch_max_hz = 700
+set gyro_lpf1_dyn_min_hz = 300
+set gyro_lpf1_dyn_max_hz = 600
+set acc_lpf_hz = 10
+set acc_calibration = -41,-18,-7,1
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set motor_poles = 12
+set yaw_motors_reversed = ON
+set simplified_gyro_filter_multiplier = 120
+set osd_link_quality_pos = 2135
+set osd_link_tx_power_pos = 3597
+set osd_rssi_dbm_pos = 34
+set osd_tim_2_pos = 2562
+set osd_flymode_pos = 2616
+set osd_throttle_pos = 2583
+set osd_warnings_pos = 14805
+set osd_avg_cell_voltage_pos = 2594
+set osd_core_temp_pos = 3630
+set osd_total_flights_pos = 422
+set osd_sys_vtx_temp_pos = 66
+set osd_displayport_device = MSP
+set vcd_video_system = HD
+set expresslrs_uid = 0,0,116,244,188,188
+set expresslrs_rate_index = 1
+set rpm_filter_harmonics = 2
+
+profile 0
+
+# profile 0
+set dterm_lpf1_dyn_min_hz = 90
+set dterm_lpf1_dyn_max_hz = 180
+set dterm_lpf1_static_hz = 90
+set dterm_lpf2_static_hz = 180
+set vbat_sag_compensation = 100
+set anti_gravity_gain = 90
+set iterm_relax_cutoff = 5
+set pidsum_limit = 1000
+set pidsum_limit_yaw = 1000
+set yaw_lowpass_hz = 0
+set p_pitch = 75
+set i_pitch = 134
+set d_pitch = 76
+set f_pitch = 199
+set p_roll = 71
+set i_roll = 127
+set d_roll = 67
+set f_roll = 191
+set p_yaw = 71
+set i_yaw = 127
+set f_yaw = 191
+set d_min_roll = 67
+set d_min_pitch = 76
+set thrust_linear = 20
+set feedforward_averaging = 2_POINT
+set feedforward_smooth_factor = 65
+set feedforward_jitter_factor = 10
+set dyn_idle_min_rpm = 35
+set simplified_master_multiplier = 160
+set simplified_d_gain = 140
+set simplified_dmax_gain = 0
+set simplified_dterm_filter_multiplier = 120
+
+profile 1
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+# rateprofile 0
+set roll_rc_rate = 1
+set pitch_rc_rate = 1
+set yaw_rc_rate = 1
+set roll_expo = 70
+set pitch_expo = 70
+set yaw_expo = 70
+set roll_srate = 100
+set pitch_srate = 100
+set yaw_srate = 70
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration
+save
+# 

@@ -1,0 +1,144 @@
+# Setting untuk semua quad #
+
+## AUX 1 : Arming
+## AUX 2 : Pre Arm
+## AUX 3 : Modes : Angle, Air, Turtle
+## AUX 4 : GPS Rescue / Failsafe
+## AUX 5 : Beeper
+
+## Setting Switch Mode di channel 5 / AUX 1 ##
+## https://github.com/betaflight/betaflight/blob/master/docs/Modes.md
+## aux <slot> <mode> <aux1 = 0> <low> <high>
+
+### Arming : Channel 5 / AUX 1 ###
+aux 0 0 0 1600 2100 0 0
+
+### Pre Arm : Channel 6 / AUX 2 ###
+aux 1 36 1 1800 2100 0 0
+
+### Angle Mode : Channel 7 / AUX 3 ###
+aux 2 1 2 900 1300 0 0
+
+### Turtle Mode  : Channel 7 / AUX 3 ###
+aux 3 35 2 1800 2100 0 0
+
+### GPS Rescue : Channel 8 / AUX 4 ###
+aux 4 46 3 1400 1700 0 0
+
+### Failsafe : Channel 8 / AUX 4 ###
+aux 5 27 3 1800 2100 0 0
+
+### Beeper : Channel 9 / AUX 5 ###
+aux 6 13 4 1700 2100 0 0
+
+
+## VTX Power via Switch di channel 8 / AUX 4 ##
+## https://github.com/betaflight/betaflight/wiki/VTX-CLI-Settings
+## vtx <index> <aux 4 = 3> <vtx band> <vtx channel> <vtx_power> <low> <high>
+
+vtx 0 3 0 0 1 900 1200   # power  25 mW
+vtx 1 3 0 0 3 1300 1700  # power 200 mW
+vtx 2 3 0 0 4 1800 2100  # power 400 mW
+
+# Channel E6
+set vtx_band = 3
+set vtx_channel = 6
+set vtx_power = 1
+set vtx_freq = 5905
+set vcd_video_system = PAL
+
+## OSD Analog ##
+set osd_warn_batt_not_full = OFF
+set osd_warn_no_gps_rescue = OFF
+set osd_warn_gps_rescue_disabled = OFF
+set osd_warn_link_quality = ON
+set osd_warn_rssi_dbm = ON
+set osd_link_quality_alarm = 30
+set osd_rssi_dbm_alarm = -100
+set osd_vbat_pos = 417
+set osd_rssi_pos = 464
+set osd_link_quality_pos = 2433
+set osd_link_tx_power_pos = 2497
+set osd_rssi_dbm_pos = 2465
+set osd_tim_1_pos = 33
+set osd_tim_2_pos = 2135
+set osd_flymode_pos = 2167
+set osd_throttle_pos = 2487
+set osd_vtx_channel_pos = 2113
+set osd_ah_sbar_pos = 4302
+set osd_ah_pos = 4174
+set osd_current_pos = 480
+set osd_mah_drawn_pos = 2519
+set osd_craft_name_pos = 2123
+set osd_pidrate_profile_pos = 4330
+set osd_warnings_pos = 2378
+set osd_avg_cell_voltage_pos = 2455
+set osd_battery_usage_pos = 81
+set osd_disarmed_pos = 2412
+set osd_core_temp_pos = 2145
+set osd_rate_profile_name_pos = 129
+set osd_stat_max_spd = OFF
+set osd_stat_endbatt = ON
+set osd_stat_battery = ON
+set osd_stat_min_rssi = OFF
+set osd_stat_bbox = OFF
+set osd_stat_bb_no = OFF
+set osd_stat_min_link_quality = ON
+set osd_stat_total_time = ON
+set osd_stat_min_rssi_dbm = ON
+
+## OSD Digital ##
+set osd_canvas_width = 53
+set osd_canvas_height = 20
+set osd_link_quality_alarm = 30
+set osd_rssi_dbm_alarm = -100
+set osd_vbat_pos = 417
+set osd_rssi_pos = 464
+set osd_link_quality_pos = 2497
+set osd_link_tx_power_pos = 2561
+set osd_rssi_dbm_pos = 2529
+set osd_tim_1_pos = 33
+set osd_tim_2_pos = 3109
+set osd_flymode_pos = 3141
+set osd_throttle_pos = 3565
+set osd_vtx_channel_pos = 33
+set osd_current_pos = 480
+set osd_mah_drawn_pos = 3597
+set osd_craft_name_pos = 2103
+set osd_pilot_name_pos = 2081
+set osd_gps_sats_show_hdop = ON
+set osd_gps_speed_pos = 2145
+set osd_gps_lon_pos = 2241
+set osd_gps_lat_pos = 2273
+set osd_gps_sats_pos = 2464
+set osd_home_dir_pos = 2102
+set osd_home_dist_pos = 2177
+set osd_altitude_pos = 2209
+set osd_power_pos = 55
+set osd_pidrate_profile_pos = 4330
+set osd_warnings_pos = 2389
+set osd_avg_cell_voltage_pos = 3533
+set osd_battery_usage_pos = 81
+set osd_disarmed_pos = 2422
+set osd_esc_tmp_pos = 88
+set osd_flip_arrow_pos = 3173
+set osd_core_temp_pos = 2113
+set osd_rate_profile_name_pos = 129
+set osd_sys_vtx_temp_pos = 33
+set osd_gps_sats_show_hdop = ON
+set osd_displayport_device = MSP
+set vcd_video_system = HD
+
+# Re-enable Gyro for Tuning
+set blackbox_disable_pids = OFF
+set blackbox_disable_rc = OFF
+set blackbox_disable_setpoint = OFF
+set blackbox_disable_bat = OFF
+set blackbox_disable_mag = OFF
+set blackbox_disable_alt = OFF
+set blackbox_disable_rssi = OFF
+set blackbox_disable_gyro = OFF
+set blackbox_disable_acc = OFF
+set blackbox_disable_debug = OFF
+set blackbox_disable_motors = OFF
+set blackbox_disable_gps = OFF

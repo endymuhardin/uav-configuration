@@ -1,0 +1,186 @@
+diff all
+
+# version
+# Betaflight / STM32F7X2 (S7X2) 4.5.0 Dec 25 2023 / 09:33:46 (22ce58655) MSP API: 1.46
+# config rev: 9bf017a
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name HGLRCF722E
+manufacturer_id HGLR
+mcu_id 004400243338511432343933
+signature 
+
+# name: Turaes
+
+# feature
+feature GPS
+feature TELEMETRY
+feature LED_STRIP
+feature OSD
+feature ESC_SENSOR
+
+# serial
+serial 0 64 115200 57600 0 115200
+serial 1 2 115200 57600 0 115200
+serial 3 131073 115200 57600 0 115200
+serial 5 1024 115200 57600 0 115200
+
+# aux
+aux 0 0 0 1525 2100 0 0
+aux 1 1 2 900 1300 0 0
+aux 2 27 3 1800 2100 0 0
+aux 3 46 3 1400 1700 0 0
+aux 4 13 4 1700 2100 0 0
+aux 5 35 2 1800 2100 0 0
+aux 6 36 1 1800 2100 0 0
+
+# rxfail
+rxfail 3 s 1400
+rxfail 6 s 1000
+
+# master
+set dyn_notch_count = 1
+set dyn_notch_q = 500
+set acc_calibration = -59,42,473,1
+set rc_smoothing_auto_factor = 65
+set blackbox_sample_rate = 1/16
+set blackbox_disable_pids = ON
+set blackbox_disable_rc = ON
+set blackbox_disable_setpoint = ON
+set blackbox_disable_bat = ON
+set blackbox_disable_alt = ON
+set blackbox_disable_rssi = ON
+set blackbox_disable_debug = ON
+set blackbox_disable_motors = ON
+set blackbox_disable_gps = ON
+set dshot_bidir = ON
+set motor_output_reordering = 3,2,1,0,4,5,6,7
+set failsafe_procedure = GPS-RESCUE
+set yaw_motors_reversed = ON
+set gps_sbas_mode = AUTO
+set gps_ublox_use_galileo = ON
+set gps_set_home_point_once = ON
+set gps_rescue_throttle_hover = 1400
+set gps_rescue_allow_arming_without_fix = ON
+set osd_warn_bitmask = 57341
+set osd_link_quality_alarm = 30
+set osd_rssi_dbm_alarm = -100
+set osd_vbat_pos = 417
+set osd_rssi_pos = 464
+set osd_link_quality_pos = 2497
+set osd_link_tx_power_pos = 2561
+set osd_rssi_dbm_pos = 2529
+set osd_rsnr_pos = 234
+set osd_tim_1_pos = 33
+set osd_tim_2_pos = 3109
+set osd_remaining_time_estimate_pos = 234
+set osd_flymode_pos = 3141
+set osd_anti_gravity_pos = 234
+set osd_g_force_pos = 234
+set osd_throttle_pos = 3565
+set osd_vtx_channel_pos = 33
+set osd_crosshairs_pos = 205
+set osd_ah_sbar_pos = 206
+set osd_ah_pos = 78
+set osd_current_pos = 480
+set osd_mah_drawn_pos = 3597
+set osd_wh_drawn_pos = 234
+set osd_motor_diag_pos = 234
+set osd_craft_name_pos = 2103
+set osd_pilot_name_pos = 2081
+set osd_gps_speed_pos = 2145
+set osd_gps_lon_pos = 2241
+set osd_gps_lat_pos = 2273
+set osd_gps_sats_pos = 2464
+set osd_home_dir_pos = 2102
+set osd_home_dist_pos = 2177
+set osd_flight_dist_pos = 384
+set osd_compass_bar_pos = 234
+set osd_altitude_pos = 2209
+set osd_pid_roll_pos = 234
+set osd_pid_pitch_pos = 234
+set osd_pid_yaw_pos = 234
+set osd_debug_pos = 234
+set osd_power_pos = 55
+set osd_pidrate_profile_pos = 4330
+set osd_warnings_pos = 2389
+set osd_avg_cell_voltage_pos = 3533
+set osd_pit_ang_pos = 234
+set osd_rol_ang_pos = 234
+set osd_battery_usage_pos = 81
+set osd_disarmed_pos = 2422
+set osd_nheading_pos = 234
+set osd_up_down_reference_pos = 205
+set osd_ready_mode_pos = 234
+set osd_esc_tmp_pos = 88
+set osd_esc_rpm_pos = 234
+set osd_esc_rpm_freq_pos = 234
+set osd_rtc_date_time_pos = 234
+set osd_adjustment_range_pos = 234
+set osd_flip_arrow_pos = 3173
+set osd_core_temp_pos = 2113
+set osd_log_status_pos = 234
+set osd_stick_overlay_left_pos = 234
+set osd_stick_overlay_right_pos = 234
+set osd_rate_profile_name_pos = 129
+set osd_pid_profile_name_pos = 234
+set osd_profile_name_pos = 234
+set osd_rcchannels_pos = 234
+set osd_camera_frame_pos = 35
+set osd_efficiency_pos = 234
+set osd_total_flights_pos = 234
+set osd_aux_pos = 234
+set osd_sys_goggle_voltage_pos = 234
+set osd_sys_vtx_voltage_pos = 234
+set osd_sys_bitrate_pos = 234
+set osd_sys_delay_pos = 1479
+set osd_sys_distance_pos = 234
+set osd_sys_lq_pos = 234
+set osd_sys_goggle_dvr_pos = 234
+set osd_sys_vtx_dvr_pos = 234
+set osd_sys_warnings_pos = 234
+set osd_sys_vtx_temp_pos = 33
+set osd_sys_fan_speed_pos = 234
+set osd_stat_bitmask = 27266788
+set osd_gps_sats_show_hdop = ON
+set osd_displayport_device = MSP
+set vcd_video_system = HD
+set craft_name = Turaes
+set pilot_name = SimeutFPV
+set altitude_source = BARO_ONLY
+
+profile 0
+
+profile 1
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+# rateprofile 0
+set roll_srate = 50
+set pitch_srate = 50
+set yaw_srate = 50
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration
+save
+# 

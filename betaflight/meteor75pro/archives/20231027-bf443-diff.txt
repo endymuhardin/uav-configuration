@@ -1,0 +1,166 @@
+diff all
+
+# version
+# Betaflight / STM32F411 (S411) 4.4.2 Jun  1 2023 / 02:20:34 (23d066d08) MSP API: 1.45
+
+# config: YES
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name CRAZYBEEF4SX1280
+manufacturer_id HAMO
+mcu_id 003000465547501620333332
+signature 
+
+# name: Meteor75Pro
+
+# feature
+feature -RX_SERIAL
+feature -TELEMETRY
+feature RX_SPI
+
+# serial
+serial 0 128 115200 57600 0 2000000
+serial 1 131073 115200 57600 0 115200
+
+# aux
+aux 0 0 0 1600 2100 0 0
+aux 1 1 2 900 1300 0 0
+aux 2 27 3 1800 2100 0 0
+aux 3 13 4 1700 2100 0 0
+aux 4 35 2 1800 2100 0 0
+aux 5 36 1 1800 2100 0 0
+
+# master
+set gyro_lpf1_static_hz = 300
+set gyro_lpf2_static_hz = 600
+set dyn_notch_count = 2
+set dyn_notch_min_hz = 125
+set dyn_notch_max_hz = 700
+set gyro_lpf1_dyn_min_hz = 300
+set gyro_lpf1_dyn_max_hz = 600
+set acc_lpf_hz = 10
+set acc_calibration = -41,-18,-7,1
+set blackbox_sample_rate = 1/8
+set blackbox_device = SERIAL
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set motor_poles = 12
+set vbat_min_cell_voltage = 350
+set vbat_warning_cell_voltage = 360
+set yaw_motors_reversed = ON
+set pid_process_denom = 4
+set simplified_gyro_filter_multiplier = 120
+set osd_link_quality_alarm = 30
+set osd_rssi_dbm_alarm = -100
+set osd_vbat_pos = 417
+set osd_rssi_pos = 464
+set osd_link_quality_pos = 2497
+set osd_link_tx_power_pos = 2561
+set osd_rssi_dbm_pos = 2529
+set osd_tim_1_pos = 33
+set osd_tim_2_pos = 3109
+set osd_flymode_pos = 3141
+set osd_throttle_pos = 3565
+set osd_vtx_channel_pos = 33
+set osd_current_pos = 480
+set osd_mah_drawn_pos = 3597
+set osd_craft_name_pos = 2100
+set osd_pilot_name_pos = 2081
+set osd_gps_speed_pos = 97
+set osd_gps_lon_pos = 193
+set osd_gps_lat_pos = 225
+set osd_gps_sats_pos = 416
+set osd_home_dir_pos = 54
+set osd_home_dist_pos = 129
+set osd_altitude_pos = 161
+set osd_power_pos = 55
+set osd_pidrate_profile_pos = 4330
+set osd_warnings_pos = 2389
+set osd_avg_cell_voltage_pos = 3533
+set osd_battery_usage_pos = 81
+set osd_disarmed_pos = 2422
+set osd_esc_tmp_pos = 88
+set osd_flip_arrow_pos = 3173
+set osd_core_temp_pos = 2113
+set osd_rate_profile_name_pos = 129
+set osd_total_flights_pos = 422
+set osd_sys_vtx_temp_pos = 33
+set osd_gps_sats_show_hdop = ON
+set osd_displayport_device = MSP
+set debug_mode = GYRO_SCALED
+set vcd_video_system = HD
+set expresslrs_uid = 0,0,116,244,188,188
+set expresslrs_rate_index = 1
+set rpm_filter_harmonics = 2
+set craft_name = Meteor75Pro
+set pilot_name = SimeutFPV
+
+profile 0
+
+# profile 0
+set dterm_lpf1_dyn_min_hz = 90
+set dterm_lpf1_dyn_max_hz = 180
+set dterm_lpf1_static_hz = 90
+set dterm_lpf2_static_hz = 180
+set vbat_sag_compensation = 100
+set anti_gravity_gain = 90
+set iterm_relax_cutoff = 5
+set pidsum_limit = 1000
+set pidsum_limit_yaw = 1000
+set yaw_lowpass_hz = 0
+set p_pitch = 75
+set i_pitch = 134
+set d_pitch = 76
+set f_pitch = 199
+set p_roll = 71
+set i_roll = 127
+set d_roll = 67
+set f_roll = 191
+set p_yaw = 71
+set i_yaw = 127
+set f_yaw = 191
+set d_min_roll = 67
+set d_min_pitch = 76
+set thrust_linear = 20
+set feedforward_averaging = 2_POINT
+set feedforward_smooth_factor = 65
+set feedforward_jitter_factor = 10
+set dyn_idle_min_rpm = 35
+set simplified_master_multiplier = 160
+set simplified_d_gain = 140
+set simplified_dmax_gain = 0
+set simplified_dterm_filter_multiplier = 120
+
+profile 1
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+# rateprofile 0
+set roll_srate = 50
+set pitch_srate = 50
+set yaw_srate = 50
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration
+save
+# 

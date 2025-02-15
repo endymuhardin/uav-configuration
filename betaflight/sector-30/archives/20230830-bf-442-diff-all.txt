@@ -1,0 +1,137 @@
+diff all
+
+# version
+# Betaflight / STM32F405 (S405) 4.4.2 Jun  1 2023 / 06:15:35 (23d066d08) MSP API: 1.45
+
+# config: YES
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name MATEKF405CTR
+manufacturer_id MTKS
+mcu_id 005900444253500b2034354e
+signature 
+
+# name: Papatong
+
+# feature
+feature GPS
+
+# serial
+serial 1 2 115200 115200 0 115200
+serial 3 64 115200 57600 0 115200
+serial 4 131073 115200 57600 0 115200
+
+# aux
+aux 0 0 0 1525 2100 0 0
+aux 1 1 2 900 1300 0 0
+aux 2 27 3 1800 2100 0 0
+aux 3 46 3 1300 1700 0 0
+aux 4 13 4 1650 2100 0 0
+aux 5 35 2 1600 2075 0 0
+aux 6 36 1 1600 2100 0 0
+
+# rxfail
+rxfail 3 s 1300
+rxfail 6 s 1000
+
+# master
+set acc_calibration = -25,-30,96,1
+set baro_hardware = NONE
+set rc_smoothing_auto_factor = 70
+set dshot_bidir = ON
+set motor_pwm_protocol = DSHOT300
+set failsafe_procedure = GPS-RESCUE
+set vbat_max_cell_voltage = 435
+set yaw_motors_reversed = ON
+set gps_sbas_mode = AUTO
+set gps_auto_baud = ON
+set gps_ublox_use_galileo = ON
+set gps_set_home_point_once = ON
+set gps_rescue_ascend_rate = 200
+set gps_rescue_return_alt = 20
+set gps_rescue_ground_speed = 2500
+set gps_rescue_descend_rate = 100
+set gps_rescue_throttle_min = 1200
+set gps_rescue_throttle_max = 1800
+set gps_rescue_throttle_hover = 1300
+set gps_rescue_allow_arming_without_fix = ON
+set gps_rescue_throttle_d = 15
+set gps_rescue_velocity_i = 30
+set gps_rescue_velocity_d = 20
+set pid_process_denom = 2
+set osd_link_quality_alarm = 30
+set osd_rssi_dbm_alarm = -100
+set osd_vbat_pos = 417
+set osd_rssi_pos = 464
+set osd_link_quality_pos = 2497
+set osd_link_tx_power_pos = 2561
+set osd_rssi_dbm_pos = 2529
+set osd_tim_1_pos = 33
+set osd_tim_2_pos = 3109
+set osd_flymode_pos = 3141
+set osd_throttle_pos = 3565
+set osd_vtx_channel_pos = 33
+set osd_current_pos = 480
+set osd_mah_drawn_pos = 3597
+set osd_craft_name_pos = 2103
+set osd_pilot_name_pos = 2081
+set osd_gps_speed_pos = 2145
+set osd_gps_lon_pos = 2241
+set osd_gps_lat_pos = 2273
+set osd_gps_sats_pos = 2464
+set osd_home_dir_pos = 2102
+set osd_home_dist_pos = 2177
+set osd_altitude_pos = 2209
+set osd_power_pos = 55
+set osd_pidrate_profile_pos = 4330
+set osd_warnings_pos = 2389
+set osd_avg_cell_voltage_pos = 3533
+set osd_battery_usage_pos = 81
+set osd_disarmed_pos = 2422
+set osd_esc_tmp_pos = 88
+set osd_flip_arrow_pos = 3173
+set osd_core_temp_pos = 2113
+set osd_rate_profile_name_pos = 129
+set osd_sys_vtx_temp_pos = 33
+set osd_gps_sats_show_hdop = ON
+set osd_displayport_device = MSP
+set vcd_video_system = HD
+set gyro_1_align_yaw = 2700
+set craft_name = Papatong
+set pilot_name = SimeutFPV
+
+profile 0
+
+profile 1
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+# rateprofile 0
+set roll_srate = 50
+set pitch_srate = 50
+set yaw_srate = 50
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration
+save
+# 
