@@ -1,7 +1,8 @@
-checksum: 19635
+checksum: 48404
 manuallyEdited: 0
 timezoneMinutes: 0
-semver: 2.10.0
+ppmunit: 0
+semver: 2.10.5
 board: pocket
 calib: 
    LH:
@@ -24,14 +25,15 @@ calib:
       mid: 1050
       spanNeg: 479
       spanPos: 479
-currModel: 1
+currModel: 3
 contrast: 15
-vBatWarn: 64
+vBatWarn: 67
 txVoltageCalibration: -6
 backlightMode: backlight_mode_keys
 antennaMode: MODE_PER_MODEL
 disableRtcWarning: 1
 keysBacklight: 0
+dontPlayHello: 0
 internalModule: TYPE_CROSSFIRE
 trainer: 
    mix: 
@@ -51,7 +53,7 @@ trainer:
          srcChn: 0
          mode: REPL
          studWeight: 100
-view: 0
+view: 4
 fai: 0
 beepMode: mode_all
 alarmsFlash: 1
@@ -72,12 +74,13 @@ hapticLength: 2
 beepLength: 2
 hapticStrength: 2
 gpsFormat: 0
+audioMuteEnable: 0
 speakerPitch: 0
 speakerVolume: 22
-vBatMin: 60
+vBatMin: 65
 vBatMax: 84
 backlightBright: 95
-globalTimer: 12668
+globalTimer: 260665
 bluetoothBaudrate: 0
 bluetoothMode: OFF
 countryCode: 0
@@ -96,6 +99,11 @@ backgroundVolume: 3
 varioPitch: 0
 varioRange: 0
 varioRepeat: 0
+customFn: 
+   0:
+      swtch: "SA2"
+      func: LOGS
+      def: "5,1"
 serialPort: 
    VCP:
       mode: CLI
@@ -103,6 +111,7 @@ serialPort:
 potsConfig: 
    P1:
       type: without_detent
+      inv: 0
       name: ""
 switchConfig: 
    SA:
@@ -125,7 +134,6 @@ bluetoothName: "73742Q-\x80\x06"
 ownerRegistrationID: "ELRS Int"
 rotEncMode: 0
 uartSampleMode: 0
-audioMuteEnable: 0
 radioGFDisabled: 0
 radioTrainerDisabled: 0
 modelHeliDisabled: 0

@@ -1,9 +1,9 @@
 semver: 2.10.5
 header: 
-   name: "QUAD Int"
+   name: "Lebah"
    modelId: 
       0:
-         val: 1
+         val: 3
 timers: 
    0:
       start: 240
@@ -44,7 +44,7 @@ timers:
 telemetryProtocol: 0
 thrTrim: 0
 noGlobalFunctions: 0
-displayTrims: 0
+displayTrims: 2
 ignoreSensorIds: 0
 trimInc: 0
 disableThrottleWarning: 0

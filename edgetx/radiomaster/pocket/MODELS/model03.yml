@@ -1,9 +1,9 @@
 semver: 2.10.5
 header: 
-   name: "QUAD Int"
+   name: "ELRS Mav"
    modelId: 
       0:
-         val: 1
+         val: 2
 timers: 
    0:
       start: 240
@@ -156,7 +156,7 @@ mixData:
    speedDown: 0
    name: "PreArm"
  -
-   weight: 100
+   weight: 30
    destCh: 6
    srcRaw: SB
    carryTrim: 0
@@ -172,24 +172,8 @@ mixData:
    speedDown: 0
    name: "FlyMod"
  -
-   weight: 100
-   destCh: 7
-   srcRaw: SC
-   carryTrim: 0
-   mixWarn: 0
-   mltpx: ADD
-   speedPrec: 0
-   offset: 0
-   swtch: "NONE"
-   flightModes: 000000000
-   delayUp: 0
-   delayDown: 0
-   speedUp: 0
-   speedDown: 0
-   name: "GPS"
- -
-   weight: 100
-   destCh: 8
+   weight: 50
+   destCh: 6
    srcRaw: SD
    carryTrim: 0
    mixWarn: 0
@@ -202,7 +186,7 @@ mixData:
    delayDown: 0
    speedUp: 0
    speedDown: 0
-   name: "Beep"
+   name: "Fly2"
 expoData: 
  -
    mode: 3

@@ -1,6 +1,6 @@
 semver: 2.10.5
 header: 
-   name: "QUAD Int"
+   name: "QUAD Ext"
    modelId: 
       0:
          val: 1
@@ -318,7 +318,7 @@ thrTrimSw: 0
 potsWarnMode: WARN_OFF
 jitterFilter: GLOBAL
 moduleData: 
-   0:
+   1:
       type: TYPE_CROSSFIRE
       subType: 0
       channelsStart: 0
@@ -326,7 +326,7 @@ moduleData:
       failsafeMode: NOT_SET
       mod: 
          crsf: 
-            telemetryBaudrate: 0
+            telemetryBaudrate: 4
 inputNames: 
    0:
       val: "Ail"
