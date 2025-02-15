@@ -1,0 +1,39 @@
+Talon 250G
+
+Servo Mapping
+
+Group 1 : PWM
+S1 : Aileron
+S2 : V-Tail Right
+
+Group 2 : PWM
+S3 : Throttle
+S4 : V-Tail Left
+
+Group 3 : DShot
+S5 : kosong
+S6 : kosong
+S7 : kosong
+
+Group 4 : PWM
+S8  : kosong
+S9  : kosong
+S10 : kosong
+
+
+UART Mapping
+1 : ELRS
+2 : kosong
+3 : GPS
+4 : kosong
+5 : Walksnail
+6 : kosong
+
+Berat total : 356 gram
+- Airframe
+- FC : Speedybee F405 Wing Mini
+- RX : Radiomaster RP4TD-M
+- GPS : RushFPV GNSS Pro M10 HMC5883 GPS + Compass
+- VTX/Cam : Walksnail Micro v1
+- Li-Ion 3s 3500mAh
+

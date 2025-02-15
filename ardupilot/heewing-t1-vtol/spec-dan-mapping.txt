@@ -1,0 +1,41 @@
+Heewing T1 VTOL PNP
+
+Servo Mapping
+
+Group 1 : PWM
+S1 : Left Tilt Servo
+S2 : Right Tilt Servo
+
+Group 2 : PWM
+S3 : Left Aileron Servo
+S4 : Right Aileron Servo
+
+
+Group 3 : DShot
+S5 : Left Motor
+S6 : Right Motor
+S7 : Tail Motor
+
+Group 4 : PWM
+S8  : Tail Elevator Servo
+S9  : kosong
+S10 : kosong
+
+
+UART Mapping
+1 : ELRS
+2 : kosong
+3 : GPS
+4 : kosong
+5 : Walksnail
+6 : kosong
+
+Berat kosong : 465 gram
+- Airframe
+- FC : Speedybee F405 Wing Mini
+- RX : Radiomaster RP4TD
+- GPS : Matek GNSS & COMPASS M10Q 5883 
+- VTX/Cam : Walksnail GT
+
+Rekomendasi batre :  4S 1300mAh - 5000mAh 150-250gram
+
