@@ -1,6 +1,6 @@
 semver: 2.10.5
 header: 
-   name: "ELRS Mav"
+   name: "MavLink"
    modelId: 
       0:
          val: 2
@@ -156,7 +156,7 @@ mixData:
    speedDown: 0
    name: "PreArm"
  -
-   weight: 25
+   weight: 30
    destCh: 6
    srcRaw: SB
    carryTrim: 0

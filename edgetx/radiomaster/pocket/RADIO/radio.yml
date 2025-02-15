@@ -1,4 +1,4 @@
-checksum: 63950
+checksum: 44952
 manuallyEdited: 0
 timezoneMinutes: 0
 ppmunit: 0
@@ -80,7 +80,7 @@ speakerVolume: 22
 vBatMin: 65
 vBatMax: 84
 backlightBright: 95
-globalTimer: 306619
+globalTimer: 315204
 bluetoothBaudrate: 0
 bluetoothMode: OFF
 countryCode: 0
