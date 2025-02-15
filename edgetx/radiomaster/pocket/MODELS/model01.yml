@@ -121,7 +121,7 @@ mixData:
  -
    weight: 100
    destCh: 4
-   srcRaw: SD
+   srcRaw: SA
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
@@ -151,7 +151,7 @@ mixData:
  -
    weight: 100
    destCh: 6
-   srcRaw: SC
+   srcRaw: SB
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
@@ -166,7 +166,7 @@ mixData:
  -
    weight: 100
    destCh: 7
-   srcRaw: SB
+   srcRaw: SC
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
@@ -181,7 +181,7 @@ mixData:
  -
    weight: 100
    destCh: 8
-   srcRaw: SA
+   srcRaw: SD
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD

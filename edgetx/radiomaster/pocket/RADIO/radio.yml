@@ -1,4 +1,4 @@
-checksum: 59685
+checksum: 19635
 manuallyEdited: 0
 timezoneMinutes: 0
 semver: 2.10.0
@@ -76,14 +76,14 @@ speakerPitch: 0
 speakerVolume: 22
 vBatMin: 60
 vBatMax: 84
-backlightBright: 90
-globalTimer: 8841
+backlightBright: 95
+globalTimer: 12668
 bluetoothBaudrate: 0
 bluetoothMode: OFF
 countryCode: 0
 pwrOnSpeed: 2
 pwrOffSpeed: 1
-noJitterFilter: 0
+noJitterFilter: 1
 imperial: 0
 disableRssiPoweroffAlarm: 0
 USBMode: 0
