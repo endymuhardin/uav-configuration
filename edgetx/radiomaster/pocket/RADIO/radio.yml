@@ -1,4 +1,4 @@
-checksum: 3058
+checksum: 63950
 manuallyEdited: 0
 timezoneMinutes: 0
 ppmunit: 0
@@ -53,7 +53,7 @@ trainer:
          srcChn: 0
          mode: REPL
          studWeight: 100
-view: 4
+view: 0
 fai: 0
 beepMode: mode_all
 alarmsFlash: 1
@@ -80,7 +80,7 @@ speakerVolume: 22
 vBatMin: 65
 vBatMax: 84
 backlightBright: 95
-globalTimer: 302873
+globalTimer: 306619
 bluetoothBaudrate: 0
 bluetoothMode: OFF
 countryCode: 0

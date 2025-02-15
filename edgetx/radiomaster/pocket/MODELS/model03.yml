@@ -156,7 +156,7 @@ mixData:
    speedDown: 0
    name: "PreArm"
  -
-   weight: 20
+   weight: 25
    destCh: 6
    srcRaw: SB
    carryTrim: 0
@@ -172,7 +172,7 @@ mixData:
    speedDown: 0
    name: "FlyMod"
  -
-   weight: 50
+   weight: 40
    destCh: 6
    srcRaw: SD
    carryTrim: 0
