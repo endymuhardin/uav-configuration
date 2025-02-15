@@ -1,4 +1,4 @@
-semver: 2.10.0
+semver: 2.10.5
 header: 
    name: "USB-Sim"
    modelId: 
@@ -55,6 +55,7 @@ throttleReversed: 0
 enableCustomThrottleWarning: 0
 disableTelemetryWarning: 0
 showInstanceIds: 0
+checklistInteractive: 0
 customThrottleWarningPosition: 0
 beepANACenter: 0
 mixData: 
@@ -65,6 +66,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -80,6 +82,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -95,6 +98,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -110,6 +114,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -125,6 +130,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -140,6 +146,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -155,6 +162,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -170,6 +178,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -185,6 +194,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -200,6 +210,7 @@ mixData:
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   speedPrec: 0
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
@@ -304,7 +315,17 @@ flightModeData:
          8:
             val: 0
 thrTraceSrc: Thr
-switchWarningState: AuBuCuDuEu
+switchWarning: 
+   SA:
+      pos: up
+   SB:
+      pos: up
+   SC:
+      pos: up
+   SD:
+      pos: up
+   SE:
+      pos: up
 rssiSource: none
 rfAlarms: 
    warning: 45

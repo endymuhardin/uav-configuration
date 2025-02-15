@@ -156,7 +156,7 @@ mixData:
    speedDown: 0
    name: "PreArm"
  -
-   weight: 30
+   weight: 20
    destCh: 6
    srcRaw: SB
    carryTrim: 0

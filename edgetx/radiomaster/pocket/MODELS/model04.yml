@@ -60,7 +60,7 @@ customThrottleWarningPosition: 0
 beepANACenter: 0
 mixData: 
  -
-   weight: 100
+   weight: 35
    destCh: 0
    srcRaw: I0
    carryTrim: 0
@@ -70,13 +70,16 @@ mixData:
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
+   curve: 
+      type: 1
+      value: 30
    delayUp: 0
    delayDown: 0
    speedUp: 0
    speedDown: 0
    name: ""
  -
-   weight: 100
+   weight: 60
    destCh: 1
    srcRaw: I1
    carryTrim: 0
@@ -86,6 +89,9 @@ mixData:
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
+   curve: 
+      type: 1
+      value: 30
    delayUp: 0
    delayDown: 0
    speedUp: 0
@@ -108,7 +114,7 @@ mixData:
    speedDown: 0
    name: ""
  -
-   weight: 100
+   weight: 45
    destCh: 3
    srcRaw: I3
    carryTrim: 0
@@ -118,6 +124,9 @@ mixData:
    offset: 0
    swtch: "NONE"
    flightModes: 000000000
+   curve: 
+      type: 1
+      value: 30
    delayUp: 0
    delayDown: 0
    speedUp: 0
@@ -203,6 +212,16 @@ mixData:
    speedUp: 0
    speedDown: 0
    name: "Beep"
+limitData: 
+   3:
+      min: 0
+      max: 0
+      ppmCenter: 0
+      offset: 0
+      symetrical: 0
+      revert: 1
+      curve: 0
+      name: ""
 expoData: 
  -
    mode: 3
