@@ -1,0 +1,106 @@
+diff all
+
+# version
+# Betaflight / STM32F411 (S411) 4.5.1 Dec 24 2024 / 10:22:39 (77d01ba3b) MSP API: 1.46
+# config rev: 16ac022
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name CRAZYBEEF4SX1280
+manufacturer_id HAMO
+mcu_id 006500193032510637363837
+signature 
+
+# name: FireflyNano2
+
+# feature
+feature TELEMETRY
+feature OSD
+
+# serial
+serial 0 128 115200 57600 0 2000000
+serial 1 131073 115200 57600 0 115200
+
+# aux
+aux 0 0 0 1525 2100 0 0
+aux 1 36 1 1525 2100 0 0
+aux 2 1 2 900 1300 0 0
+aux 3 35 2 1700 2100 0 0
+aux 4 13 4 1700 2100 0 0
+
+# master
+set dyn_notch_count = 1
+set dyn_notch_q = 500
+set acc_calibration = 117,93,38,1
+set blackbox_device = NONE
+set dshot_bidir = ON
+set vbat_max_cell_voltage = 440
+set yaw_motors_reversed = ON
+set pid_process_denom = 2
+set osd_link_quality_alarm = 30
+set osd_rssi_dbm_alarm = -100
+set osd_core_temp_alarm = 80
+set osd_vbat_pos = 417
+set osd_rssi_pos = 464
+set osd_link_quality_pos = 2454
+set osd_link_tx_power_pos = 2561
+set osd_rssi_dbm_pos = 2529
+set osd_tim_1_pos = 33
+set osd_tim_2_pos = 3109
+set osd_flymode_pos = 3141
+set osd_g_force_pos = 65
+set osd_throttle_pos = 3565
+set osd_vtx_channel_pos = 33
+set osd_ah_sbar_pos = 4302
+set osd_ah_pos = 4174
+set osd_current_pos = 480
+set osd_mah_drawn_pos = 3597
+set osd_craft_name_pos = 2100
+set osd_pilot_name_pos = 2081
+set osd_altitude_pos = 87
+set osd_power_pos = 55
+set osd_pidrate_profile_pos = 4330
+set osd_warnings_pos = 2389
+set osd_avg_cell_voltage_pos = 2486
+set osd_battery_usage_pos = 81
+set osd_disarmed_pos = 2422
+set osd_esc_tmp_pos = 88
+set osd_esc_rpm_pos = 161
+set osd_flip_arrow_pos = 2361
+set osd_core_temp_pos = 2113
+set osd_rate_profile_name_pos = 129
+set osd_sys_vtx_temp_pos = 33
+set expresslrs_uid = 129,242,116,244,188,188
+set expresslrs_rate_index = 1
+set craft_name = FireflyNano2
+set pilot_name = SimeutFPV
+
+profile 0
+
+profile 1
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration
+save
+# 
