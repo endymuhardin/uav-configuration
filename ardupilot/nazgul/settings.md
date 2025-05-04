@@ -89,3 +89,8 @@ Spesifikasi :
     * [Tutorial Om Tony](https://www.youtube.com/watch?v=EOUdSb7iJ2s)
 
     ![MP via UDP](img/09-mp-via-backpack.png)
+
+
+## Connection Diagram ##
+
+![MavLink ELRS Connection Diagram](img/connection-diagram.png)
