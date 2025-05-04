@@ -37,6 +37,6 @@ Channel 7 :
 3. RTL
 
 2pos on
-4. Mission
-5. Autotune
+4. PosHold
+5. Auto (Mission) / Autotune
 6. Loiter
