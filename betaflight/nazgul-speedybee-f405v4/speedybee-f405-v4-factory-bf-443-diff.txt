@@ -1,0 +1,60 @@
+diff all
+
+# version
+# Betaflight / STM32F405 (S405) 4.4.3 Nov 18 2023 / 06:49:34 (738127e7e) MSP API: 1.45
+
+# config: YES
+
+# start the command batch
+batch start
+
+# reset configuration to default settings
+defaults nosave
+
+board_name SPEEDYBEEF405V4
+manufacturer_id SPBE
+mcu_id 005200333034510938323533
+signature 
+
+# feature
+feature GPS
+feature ESC_SENSOR
+
+# serial
+serial 5 2 115200 57600 0 115200
+
+# master
+set acc_calibration = 54,-19,0,1
+set serialrx_provider = CRSF
+set gps_sbas_mode = AUTO
+set gps_auto_baud = ON
+set gps_ublox_use_galileo = ON
+set gps_set_home_point_once = ON
+set osd_canvas_width = 30
+set osd_canvas_height = 13
+
+profile 0
+
+profile 1
+
+profile 2
+
+profile 3
+
+# restore original profile selection
+profile 0
+
+rateprofile 0
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0
+
+# save configuration
+save
+# 
