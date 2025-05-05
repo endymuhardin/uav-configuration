@@ -4,15 +4,14 @@ Spesifikasi :
 
 * FC : SpeedyBee F405 V4 
 * ESC : SpeedyBee BLS 55A
-* [Product Website](https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/)
-* [User Manual](https://store-fhxxhuiq8q.mybigcommerce.com/product_images/img_SpeedyBee_F405_V4_Stack/SpeedyBee_F405_V4_Stack_Manual_EN.pdf)
 * Radio Receiver : Matek RP4TD
 * GPS : HGLRC M10
 
-## Peripherals ##
+Dokumentasi FC ESC
 
-* Matek RP4TD : UART2
-* GPS HGLRC (no compass) : UART6 
+* [Product Website](https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/)
+* [User Manual](https://store-fhxxhuiq8q.mybigcommerce.com/product_images/img_SpeedyBee_F405_V4_Stack/SpeedyBee_F405_V4_Stack_Manual_EN.pdf)
+* [Website Ardupilot](https://ardupilot.org/copter/docs/common-speedybeef4-v3.html)
 
 ## Settings ##
 
@@ -42,6 +41,7 @@ Spesifikasi :
 
 4. Set Serial Port
 
+    * UART1 : 115200 - DisplayPort
     * UART2 : 460800 - MavLink2
     * UART5 : 115200 - ESC Telemetry
     * UART6 : 115200 - GPS
@@ -77,6 +77,8 @@ Spesifikasi :
 
     ![Motor Test](img/07-motor-test.png)
 
+    Urutan dan arah putaran bisa dilihat [di dokumentasi Ardupilot](https://ardupilot.org/copter/docs/connect-escs-and-motors.html)
+
 10. MavLink via ELRS Backpack
    
     * RSSI_TYPE = 5
@@ -90,6 +92,15 @@ Spesifikasi :
 
     ![MP via UDP](img/09-mp-via-backpack.png)
 
+12. Setup Walksnail OSD
+
+    * OSD_TYPE = 5 (MSP_DISPLAYPORT)
+    * OSD_CELL_COUNT = 4
+    * MSP_OPTIONS = 0
+    * SERIAL1_PROTOCOL = 42 (DisplayPort)
+    * SERIAL1_BAUD = 115
+
+MSP_OPTIONS set bit 0 = 0 (do NOT EnableTelemetryMode)
 
 ## Connection Diagram ##
 
