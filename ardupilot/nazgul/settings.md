@@ -13,7 +13,7 @@ Dokumentasi FC ESC
 * [User Manual](https://store-fhxxhuiq8q.mybigcommerce.com/product_images/img_SpeedyBee_F405_V4_Stack/SpeedyBee_F405_V4_Stack_Manual_EN.pdf)
 * [Website Ardupilot](https://ardupilot.org/copter/docs/common-speedybeef4-v3.html)
 
-## Settings ##
+## Mission Planner Settings ##
 
 1. Set Frame Type
 
@@ -105,3 +105,34 @@ MSP_OPTIONS set bit 0 = 0 (do NOT EnableTelemetryMode)
 ## Connection Diagram ##
 
 ![MavLink ELRS Connection Diagram](img/connection-diagram.png)
+
+## Remote Control Settings ##
+
+1. Remote : Radiomaster Pocket ELRS
+
+    * Internal TX Firmware : 3.5.4
+    * Backpack Firmware : 1.5.2
+
+2. Switch Mapping : 
+
+    * Switch A - 2 pos - Channel 5 : Arming
+    * Switch B - 3 pos - Channel 7 : Flight Mode 1
+    * Switch D - 2 pos - Channel 7 : Flight Mode 2
+
+3. Mixer Settings
+
+    ![All Mixes](img/mixes-01-all.jpg)
+    
+    ![Flight Mode - Channel 7 - Switch B](img/mixes-02-flymod.jpg)
+    
+    ![Flight Mode - Channel 7 - Switch D](img/mixes-03-flymod.jpg)
+
+4. ExpressLRS Lua Settings
+
+    ![Link Mode Mavlink](img/elrs-mavlink-01-linkmode.jpg)
+    
+    ![Other Devices](img/elrs-mavlink-02-other-device.jpg)
+    
+    ![Backpack On](img/elrs-mavlink-03-backpack-on.jpg)
+
+    ![Backpack Telemetry Wifi](img/elrs-mavlink-04-backpack-telemetry.jpg)
