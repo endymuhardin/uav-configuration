@@ -71,7 +71,7 @@ Dokumentasi FC ESC
 
 8. Set Arming Channel (Channel 5 / AUX 1)
 
-    * RC5_OPTION : 5
+    * RC5_OPTION : 154
 
 9. Motor Test (untuk memastikan urutan dan arah putaran motor)
 
@@ -101,6 +101,19 @@ Dokumentasi FC ESC
     * SERIAL1_BAUD = 115
 
 MSP_OPTIONS set bit 0 = 0 (do NOT EnableTelemetryMode)
+
+13. Setting Battery Failsafe ke Land
+
+    * BATT_FS_CRT_ACT = 1
+    * BATT_FS_LOW_ACT = 1
+
+14. Tambahkan radio failsafe timeout supaya bisa arming
+
+    * RC_FS_TIMEOUT = 2
+
+15. Disable Acro Trainer
+
+    * ACRO_TRAINER - 0
 
 ## Connection Diagram ##
 
