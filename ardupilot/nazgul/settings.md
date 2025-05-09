@@ -58,10 +58,10 @@ Dokumentasi FC ESC
 
     * 1 : Stabilize
     * 2 : Acro
-    * 3 : Return To Launch
-    * 4 : Position Hold
-    * 5 : Auto (Mission) / AutoTune
-    * 6 : Loiter
+    * 3 : Loiter
+    * 4 : Auto / Mission
+    * 5 : AutoTune
+    * 6 : Return to Launch
 
     ![Flight Modes](img/06-flight-modes.png)
 
