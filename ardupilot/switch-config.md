@@ -10,33 +10,33 @@ Channel 7 :
 2pos off
 1. Takeoff
 2. FBWA
-3. RTL
+3. Loiter
 
 2pos on
 4. Mission / Autotune
 5. Manual
-6. Loiter
+6. RTL
 
 ## VTOL ##
 
 2pos off
 1. QLoiter
 2. FBWA
-3. QRTL
+3. Loiter
 
 2pos on
 4. Mission / Autotune
 5. Manual
-6. Loiter
+6. QRTL
 
 ## Copter ##
 
 2pos off
 1. Stabilize
 2. Acro
-3. RTL
+3. Loiter
 
 2pos on
-4. PosHold
-5. Auto (Mission) / Autotune
-6. Loiter
+4. Auto (Mission)
+5. sAutotune
+6. RTL
