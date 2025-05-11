@@ -51,6 +51,8 @@ Dokumentasi FC ESC
 5. Jenis ESC
 
     * ESC Type : DShot300
+    * Firmware : Bluejay
+    * Version : 0.21.0
 
     ![ESC Type](img/05-esc-type.png)
 
