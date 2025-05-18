@@ -18,7 +18,7 @@ Dokumentasi FC ESC
 1. Set Frame Type
 
     * Jumlah Motor : 4
-    * Type : X
+    * Type : Quad X Reversed
 
     ![Frame Type](img/01-frame-type.png)
 
