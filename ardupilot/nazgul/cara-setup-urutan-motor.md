@@ -69,6 +69,8 @@ Ardupilot akan menyuruh FC -> ESC untuk memutar motor sesuai dokumentasi. Artiny
 
 Supaya lebih jelas, kita tampilkan lagi posisi motor untuk frame `Betaflight X Reversed` sesuai dokumentasi Ardupilot di atas, yaitu sebagai berikut
 
+![Frame Quad X Betaflight Reversed](img/quad-x-bf-reversed.png)
+
 | Nomor Motor | Posisi Motor   |
 |-------------|----------------|
 | 1           | kanan belakang |
@@ -76,7 +78,7 @@ Supaya lebih jelas, kita tampilkan lagi posisi motor untuk frame `Betaflight X R
 | 3           | kiri belakang  |
 | 4           | kiri depan     |
 
-![Frame Quad X Betaflight Reversed](img/quad-x-bf-reversed.png)
+
 
 Sekarang, isikan nomor motor sesuai motor yang berputar, seperti ini
 
