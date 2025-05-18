@@ -76,6 +76,8 @@ Supaya lebih jelas, kita tampilkan lagi posisi motor untuk frame `Betaflight X R
 | 3           | kiri belakang  |
 | 4           | kiri depan     |
 
+![Frame Quad X Betaflight Reversed](img/quad-x-bf-reversed.png)
+
 Sekarang, isikan nomor motor sesuai motor yang berputar, seperti ini
 
 | Posisi dipencet | Motor berputar | Nomor motor di docs |

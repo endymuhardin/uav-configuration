@@ -30,14 +30,16 @@ Dokumentasi FC ESC
 
     ![Initial Tune](img/02-initial-tune.png)
 
-3. Urutan motor (pemasangan ESC dibalik: depan ke belakang)
+3. Urutan motor (pemasangan ESC dibalik: depan ke belakang) untuk prop-out (arah putaran propeller ke luar).
    
-   * Servo 1 : Motor 3
-   * Servo 2 : Motor 2
-   * Servo 3 : Motor 1
-   * Servo 4 : Motor 4
+   * Servo 1 : Motor 4
+   * Servo 2 : Motor 3
+   * Servo 3 : Motor 2
+   * Servo 4 : Motor 1
 
-   ![Servo Output](img/03-servo-output.png)
+   ![Servo Output](img/servo-output-final.png)
+
+   Cara settingnya dijelaskan di [dokumen terpisah](./cara-setup-urutan-motor.md)
 
 4. Set Serial Port
 
