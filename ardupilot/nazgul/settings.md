@@ -3,9 +3,10 @@
 Spesifikasi : 
 
 * FC : SpeedyBee F405 V4 
-* ESC : SpeedyBee BLS 55A
+* ESC : SpeedyBee BLS 55A - using DShot300
 * Radio Receiver : Matek RP4TD
-* GPS : HGLRC M10
+* GPS : MicoAir M10G-5883
+* Motor : Emax Eco II 1750KV
 
 Dokumentasi FC ESC
 
