@@ -27,7 +27,7 @@ Dokumentasi FC ESC
 
     * Batre : 6s
     * Max Voltage : 4.2 volt
-    * Min Voltage : 3.5 volt
+    * Min Voltage : 3.3 volt
 
     ![Initial Tune](img/02-initial-tune.png)
 
@@ -119,6 +119,56 @@ MSP_OPTIONS set bit 0 = 0 (do NOT EnableTelemetryMode)
 15. Disable Acro Trainer
 
     * ACRO_TRAINER - 0
+
+16. Initial Tuning Parameter (untuk 5 inch 6s)
+
+```
+ANGLE_MAX,6000
+ARMING_CHECK,1
+ATC_ACCEL_P_MAX,162000
+ATC_ACCEL_R_MAX,162000
+ATC_ACCEL_Y_MAX,56000
+ATC_ANG_PIT_P,12
+ATC_ANG_RLL_P,12
+ATC_ANG_YAW_P,6
+ATC_RAT_PIT_D,0.001
+ATC_RAT_PIT_I,0.06
+ATC_RAT_PIT_P,0.06
+ATC_RAT_PIT_SMAX,0
+ATC_RAT_RLL_D,0.001
+ATC_RAT_RLL_I,0.06
+ATC_RAT_RLL_P,0.06
+ATC_RAT_RLL_SMAX,0
+ATC_RAT_YAW_D,0.002
+ATC_RAT_YAW_I,0.02
+ATC_RAT_YAW_P,0.2
+ATC_RAT_YAW_SMAX,0
+BATT_ARM_VOLT,22.10
+BATT_CRT_VOLT,21.00
+BATT_LOW_VOLT,21.60
+GPS1_GNSS_MODE,5
+INS_HNTCH_BW,30
+INS_HNTCH_FREQ,140
+INS_HNTCH_HMNCS,1
+INS_HNTCH_OPTS,6
+INS_LOG_BAT_OPT,4
+LOG_BITMASK,180222
+MOT_BAT_VOLT_MIN,19.80
+PSC_ACCZ_I,0.26
+PSC_ACCZ_P,0.13
+PSC_VELZ_P,3
+SERVO_BLH_AUTO,1
+SERVO_DSHOT_ESC,2
+```
+
+17. Setelah hover stabil di mode `Stabilize`, `Altitude Hold`, dan `Loiter` bisa lanjut ke `Autotune`
+
+```
+AUTOTUNE_AGGR,0.1
+AUTOTUNE_AXES,3
+```
+
+    Lakukan `autotune` bergantian per axis. Supaya baterainya cukup.
 
 ## Connection Diagram ##
 
