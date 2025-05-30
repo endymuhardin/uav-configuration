@@ -1,9 +1,9 @@
-semver: 2.10.5
+semver: 2.11.1
 header: 
-   name: "MavLink"
+   name: "MavLinkInt"
    modelId: 
       0:
-         val: 2
+         val: 1
 timers: 
    0:
       start: 240
@@ -60,128 +60,136 @@ customThrottleWarningPosition: 0
 beepANACenter: 0
 mixData: 
  -
-   weight: 100
    destCh: 0
-   srcRaw: I0
+   srcRaw: "I0"
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   delayPrec: 0
    speedPrec: 0
+   flightModes: 000000000
+   weight: 100
    offset: 0
    swtch: "NONE"
-   flightModes: 000000000
    delayUp: 0
    delayDown: 0
    speedUp: 0
    speedDown: 0
    name: ""
  -
-   weight: 100
    destCh: 1
-   srcRaw: I1
+   srcRaw: "I1"
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   delayPrec: 0
    speedPrec: 0
+   flightModes: 000000000
+   weight: 100
    offset: 0
    swtch: "NONE"
-   flightModes: 000000000
    delayUp: 0
    delayDown: 0
    speedUp: 0
    speedDown: 0
    name: ""
  -
-   weight: 100
    destCh: 2
-   srcRaw: I2
+   srcRaw: "I2"
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   delayPrec: 0
    speedPrec: 0
+   flightModes: 000000000
+   weight: 100
    offset: 0
    swtch: "NONE"
-   flightModes: 000000000
    delayUp: 0
    delayDown: 0
    speedUp: 0
    speedDown: 0
    name: ""
  -
-   weight: 100
    destCh: 3
-   srcRaw: I3
+   srcRaw: "I3"
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   delayPrec: 0
    speedPrec: 0
+   flightModes: 000000000
+   weight: 100
    offset: 0
    swtch: "NONE"
-   flightModes: 000000000
    delayUp: 0
    delayDown: 0
    speedUp: 0
    speedDown: 0
    name: ""
  -
-   weight: 100
    destCh: 4
-   srcRaw: SA
+   srcRaw: "SA"
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   delayPrec: 0
    speedPrec: 0
+   flightModes: 000000000
+   weight: 100
    offset: 0
    swtch: "NONE"
-   flightModes: 000000000
    delayUp: 0
    delayDown: 0
    speedUp: 0
    speedDown: 0
    name: "Arming"
  -
-   weight: 100
    destCh: 5
-   srcRaw: SE
+   srcRaw: "P1"
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   delayPrec: 0
    speedPrec: 0
+   flightModes: 000000000
+   weight: 100
    offset: 0
    swtch: "NONE"
-   flightModes: 000000000
    delayUp: 0
    delayDown: 0
    speedUp: 0
    speedDown: 0
-   name: "PreArm"
+   name: "ATune"
  -
-   weight: 30
    destCh: 6
-   srcRaw: SB
+   srcRaw: "SB"
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   delayPrec: 0
    speedPrec: 0
+   flightModes: 000000000
+   weight: 30
    offset: 0
    swtch: "NONE"
-   flightModes: 000000000
    delayUp: 0
    delayDown: 0
    speedUp: 0
    speedDown: 0
    name: "FlyMod"
  -
-   weight: 40
    destCh: 6
-   srcRaw: SD
+   srcRaw: "SD"
    carryTrim: 0
    mixWarn: 0
    mltpx: ADD
+   delayPrec: 0
    speedPrec: 0
+   flightModes: 000000000
+   weight: 40
    offset: 0
    swtch: "NONE"
-   flightModes: 000000000
    delayUp: 0
    delayDown: 0
    speedUp: 0
@@ -192,58 +200,58 @@ expoData:
    mode: 3
    scale: 0
    trimSource: 0
-   srcRaw: Ail
+   srcRaw: "Ail"
+   weight: 100
+   offset: 0
+   swtch: "NONE"
+   curve: 
+      type: 1
+      value: 0
    chn: 0
-   swtch: "NONE"
    flightModes: 000000000
-   weight: 100
    name: ""
-   offset: 0
-   curve: 
-      type: 1
-      value: 0
  -
    mode: 3
    scale: 0
    trimSource: 0
-   srcRaw: Ele
+   srcRaw: "Ele"
+   weight: 100
+   offset: 0
+   swtch: "NONE"
+   curve: 
+      type: 1
+      value: 0
    chn: 1
-   swtch: "NONE"
    flightModes: 000000000
-   weight: 100
    name: ""
-   offset: 0
-   curve: 
-      type: 1
-      value: 0
  -
    mode: 3
    scale: 0
    trimSource: 0
-   srcRaw: Thr
+   srcRaw: "Thr"
+   weight: 100
+   offset: 0
+   swtch: "NONE"
+   curve: 
+      type: 1
+      value: 0
    chn: 2
-   swtch: "NONE"
    flightModes: 000000000
-   weight: 100
    name: ""
-   offset: 0
-   curve: 
-      type: 1
-      value: 0
  -
    mode: 3
    scale: 0
    trimSource: 0
-   srcRaw: Rud
-   chn: 3
-   swtch: "NONE"
-   flightModes: 000000000
+   srcRaw: "Rud"
    weight: 100
-   name: ""
    offset: 0
+   swtch: "NONE"
    curve: 
       type: 1
       value: 0
+   chn: 3
+   flightModes: 000000000
+   name: ""
 flightModeData: 
    0:
       trim: 
@@ -311,6 +319,9 @@ moduleData:
       mod: 
          crsf: 
             telemetryBaudrate: 0
+            crsfArmingMode: 0
+            crsfArmingTrigger: "NONE"
+            spare3: 0
 inputNames: 
    0:
       val: "Ail"
@@ -323,196 +334,6 @@ inputNames:
 potsWarnEnabled: 0
 telemetrySensors: 
    0:
-      id1: 
-         id: 20
-      id2: 
-         instance: 0
-      label: "1RSS"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 17
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   1:
-      id1: 
-         id: 20
-      id2: 
-         instance: 1
-      label: "2RSS"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 17
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   2:
-      id1: 
-         id: 20
-      id2: 
-         instance: 2
-      label: "RQly"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 13
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   3:
-      id1: 
-         id: 20
-      id2: 
-         instance: 3
-      label: "RSNR"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 17
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   4:
-      id1: 
-         id: 20
-      id2: 
-         instance: 4
-      label: "ANT"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 0
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   5:
-      id1: 
-         id: 20
-      id2: 
-         instance: 5
-      label: "RFMD"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 0
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   6:
-      id1: 
-         id: 20
-      id2: 
-         instance: 6
-      label: "TPWR"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 16
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   7:
-      id1: 
-         id: 20
-      id2: 
-         instance: 7
-      label: "TRSS"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 17
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   8:
-      id1: 
-         id: 20
-      id2: 
-         instance: 8
-      label: "TQly"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 13
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   9:
-      id1: 
-         id: 20
-      id2: 
-         instance: 9
-      label: "TSNR"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 17
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   10:
       id1: 
          id: 2
       id2: 
@@ -529,7 +350,7 @@ telemetrySensors:
       onlyPositive: 0
       cfg: 
          param: 0
-   11:
+   1:
       id1: 
          id: 2
       id2: 
@@ -548,7 +369,7 @@ telemetrySensors:
          custom: 
             ratio: 0
             offset: 0
-   12:
+   2:
       id1: 
          id: 2
       id2: 
@@ -567,7 +388,7 @@ telemetrySensors:
          custom: 
             ratio: 0
             offset: 0
-   13:
+   3:
       id1: 
          id: 2
       id2: 
@@ -586,7 +407,7 @@ telemetrySensors:
          custom: 
             ratio: 0
             offset: 0
-   14:
+   4:
       id1: 
          id: 2
       id2: 
@@ -605,83 +426,7 @@ telemetrySensors:
          custom: 
             ratio: 0
             offset: 0
-   15:
-      id1: 
-         id: 8
-      id2: 
-         instance: 0
-      label: "RxBt"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 1
-      prec: 1
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   16:
-      id1: 
-         id: 8
-      id2: 
-         instance: 1
-      label: "Curr"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 2
-      prec: 1
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   17:
-      id1: 
-         id: 8
-      id2: 
-         instance: 2
-      label: "Capa"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 14
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   18:
-      id1: 
-         id: 8
-      id2: 
-         instance: 3
-      label: "Bat%"
-      subId: 0
-      type: TYPE_CUSTOM
-      unit: 13
-      prec: 0
-      autoOffset: 0
-      filter: 0
-      logs: 1
-      persistent: 0
-      onlyPositive: 0
-      cfg: 
-         custom: 
-            ratio: 0
-            offset: 0
-   19:
+   5:
       id1: 
          id: 30
       id2: 
@@ -700,7 +445,7 @@ telemetrySensors:
          custom: 
             ratio: 0
             offset: 0
-   20:
+   6:
       id1: 
          id: 30
       id2: 
@@ -719,7 +464,7 @@ telemetrySensors:
          custom: 
             ratio: 0
             offset: 0
-   21:
+   7:
       id1: 
          id: 30
       id2: 
@@ -738,7 +483,83 @@ telemetrySensors:
          custom: 
             ratio: 0
             offset: 0
-   22:
+   8:
+      id1: 
+         id: 8
+      id2: 
+         instance: 0
+      label: "RxBt"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 1
+      prec: 1
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   9:
+      id1: 
+         id: 8
+      id2: 
+         instance: 1
+      label: "Curr"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 2
+      prec: 1
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   10:
+      id1: 
+         id: 8
+      id2: 
+         instance: 2
+      label: "Capa"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 14
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   11:
+      id1: 
+         id: 8
+      id2: 
+         instance: 3
+      label: "Bat%"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 13
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   12:
       id1: 
          id: 33
       id2: 
@@ -755,6 +576,215 @@ telemetrySensors:
       onlyPositive: 0
       cfg: 
          param: 0
+   13:
+      id1: 
+         id: 20
+      id2: 
+         instance: 0
+      label: "1RSS"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 17
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   14:
+      id1: 
+         id: 20
+      id2: 
+         instance: 1
+      label: "2RSS"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 17
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   15:
+      id1: 
+         id: 20
+      id2: 
+         instance: 2
+      label: "RQly"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 13
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   16:
+      id1: 
+         id: 20
+      id2: 
+         instance: 3
+      label: "RSNR"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 17
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   17:
+      id1: 
+         id: 20
+      id2: 
+         instance: 4
+      label: "ANT"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 0
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   18:
+      id1: 
+         id: 20
+      id2: 
+         instance: 5
+      label: "RFMD"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 0
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   19:
+      id1: 
+         id: 20
+      id2: 
+         instance: 6
+      label: "TPWR"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 16
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   20:
+      id1: 
+         id: 20
+      id2: 
+         instance: 7
+      label: "TRSS"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 17
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   21:
+      id1: 
+         id: 20
+      id2: 
+         instance: 8
+      label: "TQly"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 13
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   22:
+      id1: 
+         id: 20
+      id2: 
+         instance: 9
+      label: "TSNR"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 17
+      prec: 0
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
+   23:
+      id1: 
+         id: 7
+      id2: 
+         instance: 0
+      label: "VSpd"
+      subId: 0
+      type: TYPE_CUSTOM
+      unit: 5
+      prec: 1
+      autoOffset: 0
+      filter: 0
+      logs: 1
+      persistent: 0
+      onlyPositive: 0
+      cfg: 
+         custom: 
+            ratio: 0
+            offset: 0
 screens: 
    0:
       type: VALUES
@@ -763,21 +793,21 @@ screens:
             0:
                sources: 
                   0:
-                     val: tele(0)
+                     val: tele(13)
                   1:
-                     val: tele(2)
+                     val: tele(15)
             1:
                sources: 
                   0:
-                     val: tele(6)
+                     val: tele(19)
                   1:
-                     val: tele(3)
+                     val: tele(16)
             2:
                sources: 
                   0:
-                     val: tele(14)
+                     val: tele(4)
                   1:
-                     val: tele(15)
+                     val: tele(8)
    1:
       type: SCRIPT
       u: 

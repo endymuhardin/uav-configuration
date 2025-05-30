@@ -1,9 +1,9 @@
 semver: 2.11.1
 header: 
-   name: "QUAD Ext"
+   name: "Lebah"
    modelId: 
       0:
-         val: 1
+         val: 2
 timers: 
    0:
       start: 240
@@ -44,7 +44,7 @@ timers:
 telemetryProtocol: 0
 thrTrim: 0
 noGlobalFunctions: 0
-displayTrims: 0
+displayTrims: 2
 ignoreSensorIds: 0
 trimInc: 0
 disableThrottleWarning: 0
@@ -68,9 +68,12 @@ mixData:
    delayPrec: 0
    speedPrec: 0
    flightModes: 000000000
-   weight: 100
+   weight: 35
    offset: 0
    swtch: "NONE"
+   curve: 
+      type: 1
+      value: 30
    delayUp: 0
    delayDown: 0
    speedUp: 0
@@ -85,9 +88,12 @@ mixData:
    delayPrec: 0
    speedPrec: 0
    flightModes: 000000000
-   weight: 100
+   weight: 60
    offset: 0
    swtch: "NONE"
+   curve: 
+      type: 1
+      value: 30
    delayUp: 0
    delayDown: 0
    speedUp: 0
@@ -119,9 +125,12 @@ mixData:
    delayPrec: 0
    speedPrec: 0
    flightModes: 000000000
-   weight: 100
+   weight: 45
    offset: 0
    swtch: "NONE"
+   curve: 
+      type: 1
+      value: 30
    delayUp: 0
    delayDown: 0
    speedUp: 0
@@ -212,6 +221,16 @@ mixData:
    speedUp: 0
    speedDown: 0
    name: "Beep"
+limitData: 
+   3:
+      min: 0
+      max: 0
+      ppmCenter: 0
+      offset: 0
+      symetrical: 0
+      revert: 1
+      curve: 0
+      name: ""
 expoData: 
  -
    mode: 3
@@ -269,44 +288,6 @@ expoData:
    chn: 3
    flightModes: 000000000
    name: ""
-flightModeData: 
-   0:
-      trim: 
-         0:
-            value: 0
-            mode: 31
-         1:
-            value: 0
-            mode: 31
-         2:
-            value: 0
-            mode: 31
-         3:
-            value: 0
-            mode: 31
-      name: ""
-      swtch: "NONE"
-      fadeIn: 0
-      fadeOut: 0
-      gvars: 
-         0:
-            val: 0
-         1:
-            val: 0
-         2:
-            val: 0
-         3:
-            val: 0
-         4:
-            val: 0
-         5:
-            val: 0
-         6:
-            val: 0
-         7:
-            val: 0
-         8:
-            val: 0
 thrTraceSrc: Thr
 switchWarning: 
    SA:
@@ -327,7 +308,7 @@ thrTrimSw: 0
 potsWarnMode: WARN_OFF
 jitterFilter: GLOBAL
 moduleData: 
-   1:
+   0:
       type: TYPE_CROSSFIRE
       subType: 0
       channelsStart: 0
@@ -335,7 +316,7 @@ moduleData:
       failsafeMode: NOT_SET
       mod: 
          crsf: 
-            telemetryBaudrate: 4
+            telemetryBaudrate: 0
             crsfArmingMode: 0
             crsfArmingTrigger: "NONE"
             spare3: 0
