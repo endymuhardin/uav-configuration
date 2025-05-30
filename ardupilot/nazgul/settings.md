@@ -65,7 +65,7 @@ Dokumentasi FC ESC
     * 2 : Acro
     * 3 : Loiter
     * 4 : Auto / Mission
-    * 5 : AutoTune
+    * 5 : Guided
     * 6 : Return to Launch
 
     ![Flight Modes](img/06-flight-modes.png)
@@ -78,26 +78,31 @@ Dokumentasi FC ESC
 
     * RC5_OPTION : 154
 
-9. Motor Test (untuk memastikan urutan dan arah putaran motor)
+9. Set Autotune Channel di Channel 6
+
+    * RC6_OPTION : 17
+
+
+10. Motor Test (untuk memastikan urutan dan arah putaran motor)
 
     ![Motor Test](img/07-motor-test.png)
 
     Urutan dan arah putaran bisa dilihat [di dokumentasi Ardupilot](https://ardupilot.org/copter/docs/connect-escs-and-motors.html)
 
-10. MavLink via ELRS Backpack
+12. MavLink via ELRS Backpack
    
     * RSSI_TYPE = 5
     * [Referensi Website Resmi](https://www.expresslrs.org/software/mavlink/)
 
     ![Mavlink ELRS](img/08-elrs-mavlink-rssi-type.png)
 
-11. Connect laptop ke backpack remote via wifi. Mission Planner pilih protokol UDP
+13. Connect laptop ke backpack remote via wifi. Mission Planner pilih protokol UDP
 
     * [Tutorial Om Tony](https://www.youtube.com/watch?v=EOUdSb7iJ2s)
 
     ![MP via UDP](img/09-mp-via-backpack.png)
 
-12. Setup Walksnail OSD
+14. Setup Walksnail OSD
 
     * OSD_TYPE = 5 (MSP_DISPLAYPORT)
     * OSD_CELL_COUNT = 4
