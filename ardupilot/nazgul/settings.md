@@ -78,10 +78,13 @@ Dokumentasi FC ESC
 
     * RC5_OPTION : 154
 
+    Disable arming dengan stik command
+
+    * ARMING_RUDDER : 0
+
 9. Set Autotune Channel di Channel 6
 
     * RC6_OPTION : 17
-
 
 10. Motor Test (untuk memastikan urutan dan arah putaran motor)
 
