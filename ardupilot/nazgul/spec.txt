@@ -1,0 +1,17 @@
+iFlight Nazgul v5
+- SpeedyBee F405 V4 BLS 55A
+- Emax Eco II 1700KV
+- Matek R24D - ExpressLRS 3.5.3
+- MicoAir M10G-5883 Ublox GPS Module
+- ArduCopter 4.6.0
+  - MavLink ELRS
+- Walksnail Micro v1 38.43.12
+  - 1000mW
+  - 720p
+  - Bitrate : Standard
+  - Framerate : High
+  - Sharpness : 3
+  - Saturation : 3
+  - Scene : day
+  - WB : 5000
+  - 3D-NR : Low
