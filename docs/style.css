@@ -1526,6 +1526,62 @@ footer a:hover {
     color: var(--primary-color);
 }
 
+/* Troubleshooting checklist styles */
+.troubleshooting-checklist {
+    margin-top: 15px;
+}
+
+.troubleshooting-checklist h5 {
+    color: var(--warning-color);
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.troubleshooting-checklist .checklist-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.troubleshooting-checklist .checklist-item {
+    background: #fff8e7;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 12px;
+    transition: all 0.2s ease;
+}
+
+.troubleshooting-checklist .checklist-item:hover {
+    background: #fff6dc;
+    border-color: var(--warning-color);
+}
+
+.troubleshooting-checklist .checklist-item label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.troubleshooting-checklist .checklist-item input[type="checkbox"] {
+    margin: 0;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--warning-color);
+}
+
+.troubleshooting-checklist .checklist-item input[type="checkbox"]:checked + strong {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
 /* Mobile responsiveness for FC orientation */
 @media (max-width: 768px) {
     .detail-row {
