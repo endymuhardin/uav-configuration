@@ -427,14 +427,14 @@ const fcOrientations = {
         description: "Putar 180° + upside down",
         rotation: "180° + Upside Down",
         useCase: "FC di sisi bawah dengan panah menghadap ke belakang",
-        visualization: "⟲←"
+        visualization: "⟲↓"
     },
     "14": {
         name: "Yaw 270° + Roll 180°",
         description: "Putar 270° + upside down",
         rotation: "270° CW + Upside Down",
         useCase: "FC di sisi bawah dengan panah menghadap ke kiri",
-        visualization: "⟲↑"
+        visualization: "⟲←"
     },
     "20": {
         name: "Pitch 90°",
