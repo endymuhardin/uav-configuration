@@ -1619,23 +1619,35 @@ function addHardwareEventListeners() {
     });
     
     // Special listener for frame class changes
-    document.getElementById('frame-class-input').addEventListener('change', function() {
-        updateFrameTypeOptions();
-        // Set default frame type for the selected class
-        const frameClass = this.value;
-        const firstFrameType = Object.keys(frameDatabase[frameClass].frameTypes)[0];
-        document.getElementById('frame-type-input').value = firstFrameType;
-        updateHardwareFromForm();
-        
-        // Immediately update step content if on relevant steps
-        if (currentStep === 1) {
-            updateFrameTypeStep();
-        } else if (currentStep === 6) {
-            updateMotorSetupStep(); // Motor Test
-        } else if (currentStep === 7) {
-            updateMotorSetupStep(); // Motor Order
-        }
-    });
+    const frameClassInput = document.getElementById('frame-class-input');
+    if (frameClassInput) {
+        frameClassInput.addEventListener('change', function() {
+            console.log('Frame class changed to:', this.value);
+            updateFrameTypeOptions();
+            // Set default frame type for the selected class
+            const frameClass = this.value;
+            const frameData = frameDatabase[frameClass];
+            if (frameData) {
+                const firstFrameType = Object.keys(frameData.frameTypes)[0];
+                const frameTypeInput = document.getElementById('frame-type-input');
+                if (frameTypeInput) {
+                    frameTypeInput.value = firstFrameType;
+                }
+            }
+            updateHardwareFromForm();
+            
+            // Immediately update step content if on relevant steps
+            if (currentStep === 1) {
+                updateFrameTypeStep();
+            } else if (currentStep === 6) {
+                updateMotorSetupStep(); // Motor Test
+            } else if (currentStep === 7) {
+                updateMotorSetupStep(); // Motor Order
+            }
+        });
+    } else {
+        console.error('Frame class input not found');
+    }
     
     // Special listener for frame type changes
     document.getElementById('frame-type-input').addEventListener('change', function() {
@@ -1825,10 +1837,20 @@ function updateFrameTypeOptions() {
     const frameClassSelect = document.getElementById('frame-class-input');
     const frameTypeSelect = document.getElementById('frame-type-input');
     
+    if (!frameClassSelect || !frameTypeSelect) {
+        console.error('Frame class or frame type select not found');
+        return;
+    }
+    
     const selectedFrameClass = frameClassSelect.value;
     const frameData = frameDatabase[selectedFrameClass];
     
-    if (!frameData) return;
+    console.log('Updating frame type options for class:', selectedFrameClass, frameData);
+    
+    if (!frameData) {
+        console.error('Frame data not found for class:', selectedFrameClass);
+        return;
+    }
     
     // Clear existing options
     frameTypeSelect.innerHTML = '';
@@ -1841,6 +1863,8 @@ function updateFrameTypeOptions() {
         option.title = typeData.description;
         frameTypeSelect.appendChild(option);
     });
+    
+    console.log('Added', frameTypeSelect.options.length, 'frame type options');
 }
 
 function updateHardwareSummary() {
@@ -2106,6 +2130,121 @@ function resetHardwareConfig() {
         
         showResetSuccess();
     }
+}
+
+function resetAllSettings() {
+    const confirmMessage = `⚠️ RESET ALL SETTINGS
+
+Ini akan menghapus SEMUA data:
+• Konfigurasi hardware
+• Progress langkah-langkah  
+• Peripheral settings
+• Semua checkbox yang sudah dicentang
+
+Anda akan kembali ke awal panduan.
+
+Lanjutkan reset?`;
+
+    if (confirm(confirmMessage)) {
+        // Clear all localStorage
+        localStorage.removeItem('ardupilot-hardware-config');
+        localStorage.removeItem('ardupilot-guide-progress');
+        
+        // Reset hardware config to defaults
+        hardwareConfig = {
+            fc: 'SpeedyBee F405 V4',
+            esc: 'SpeedyBee BLS 55A (DShot300)',
+            receiver: 'Matek RP4TD',
+            gps1: 'MicoAir M10G-5883',
+            gps2: '',
+            motor: 'Emax Eco II 1750KV',
+            battery: '6s',
+            frameSize: '5',
+            frameClass: '1', // Quad
+            frameType: '18', // Quad X (BF Reversed) - prop-out
+            escProtocol: 'dshot300', // ESC Protocol
+            vtxType: 'walksnail',
+            vtxModel: 'Avatar Mini',
+            notes: '',
+            // Peripheral configuration
+            peripherals: {
+                gps1: { enabled: true, uart: 'UART6' },
+                gps2: { enabled: false, uart: 'UART5' },
+                vtx: { enabled: true, uart: 'UART1', protocol: 'displayport' },
+                'rc-receiver': { 
+                    enabled: true, 
+                    uart: 'UART2',
+                    type: 'expresslrs',
+                    protocol: 'mavlink'
+                },
+                'esc-telem': { enabled: true, uart: 'UART5' },
+                rangefinder: { enabled: false, uart: 'UART3' },
+                smartport: { enabled: false, uart: 'UART4' },
+                gimbal: { enabled: false, uart: 'UART3' }
+            }
+        };
+        
+        // Reset step progress
+        stepChecks = {};
+        currentStep = 0;
+        
+        // Reset all form elements
+        populateHardwareForm();
+        updateHardwareSummary();
+        
+        // Reset all step checkboxes
+        const checkboxes = document.querySelectorAll('.step-check');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        
+        // Reset motor test checkboxes
+        const motorCheckboxes = document.querySelectorAll('.motor-item-check');
+        motorCheckboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+        
+        // Go back to step 0 (hardware config)
+        showStep(0);
+        
+        // Update navigation
+        updateNavigationButtons();
+        updateStepIndicators();
+        
+        // Show success message
+        showResetAllSuccess();
+    }
+}
+
+function showResetAllSuccess() {
+    const message = document.createElement('div');
+    message.className = 'reset-all-success';
+    message.innerHTML = '🗑️ Semua settings berhasil direset! Anda kembali ke awal panduan.';
+    message.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #dc3545;
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+        z-index: 1000;
+        font-weight: 500;
+        max-width: 300px;
+        animation: slideInRight 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(message);
+    
+    setTimeout(() => {
+        message.style.animation = 'slideOutRight 0.3s ease-in forwards';
+        setTimeout(() => {
+            if (document.body.contains(message)) {
+                document.body.removeChild(message);
+            }
+        }, 300);
+    }, 3000);
 }
 
 function showExportSuccess() {
