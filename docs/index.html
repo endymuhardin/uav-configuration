@@ -387,14 +387,14 @@
                             <select id="fc-orientation-select" class="hw-input">
                                 <option value="0">Normal - Panah/USB menghadap ke depan</option>
                                 <option value="1">Yaw 90° - Diputar 90° searah jarum jam</option>
-                                <option value="2">Yaw 180° - Diputar 180° (terbalik)</option>
+                                <option value="2">Yaw 180° - Panah menghadap ke belakang</option>
                                 <option value="3">Yaw 270° - Diputar 270° searah jarum jam</option>
-                                <option value="4">Roll 180° - Terbalik horizontal (upside down)</option>
-                                <option value="5">Roll 180° + Yaw 90° - Terbalik + putar 90°</option>
-                                <option value="8">Pitch 180° - Terbalik vertikal</option>
-                                <option value="12">Yaw 90° + Roll 180° - Putar 90° + terbalik horizontal</option>
-                                <option value="13">Yaw 180° + Roll 180° - Putar 180° + terbalik horizontal</option>
-                                <option value="14">Yaw 270° + Roll 180° - Putar 270° + terbalik horizontal</option>
+                                <option value="4">Roll 180° - FC di sisi bawah (upside down)</option>
+                                <option value="5">Roll 180° + Yaw 90° - FC di sisi bawah, panah ke kanan</option>
+                                <option value="8">Pitch 180° - Pitch inverted (depan-belakang tertukar)</option>
+                                <option value="12">Yaw 90° + Roll 180° - FC di sisi bawah, panah ke kanan</option>
+                                <option value="13">Yaw 180° + Roll 180° - FC di sisi bawah, panah ke belakang</option>
+                                <option value="14">Yaw 270° + Roll 180° - FC di sisi bawah, panah ke kiri</option>
                                 <option value="20">Pitch 90° - Hidung naik 90°</option>
                                 <option value="21">Pitch 270° - Hidung turun 90°</option>
                             </select>
@@ -409,7 +409,7 @@
                             <ul>
                                 <li><strong>Normal (0)</strong>: Orientasi paling umum - panah FC menghadap depan drone</li>
                                 <li><strong>Yaw rotations</strong>: Untuk FC yang diputar secara horizontal</li>
-                                <li><strong>Roll 180°</strong>: Untuk FC yang dipasang terbalik (upside down)</li>
+                                <li><strong>Roll 180°</strong>: Untuk FC yang dipasang di sisi bawah (upside down)</li>
                                 <li><strong>Pitch rotations</strong>: Untuk FC yang dipasang miring ke atas/bawah</li>
                             </ul>
                         </div>
@@ -438,7 +438,7 @@
                                     <tr>
                                         <td>2</td>
                                         <td>Yaw 180</td>
-                                        <td>Diputar 180° (terbalik)</td>
+                                        <td>Panah menghadap ke belakang</td>
                                     </tr>
                                     <tr>
                                         <td>3</td>
@@ -448,17 +448,17 @@
                                     <tr>
                                         <td>4</td>
                                         <td>Roll 180</td>
-                                        <td>Terbalik horizontal (upside down)</td>
+                                        <td>FC di sisi bawah (upside down)</td>
                                     </tr>
                                     <tr>
                                         <td>5</td>
                                         <td>Roll 180 Yaw 90</td>
-                                        <td>Terbalik + putar 90°</td>
+                                        <td>FC di sisi bawah, panah ke kanan</td>
                                     </tr>
                                     <tr>
                                         <td>8</td>
                                         <td>Pitch 180</td>
-                                        <td>Terbalik vertikal</td>
+                                        <td>Pitch inverted</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -505,7 +505,7 @@
                             <h4>🛠️ Troubleshooting Orientasi Salah:</h4>
                             
                             <div class="problem-solution">
-                                <h5>Problem: HUD terbalik atau bergerak berlawanan</h5>
+                                <h5>Problem: HUD bergerak berlawanan arah</h5>
                                 <p><strong>Solution:</strong></p>
                                 <ul>
                                     <li>Cek pemasangan fisik FC</li>
@@ -987,7 +987,7 @@
                         <li>Lakukan motor test ulang dengan throttle rendah (5-10%)</li>
                         <li>Verifikasi urutan: Motor A, B, C, D sesuai posisi frame</li>
                         <li>Verifikasi arah putaran sesuai dengan frame type</li>
-                        <li>Pastikan tidak ada motor yang berputar terbalik</li>
+                        <li>Pastikan tidak ada motor yang berputar berlawanan arah</li>
                     </ol>
                     
                     <div class="alert alert-success">
@@ -1627,7 +1627,7 @@ SERVO_DSHOT_ESC,2</pre>
                     <ul>
                         <li>🔴 <strong>Betaflight</strong>: Throttle stick naik = throttle naik (normal)</li>
                         <li>🟢 <strong>ArduPilot</strong>: Perlu RC2_REVERSED=1 untuk matching Betaflight behavior</li>
-                        <li>📡 <strong>Tanpa parameter ini</strong>: Throttle stick akan terbalik (berbahaya!)</li>
+                        <li>📡 <strong>Tanpa parameter ini</strong>: Throttle stick akan berlawanan arah (berbahaya!)</li>
                         <li>✅ <strong>Solusi</strong>: Pastikan RC2_REVERSED=1 sudah ter-set untuk konsistensi</li>
                     </ul>
                 </div>

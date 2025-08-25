@@ -382,9 +382,9 @@ const fcOrientations = {
     },
     "2": {
         name: "Yaw 180°",
-        description: "Diputar 180° (terbalik)",
+        description: "Diputar 180°",
         rotation: "180°",
-        useCase: "FC dipasang terbalik, panah menghadap belakang",
+        useCase: "FC dipasang dengan panah menghadap ke belakang",
         visualization: "←"
     },
     "3": {
@@ -396,44 +396,44 @@ const fcOrientations = {
     },
     "4": {
         name: "Roll 180°",
-        description: "Terbalik horizontal (upside down)",
+        description: "Upside down",
         rotation: "Upside Down",
-        useCase: "FC dipasang terbalik di bawah frame",
+        useCase: "FC dipasang di sisi bawah dengan panah tetap menghadap depan",
         visualization: "⟲"
     },
     "5": {
         name: "Roll 180° + Yaw 90°",
-        description: "Terbalik + putar 90°",
+        description: "Upside down + putar 90°",
         rotation: "Upside Down + 90° CW",
-        useCase: "FC terbalik dan diputar 90°",
+        useCase: "FC di sisi bawah dengan panah menghadap ke kanan",
         visualization: "⟲↓"
     },
     "8": {
         name: "Pitch 180°",
-        description: "Terbalik vertikal",
+        description: "Pitch inverted",
         rotation: "Pitch Inverted",
-        useCase: "FC dipasang dengan pitch terbalik",
+        useCase: "FC dipasang dengan pitch inverted (depan-belakang tertukar)",
         visualization: "⤴"
     },
     "12": {
         name: "Yaw 90° + Roll 180°",
-        description: "Putar 90° + terbalik horizontal",
+        description: "Putar 90° + upside down",
         rotation: "90° CW + Upside Down",
-        useCase: "FC terbalik dan diputar 90°",
+        useCase: "FC di sisi bawah dengan panah menghadap ke kanan",
         visualization: "⟲↓"
     },
     "13": {
         name: "Yaw 180° + Roll 180°",
-        description: "Putar 180° + terbalik horizontal",
+        description: "Putar 180° + upside down",
         rotation: "180° + Upside Down",
-        useCase: "FC terbalik dan diputar 180°",
+        useCase: "FC di sisi bawah dengan panah menghadap ke belakang",
         visualization: "⟲←"
     },
     "14": {
         name: "Yaw 270° + Roll 180°",
-        description: "Putar 270° + terbalik horizontal",
+        description: "Putar 270° + upside down",
         rotation: "270° CW + Upside Down",
-        useCase: "FC terbalik dan diputar 270°",
+        useCase: "FC di sisi bawah dengan panah menghadap ke kiri",
         visualization: "⟲↑"
     },
     "20": {
