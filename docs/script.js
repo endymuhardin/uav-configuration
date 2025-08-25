@@ -161,7 +161,7 @@ const rcReceiverTypes = {
     "expresslrs": {
         name: "ExpressLRS",
         supportedProtocols: ["crsf", "mavlink", "sbus"],
-        defaultProtocol: "mavlink"
+        defaultProtocol: "crsf"
     },
     "crossfire": {
         name: "TBS Crossfire", 
@@ -1601,7 +1601,7 @@ function initializeHardwareConfig() {
                 enabled: true, 
                 uart: 'UART2',
                 type: 'expresslrs',
-                protocol: 'mavlink'
+                protocol: 'crsf'
             },
             'esc-telem': { enabled: true, uart: 'UART5' },
             rangefinder: { enabled: false, uart: 'UART3' },
@@ -1678,7 +1678,7 @@ function populatePeripheralConfig() {
             
             if (checkbox) checkbox.checked = config.enabled;
             if (rcReceiverType) rcReceiverType.value = config.type || 'expresslrs';
-            if (rcProtocol) rcProtocol.value = config.protocol || 'mavlink';
+            if (rcProtocol) rcProtocol.value = config.protocol || 'crsf';
             if (rcUartSelect) {
                 rcUartSelect.value = config.uart;
                 rcUartSelect.disabled = !config.enabled;
@@ -2312,7 +2312,7 @@ function resetHardwareConfig() {
                     enabled: true, 
                     uart: 'UART2',
                     type: 'expresslrs',
-                    protocol: 'mavlink'
+                    protocol: 'crsf'
                 },
                 'esc-telem': { enabled: true, uart: 'UART5' },
                 rangefinder: { enabled: false, uart: 'UART3' },
@@ -2373,7 +2373,7 @@ Lanjutkan reset?`;
                     enabled: true, 
                     uart: 'UART2',
                     type: 'expresslrs',
-                    protocol: 'mavlink'
+                    protocol: 'crsf'
                 },
                 'esc-telem': { enabled: true, uart: 'UART5' },
                 rangefinder: { enabled: false, uart: 'UART3' },
