@@ -756,6 +756,20 @@ function updateSerialPortStep() {
     updateSerialCheckText(enabledPeripherals);
 }
 
+function updatePeripheralDisplay() {
+    // Update peripheral-related displays
+    if (!hardwareConfig.peripherals) return;
+    
+    // Get enabled peripherals
+    const enabledPeripherals = Object.entries(hardwareConfig.peripherals)
+        .filter(([key, config]) => config.enabled);
+    
+    // Update serial port displays if they exist
+    updateSerialPortTable(enabledPeripherals);
+    updateWiringDiagram(enabledPeripherals);
+    updateSerialCheckText(enabledPeripherals);
+}
+
 function updateEscStep() {
     const escProtocol = hardwareConfig.escProtocol || 'dshot300';
     const escData = escProtocols[escProtocol];
