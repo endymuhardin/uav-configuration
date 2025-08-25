@@ -1,0 +1,40 @@
+title: "Panduan Setup ArduPilot Nazgul"
+description: "Interactive guide for setting up ArduPilot on Nazgul drone with SpeedyBee F405 V4"
+baseurl: ""
+url: "https://endymuhardin.github.io"
+
+# Build settings
+theme: minima
+markdown: kramdown
+
+# GitHub Pages settings
+repository: "endymuhardin/uav-configuration"
+
+# Site settings
+lang: id
+author: "Endy Muhardin"
+email: "endy@muhardin.com"
+
+# Navigation
+header_pages:
+  - index.html
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Exclude files
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Include files
+include:
+  - _pages

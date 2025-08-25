@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Setup ArduPilot Nazgul - UAV Configuration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚁 Panduan Interaktif Setup ArduPilot</h1>
+            <p class="subtitle">Untuk Nazgul dengan SpeedyBee F405 V4</p>
+        </header>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+            <div class="progress-text">
+                <span id="progressText">0% Selesai</span>
+            </div>
+        </div>
+
+        <nav class="step-nav">
+            <button class="nav-btn" id="prevBtn" onclick="changeStep(-1)" disabled>← Sebelumnya</button>
+            <div class="step-indicators" id="stepIndicators"></div>
+            <button class="nav-btn" id="nextBtn" onclick="changeStep(1)">Selanjutnya →</button>
+        </nav>
+
+        <main>
+            <!-- Spesifikasi -->
+            <section class="step-content" id="step0">
+                <h2>📋 Konfigurasi Hardware</h2>
+                
+                <div class="config-actions">
+                    <button class="btn-secondary" onclick="exportConfiguration()">📤 Export Config</button>
+                    <label for="importConfig" class="btn-secondary file-input-label">
+                        📥 Import Config
+                        <input type="file" id="importConfig" accept=".json" onchange="importConfiguration(event)" style="display: none;">
+                    </label>
+                    <button class="btn-secondary" onclick="resetHardwareConfig()">🔄 Reset Default</button>
+                </div>
+
+                <div class="hardware-config-form">
+                    <h3>🔧 Spesifikasi Hardware Anda</h3>
+                    <p>Masukkan spesifikasi hardware drone Anda:</p>
+                    
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label for="fc-input">Flight Controller (FC):</label>
+                            <input type="text" id="fc-input" class="hw-input" value="SpeedyBee F405 V4" 
+                                   placeholder="Contoh: SpeedyBee F405 V4">
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="esc-input">ESC:</label>
+                            <input type="text" id="esc-input" class="hw-input" value="SpeedyBee BLS 55A (DShot300)" 
+                                   placeholder="Contoh: SpeedyBee BLS 55A">
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="receiver-input">Radio Receiver:</label>
+                            <input type="text" id="receiver-input" class="hw-input" value="Matek RP4TD" 
+                                   placeholder="Contoh: Matek RP4TD">
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="gps1-input">GPS 1 (Primary):</label>
+                            <input type="text" id="gps1-input" class="hw-input" value="MicoAir M10G-5883" 
+                                   placeholder="Contoh: MicoAir M10G-5883">
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="gps2-input">GPS 2 (Secondary):</label>
+                            <input type="text" id="gps2-input" class="hw-input" value="" 
+                                   placeholder="Contoh: MicoAir M10G-5883 (Opsional)">
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="motor-input">Motor:</label>
+                            <input type="text" id="motor-input" class="hw-input" value="Emax Eco II 1750KV" 
+                                   placeholder="Contoh: Emax Eco II 1750KV">
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="battery-input">Baterai:</label>
+                            <select id="battery-input" class="hw-input">
+                                <option value="6s">6S (22.2V - 25.2V)</option>
+                                <option value="4s">4S (14.8V - 16.8V)</option>
+                                <option value="5s">5S (18.5V - 21V)</option>
+                                <option value="3s">3S (11.1V - 12.6V)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="frame-size-input">Ukuran Frame:</label>
+                            <select id="frame-size-input" class="hw-input">
+                                <option value="5inch">5 inch</option>
+                                <option value="7inch">7 inch</option>
+                                <option value="6inch">6 inch</option>
+                                <option value="4inch">4 inch</option>
+                                <option value="3inch">3 inch</option>
+                            </select>
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="frame-class-input">Frame Class:</label>
+                            <select id="frame-class-input" class="hw-input">
+                                <option value="1">Quad (4 motors)</option>
+                                <option value="2">Hexa (6 motors)</option>
+                                <option value="3">Octa (8 motors)</option>
+                                <option value="4">OctaQuad (8 motors coaxial)</option>
+                                <option value="5">Y6 (6 motors coaxial)</option>
+                                <option value="7">Tri (3 motors)</option>
+                                <option value="8">SingleCopter (1 motor)</option>
+                                <option value="9">CoaxCopter (2 motors)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="frame-type-input">Frame Type:</label>
+                            <select id="frame-type-input" class="hw-input">
+                                <!-- Will be populated dynamically based on frame class -->
+                            </select>
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="vtx-input">VTX:</label>
+                            <input type="text" id="vtx-input" class="hw-input" value="Walksnail Avatar Mini" 
+                                   placeholder="Contoh: Walksnail Avatar Mini">
+                        </div>
+                    </div>
+                    
+                    <div class="peripheral-config">
+                        <h4>🔌 Konfigurasi Peripheral</h4>
+                        <p>Pilih peripheral yang terpasang pada drone Anda:</p>
+                        
+                        <div class="config-grid">
+                            <div class="config-item">
+                                <label>
+                                    <input type="checkbox" id="peripheral-gps1" class="peripheral-checkbox" checked>
+                                    GPS Module 1 (Primary)
+                                </label>
+                                <select id="gps1-uart-select" class="hw-input peripheral-uart">
+                                    <option value="UART6" selected>UART6</option>
+                                    <option value="UART1">UART1</option>
+                                    <option value="UART2">UART2</option>
+                                    <option value="UART3">UART3</option>
+                                    <option value="UART4">UART4</option>
+                                    <option value="UART5">UART5</option>
+                                </select>
+                            </div>
+
+                            <div class="config-item">
+                                <label>
+                                    <input type="checkbox" id="peripheral-gps2" class="peripheral-checkbox">
+                                    GPS Module 2 (Secondary)
+                                </label>
+                                <select id="gps2-uart-select" class="hw-input peripheral-uart">
+                                    <option value="UART5" selected>UART5</option>
+                                    <option value="UART1">UART1</option>
+                                    <option value="UART2">UART2</option>
+                                    <option value="UART3">UART3</option>
+                                    <option value="UART4">UART4</option>
+                                    <option value="UART6">UART6</option>
+                                </select>
+                            </div>
+                            
+                            <div class="config-item">
+                                <label>
+                                    <input type="checkbox" id="peripheral-vtx" class="peripheral-checkbox" checked>
+                                    VTX (OSD DisplayPort)
+                                </label>
+                                <select id="vtx-uart-select" class="hw-input peripheral-uart">
+                                    <option value="UART1" selected>UART1</option>
+                                    <option value="UART2">UART2</option>
+                                    <option value="UART3">UART3</option>
+                                    <option value="UART4">UART4</option>
+                                    <option value="UART5">UART5</option>
+                                    <option value="UART6">UART6</option>
+                                </select>
+                            </div>
+                            
+                            <div class="config-item rc-receiver-section">
+                                <label>
+                                    <input type="checkbox" id="peripheral-rc-receiver" class="peripheral-checkbox" checked>
+                                    RC Receiver
+                                </label>
+                                <div class="rc-config-details">
+                                    <label for="rc-receiver-type">Tipe RC Receiver:</label>
+                                    <select id="rc-receiver-type" class="hw-input">
+                                        <option value="expresslrs">ExpressLRS</option>
+                                        <option value="crossfire">TBS Crossfire</option>
+                                        <option value="frsky">FrSky</option>
+                                        <option value="spektrum">Spektrum</option>
+                                        <option value="flysky">FlySky</option>
+                                        <option value="generic">Generic</option>
+                                    </select>
+                                    
+                                    <label for="rc-protocol">Protokol:</label>
+                                    <select id="rc-protocol" class="hw-input">
+                                        <option value="crsf">CRSF</option>
+                                        <option value="mavlink" selected>MavLink (telemetry)</option>
+                                        <option value="sbus">SBUS</option>
+                                        <option value="ppm">PPM</option>
+                                        <option value="dsm">DSM/DSMX</option>
+                                    </select>
+                                    
+                                    <label for="rc-uart-select">UART Port:</label>
+                                    <select id="rc-uart-select" class="hw-input peripheral-uart">
+                                        <option value="UART2" selected>UART2</option>
+                                        <option value="UART1">UART1</option>
+                                        <option value="UART3">UART3</option>
+                                        <option value="UART4">UART4</option>
+                                        <option value="UART5">UART5</option>
+                                        <option value="UART6">UART6</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="config-item">
+                                <label>
+                                    <input type="checkbox" id="peripheral-esc-telem" class="peripheral-checkbox" checked>
+                                    ESC Telemetry
+                                </label>
+                                <select id="esc-telem-uart-select" class="hw-input peripheral-uart">
+                                    <option value="UART5" selected>UART5</option>
+                                    <option value="UART1">UART1</option>
+                                    <option value="UART2">UART2</option>
+                                    <option value="UART3">UART3</option>
+                                    <option value="UART4">UART4</option>
+                                    <option value="UART6">UART6</option>
+                                </select>
+                            </div>
+                            
+                            <div class="config-item">
+                                <label>
+                                    <input type="checkbox" id="peripheral-rangefinder" class="peripheral-checkbox">
+                                    Rangefinder/Lidar
+                                </label>
+                                <select id="rangefinder-uart-select" class="hw-input peripheral-uart">
+                                    <option value="UART3" selected>UART3</option>
+                                    <option value="UART1">UART1</option>
+                                    <option value="UART2">UART2</option>
+                                    <option value="UART4">UART4</option>
+                                    <option value="UART5">UART5</option>
+                                    <option value="UART6">UART6</option>
+                                </select>
+                            </div>
+                            
+                            <div class="config-item">
+                                <label>
+                                    <input type="checkbox" id="peripheral-smartport" class="peripheral-checkbox">
+                                    SmartPort Telemetry
+                                </label>
+                                <select id="smartport-uart-select" class="hw-input peripheral-uart">
+                                    <option value="UART4" selected>UART4</option>
+                                    <option value="UART1">UART1</option>
+                                    <option value="UART2">UART2</option>
+                                    <option value="UART3">UART3</option>
+                                    <option value="UART5">UART5</option>
+                                    <option value="UART6">UART6</option>
+                                </select>
+                            </div>
+                            
+                            <div class="config-item">
+                                <label>
+                                    <input type="checkbox" id="peripheral-gimbal" class="peripheral-checkbox">
+                                    Gimbal Control
+                                </label>
+                                <select id="gimbal-uart-select" class="hw-input peripheral-uart">
+                                    <option value="UART3" selected>UART3</option>
+                                    <option value="UART1">UART1</option>
+                                    <option value="UART2">UART2</option>
+                                    <option value="UART4">UART4</option>
+                                    <option value="UART5">UART5</option>
+                                    <option value="UART6">UART6</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-item full-width">
+                        <label for="notes-input">Catatan Tambahan:</label>
+                        <textarea id="notes-input" class="hw-input" rows="3" 
+                                  placeholder="Catatan khusus tentang setup Anda..."></textarea>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>📋 Ringkasan Konfigurasi Anda</h3>
+                    <div id="hardware-summary" class="spec-list">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="resource-links">
+                    <h3>📚 Dokumentasi Referensi</h3>
+                    <div id="reference-links">
+                        <!-- Will be populated dynamically based on hardware -->
+                        <a href="https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/" target="_blank" class="link-btn">Product Website</a>
+                        <a href="https://store-fhxxhuiq8q.mybigcommerce.com/product_images/img_SpeedyBee_F405_V4_Stack/SpeedyBee_F405_V4_Stack_Manual_EN.pdf" target="_blank" class="link-btn">User Manual</a>
+                        <a href="https://ardupilot.org/copter/docs/common-speedybeef4-v3.html" target="_blank" class="link-btn">ArduPilot Docs</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 1: Frame Type -->
+            <section class="step-content" id="step1" style="display:none;">
+                <h2>1. Set Frame Type</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Konfigurasi Frame Dinamis</h3>
+                        <div id="frame-config-display">
+                            <!-- Will be populated by JavaScript based on hardware config -->
+                        </div>
+                        
+                        <div class="param-list">
+                            <div class="param-item" id="frame-class-param">
+                                <code>FRAME_CLASS = ?</code>
+                                <span>Frame class parameter</span>
+                            </div>
+                            <div class="param-item" id="frame-type-param">
+                                <code>FRAME_TYPE = ?</code>
+                                <span>Frame type parameter</span>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <strong>💡 Tips:</strong> Parameter frame type sudah diset berdasarkan konfigurasi hardware Anda di langkah pertama. 
+                            Jika ingin mengubah, kembali ke langkah "Konfigurasi Hardware".
+                        </div>
+                    </div>
+                    <div id="frame-diagram">
+                        <img src="../ardupilot/nazgul/img/01-frame-type.png" alt="Frame Type Configuration" class="instruction-img">
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="1">
+                        <span id="frame-check-text">Frame type sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 2: Initial Tune -->
+            <section class="step-content" id="step2" style="display:none;">
+                <h2>2. Initial Tune</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Konfigurasi Baterai</h3>
+                        <ul>
+                            <li>Baterai: <strong>6S</strong></li>
+                            <li>Max Voltage: <strong>4.2 volt</strong></li>
+                            <li>Min Voltage: <strong>3.3 volt</strong></li>
+                        </ul>
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Penting:</strong> Setting voltage yang tepat sangat penting untuk keamanan baterai
+                        </div>
+                    </div>
+                    <img src="../ardupilot/nazgul/img/02-initial-tune.png" alt="Initial Tune Configuration" class="instruction-img">
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="2">
+                        <span>Parameter baterai sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 3: Motor Order -->
+            <section class="step-content" id="step3" style="display:none;">
+                <h2>3. Setup Urutan Motor</h2>
+                
+                <div class="motor-setup-section" id="motor-config-section">
+                    <!-- Will be populated dynamically by JavaScript -->
+                </div>
+
+                <div class="step-by-step">
+                    <h4>Langkah 1: Motor Test</h4>
+                    <div class="alert alert-danger">
+                        <strong>SEKALI LAGI: PASTIKAN BALING-BALING TIDAK TERPASANG!</strong>
+                    </div>
+                    
+                    <ol>
+                        <li>Pasang baterai (lepas VTX untuk menghindari overheat)</li>
+                        <li>Buka menu <strong>Setup > Optional Hardware > Motor Test</strong></li>
+                        <li>Klik tombol <strong>Test Motor A, B, C, D</strong> secara bergantian</li>
+                        <li>Catat motor mana yang berputar untuk setiap posisi</li>
+                    </ol>
+                    
+                    <img src="../ardupilot/nazgul/img/tab-motor-test.png" alt="Motor Test Tab" class="instruction-img">
+                </div>
+
+                <div class="step-by-step">
+                    <h4>Langkah 2: Referensi Motor untuk Frame Anda</h4>
+                    <p>Berikut adalah tabel referensi motor untuk frame configuration yang Anda pilih:</p>
+                    
+                    <table class="motor-table" id="dynamic-motor-test-table">
+                        <!-- Will be populated dynamically by JavaScript -->
+                    </table>
+                </div>
+
+                <div class="step-by-step" id="servo-output-config">
+                    <!-- Will be populated dynamically if servo mapping exists -->
+                </div>
+
+                <div class="step-by-step">
+                    <h4>Langkah 3: Verifikasi Motor Test</h4>
+                    <ol>
+                        <li>Kembali ke tab <strong>Motor Test</strong></li>
+                        <li>Test semua motor sesuai dengan tabel referensi di atas</li>
+                        <li>Pastikan motor yang berputar sesuai dengan posisinya</li>
+                        <li>Pastikan arah putaran sesuai dengan yang ditentukan</li>
+                    </ol>
+                </div>
+
+                <div class="step-by-step">
+                    <h4>Langkah 4: Setup Arah Putaran Motor (Jika Diperlukan)</h4>
+                    <p>Jika arah putaran motor tidak sesuai dengan tabel referensi:</p>
+                    
+                    <div class="alert alert-info">
+                        <strong>💡 Info:</strong> Arah putaran harus sesuai dengan frame type yang dipilih
+                    </div>
+                    
+                    <p>Cara mengubah arah putaran menggunakan parameter <strong>SERVO_BLH_RVMASK</strong>:</p>
+                    <ol>
+                        <li>Buka <strong>Config > Full Parameter List</strong></li>
+                        <li>Cari parameter <strong>SERVO_BLH_RVMASK</strong></li>
+                        <li>Centang channel motor yang ingin dibalik arah putarannya</li>
+                        <li>Write parameters dan test ulang</li>
+                    </ol>
+                    
+                    <img src="../ardupilot/nazgul/img/servo-blh-reverse.png" alt="Servo BLH Reverse" class="instruction-img">
+                </div>
+
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="3">
+                        <span id="motor-check-text">✅ Motor test berhasil, urutan dan arah putaran motor sudah benar</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 4: Serial Ports -->
+            <section class="step-content" id="step4" style="display:none;">
+                <h2>4. Konfigurasi Serial Port</h2>
+                
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>🔌 Konfigurasi UART Anda</h3>
+                        <p>Berdasarkan peripheral yang Anda pilih di konfigurasi hardware:</p>
+                        
+                        <div id="dynamic-serial-table">
+                            <!-- Will be populated dynamically by JavaScript -->
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <strong>💡 Tips:</strong> Konfigurasi ini dibuat otomatis berdasarkan peripheral yang Anda aktifkan di langkah pertama. 
+                            Untuk mengubah, kembali ke "Konfigurasi Hardware".
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-card" id="wiring-instructions">
+                    <!-- Will be populated dynamically with wiring instructions -->
+                </div>
+                
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>📝 Cara Setting di Mission Planner</h3>
+                        <ol>
+                            <li>Buka <strong>Config > Full Parameter List</strong></li>
+                            <li>Cari parameter <strong>SERIAL</strong> yang sesuai dengan tabel di atas</li>
+                            <li>Set <strong>PROTOCOL</strong> dan <strong>BAUD</strong> sesuai dengan nilai yang ditampilkan</li>
+                            <li>Klik <strong>Write Params</strong> untuk menyimpan</li>
+                            <li>Reboot flight controller</li>
+                        </ol>
+                        
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Penting:</strong> Pastikan koneksi fisik sudah benar sebelum mengaktifkan protokol serial.
+                        </div>
+                    </div>
+                    <img src="../ardupilot/nazgul/img/04-serial-ports.png" alt="Serial Ports Configuration" class="instruction-img">
+                </div>
+                
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="4">
+                        <span id="serial-check-text">Serial port sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 5: ESC Type -->
+            <section class="step-content" id="step5" style="display:none;">
+                <h2>5. Jenis ESC</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Konfigurasi ESC</h3>
+                        <ul>
+                            <li>ESC Type: <strong>DShot300</strong></li>
+                            <li>Firmware: <strong>Bluejay</strong></li>
+                            <li>Version: <strong>0.21.0</strong></li>
+                        </ul>
+                    </div>
+                    <img src="../ardupilot/nazgul/img/05-esc-type.png" alt="ESC Type Configuration" class="instruction-img">
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="5">
+                        <span>Tipe ESC sudah diset ke DShot300</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 6: Flight Modes -->
+            <section class="step-content" id="step6" style="display:none;">
+                <h2>6. Set Flight Modes</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Mode Terbang</h3>
+                        <table class="config-table">
+                            <thead>
+                                <tr>
+                                    <th>Mode</th>
+                                    <th>Fungsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Stabilize</td></tr>
+                                <tr><td>2</td><td>Acro</td></tr>
+                                <tr><td>3</td><td>Loiter</td></tr>
+                                <tr><td>4</td><td>Auto / Mission</td></tr>
+                                <tr><td>5</td><td>Guided</td></tr>
+                                <tr><td>6</td><td>Return to Launch</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="param-box">
+                            <strong>Parameter:</strong> FLTMODE_CH = 7 (Channel 7)
+                        </div>
+                    </div>
+                    <img src="../ardupilot/nazgul/img/06-flight-modes.png" alt="Flight Modes Configuration" class="instruction-img">
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="6">
+                        <span>Flight modes sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 7: Arming Configuration -->
+            <section class="step-content" id="step7" style="display:none;">
+                <h2>7. Set Arming Channel</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Konfigurasi Arming</h3>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <code>RC5_OPTION = 154</code>
+                                <span>Channel 5 / AUX 1 untuk arming</span>
+                            </div>
+                            <div class="param-item">
+                                <code>ARMING_RUDDER = 0</code>
+                                <span>Disable arming dengan stik command</span>
+                            </div>
+                        </div>
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Safety:</strong> Pastikan switch arming berada di posisi yang aman
+                        </div>
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="7">
+                        <span>Arming channel sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 8: Autotune -->
+            <section class="step-content" id="step8" style="display:none;">
+                <h2>8. Set Autotune Channel</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Konfigurasi Autotune</h3>
+                        <div class="param-item">
+                            <code>RC6_OPTION = 17</code>
+                            <span>Channel 6 untuk Autotune</span>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>💡 Tips:</strong> Autotune akan membantu mengoptimalkan PID secara otomatis
+                        </div>
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="8">
+                        <span>Autotune channel sudah diset</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 9: Motor Test -->
+            <section class="step-content" id="step9" style="display:none;">
+                <h2>9. Motor Test</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Test Motor</h3>
+                        <p>Lakukan motor test untuk memastikan:</p>
+                        <ul>
+                            <li>✓ Urutan motor sudah benar</li>
+                            <li>✓ Arah putaran motor sesuai</li>
+                            <li>✓ Semua motor berfungsi normal</li>
+                        </ul>
+                        <div class="alert alert-danger">
+                            <strong>⚠️ PERHATIAN:</strong> Lepaskan propeller sebelum melakukan motor test!
+                        </div>
+                    </div>
+                    <img src="../ardupilot/nazgul/img/07-motor-test.png" alt="Motor Test" class="instruction-img">
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="9">
+                        <span>Motor test sudah dilakukan dan berhasil</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 10: MavLink ELRS -->
+            <section class="step-content" id="step10" style="display:none;">
+                <h2>10. MavLink via ELRS Backpack</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Konfigurasi ELRS MavLink</h3>
+                        <div class="param-item">
+                            <code>RSSI_TYPE = 5</code>
+                            <span>Enable RSSI dari ELRS</span>
+                        </div>
+                        <p>Untuk koneksi laptop ke backpack remote via WiFi, gunakan protokol UDP di Mission Planner.</p>
+                        <div class="resource-links">
+                            <a href="https://www.expresslrs.org/software/mavlink/" target="_blank" class="link-btn">📖 Dokumentasi ELRS</a>
+                            <a href="https://www.youtube.com/watch?v=EOUdSb7iJ2s" target="_blank" class="link-btn">📺 Tutorial Video</a>
+                        </div>
+                    </div>
+                    <img src="../ardupilot/nazgul/img/08-elrs-mavlink-rssi-type.png" alt="ELRS MavLink Configuration" class="instruction-img">
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="10">
+                        <span>MavLink ELRS sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 11: Walksnail OSD -->
+            <section class="step-content" id="step11" style="display:none;">
+                <h2>11. Setup Walksnail OSD</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Parameter OSD</h3>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <code>OSD_TYPE = 5</code>
+                                <span>MSP_DISPLAYPORT</span>
+                            </div>
+                            <div class="param-item">
+                                <code>OSD_CELL_COUNT = 4</code>
+                                <span>Jumlah cell baterai</span>
+                            </div>
+                            <div class="param-item">
+                                <code>MSP_OPTIONS = 0</code>
+                                <span>Disable telemetry mode</span>
+                            </div>
+                            <div class="param-item">
+                                <code>SERIAL1_PROTOCOL = 42</code>
+                                <span>DisplayPort protocol</span>
+                            </div>
+                            <div class="param-item">
+                                <code>SERIAL1_BAUD = 115</code>
+                                <span>Baud rate 115200</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="11">
+                        <span>Walksnail OSD sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 12: Battery Failsafe -->
+            <section class="step-content" id="step12" style="display:none;">
+                <h2>12. Battery Failsafe</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Konfigurasi Failsafe</h3>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <code>BATT_FS_CRT_ACT = 1</code>
+                                <span>Critical battery action: Land</span>
+                            </div>
+                            <div class="param-item">
+                                <code>BATT_FS_LOW_ACT = 1</code>
+                                <span>Low battery action: Land</span>
+                            </div>
+                            <div class="param-item">
+                                <code>RC_FS_TIMEOUT = 2</code>
+                                <span>Radio failsafe timeout (seconds)</span>
+                            </div>
+                        </div>
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Penting:</strong> Failsafe adalah fitur keamanan yang kritis
+                        </div>
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="12">
+                        <span>Battery failsafe sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 13: Acro Settings -->
+            <section class="step-content" id="step13" style="display:none;">
+                <h2>13. Acro Settings</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Disable Acro Trainer</h3>
+                        <div class="param-item">
+                            <code>ACRO_TRAINER = 0</code>
+                            <span>Disable trainer untuk full acro mode</span>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>💡 Info:</strong> Dengan trainer disabled, Anda mendapat kontrol penuh dalam mode Acro
+                        </div>
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="13">
+                        <span>Acro trainer sudah di-disable</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 14: Initial Tuning Parameters -->
+            <section class="step-content" id="step14" style="display:none;">
+                <h2>14. Initial Tuning Parameters</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Parameter Tuning untuk 5 inch 6S</h3>
+                        <p>Copy dan paste parameter berikut ke Mission Planner:</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyParams()">📋 Copy Parameters</button>
+                            <pre id="tuningParams">ANGLE_MAX,6000
+ARMING_CHECK,1
+ATC_ACCEL_P_MAX,162000
+ATC_ACCEL_R_MAX,162000
+ATC_ACCEL_Y_MAX,56000
+ATC_ANG_PIT_P,12
+ATC_ANG_RLL_P,12
+ATC_ANG_YAW_P,6
+ATC_RAT_PIT_D,0.001
+ATC_RAT_PIT_I,0.06
+ATC_RAT_PIT_P,0.06
+ATC_RAT_PIT_SMAX,0
+ATC_RAT_RLL_D,0.001
+ATC_RAT_RLL_I,0.06
+ATC_RAT_RLL_P,0.06
+ATC_RAT_RLL_SMAX,0
+ATC_RAT_YAW_D,0.002
+ATC_RAT_YAW_I,0.02
+ATC_RAT_YAW_P,0.2
+ATC_RAT_YAW_SMAX,0
+BATT_ARM_VOLT,22.10
+BATT_CRT_VOLT,21.00
+BATT_LOW_VOLT,21.60
+GPS1_GNSS_MODE,5
+GPS2_GNSS_MODE,5
+GPS_AUTO_SWITCH,1
+GPS_BLEND_MASK,5
+INS_HNTCH_BW,30
+INS_HNTCH_FREQ,140
+INS_HNTCH_HMNCS,1
+INS_HNTCH_OPTS,6
+INS_LOG_BAT_OPT,4
+LOG_BITMASK,180222
+MOT_BAT_VOLT_MIN,19.80
+PSC_ACCZ_I,0.26
+PSC_ACCZ_P,0.13
+PSC_VELZ_P,3
+SERVO_BLH_AUTO,1
+SERVO_DSHOT_ESC,2</pre>
+                        </div>
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="14">
+                        <span>Initial tuning parameters sudah di-load</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 15: Autotune Process -->
+            <section class="step-content" id="step15" style="display:none;">
+                <h2>15. Proses Autotune</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Persiapan Autotune</h3>
+                        <p>Setelah hover stabil di mode Stabilize, Altitude Hold, dan Loiter:</p>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <code>AUTOTUNE_AGGR = 0.1</code>
+                                <span>Aggressiveness level (0.1 = conservative)</span>
+                            </div>
+                            <div class="param-item">
+                                <code>AUTOTUNE_AXES = 3</code>
+                                <span>Axes to tune (3 = Yaw only, 7 = All)</span>
+                            </div>
+                        </div>
+                        <div class="alert alert-info">
+                            <strong>💡 Tips:</strong> Lakukan autotune per axis secara bergantian untuk menghemat baterai
+                        </div>
+                        <ol class="process-list">
+                            <li>Pastikan baterai penuh</li>
+                            <li>Hover di area yang luas dan aman</li>
+                            <li>Aktifkan autotune via switch</li>
+                            <li>Biarkan proses berjalan sampai selesai</li>
+                            <li>Land dan save parameter</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="15">
+                        <span>Autotune sudah dilakukan</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 16: Remote Control -->
+            <section class="step-content" id="step16" style="display:none;">
+                <h2>16. Remote Control Settings</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Radiomaster Pocket ELRS</h3>
+                        <ul>
+                            <li>Internal TX Firmware: <strong>3.5.4</strong></li>
+                            <li>Backpack Firmware: <strong>1.5.2</strong></li>
+                        </ul>
+                        <h4>Switch Mapping:</h4>
+                        <table class="config-table">
+                            <thead>
+                                <tr>
+                                    <th>Switch</th>
+                                    <th>Type</th>
+                                    <th>Channel</th>
+                                    <th>Fungsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>A</td>
+                                    <td>2 pos</td>
+                                    <td>5</td>
+                                    <td>Arming</td>
+                                </tr>
+                                <tr>
+                                    <td>B</td>
+                                    <td>3 pos</td>
+                                    <td>7</td>
+                                    <td>Flight Mode 1</td>
+                                </tr>
+                                <tr>
+                                    <td>D</td>
+                                    <td>2 pos</td>
+                                    <td>7</td>
+                                    <td>Flight Mode 2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="image-gallery">
+                        <img src="../ardupilot/nazgul/img/mixes-01-all.jpg" alt="All Mixes" class="gallery-img">
+                        <img src="../ardupilot/nazgul/img/mixes-02-flymod.jpg" alt="Flight Mode Mix" class="gallery-img">
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="16">
+                        <span>Remote control sudah dikonfigurasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Completion -->
+            <section class="step-content" id="step17" style="display:none;">
+                <h2>🎉 Setup Selesai!</h2>
+                <div class="completion-card">
+                    <div class="success-icon">✅</div>
+                    <h3>Selamat! Setup ArduPilot Anda sudah selesai</h3>
+                    <p>Drone Anda sekarang siap untuk test flight. Pastikan untuk:</p>
+                    <ul class="final-checklist">
+                        <li>✓ Double check semua koneksi fisik</li>
+                        <li>✓ Kalibrasi compass dan accelerometer</li>
+                        <li>✓ Test semua flight mode di area yang aman</li>
+                        <li>✓ Mulai dengan hover test di mode Stabilize</li>
+                        <li>✓ Simpan backup parameter setelah tuning selesai</li>
+                    </ul>
+                    <div class="alert alert-success">
+                        <strong>💾 Backup:</strong> Jangan lupa save parameter ke file untuk backup!
+                    </div>
+                    <button class="btn-primary" onclick="resetGuide()">🔄 Mulai Ulang</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>UAV Configuration Guide | ArduPilot Nazgul Setup</p>
+            <p><a href="https://github.com/endymuhardin/uav-configuration" target="_blank">GitHub Repository</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
