@@ -631,6 +631,7 @@ function updateSerialPortStep() {
     // Update serial port configuration display
     updateSerialPortTable(enabledPeripherals);
     updateWiringDiagram(enabledPeripherals);
+    generateWiringDiagram(enabledPeripherals);
     updateSerialCheckText(enabledPeripherals);
 }
 
@@ -807,6 +808,224 @@ function updateWiringDiagram(enabledPeripherals) {
     }
     
     wiringContainer.innerHTML = wiringInstructions;
+}
+
+// Dynamic SVG Wiring Diagram Generation
+function generateWiringDiagram(enabledPeripherals) {
+    const diagramContainer = document.getElementById('wiring-diagram-container');
+    if (!diagramContainer) return;
+    
+    // FC pin definitions (generic layout)
+    const fcPins = {
+        // Power pins
+        'VCC': { x: 100, y: 50, type: 'power' },
+        'GND': { x: 100, y: 80, type: 'power' },
+        'VBAT': { x: 100, y: 110, type: 'power' },
+        
+        // UART pins
+        'UART1_TX': { x: 200, y: 50, type: 'uart', uart: 'UART1' },
+        'UART1_RX': { x: 230, y: 50, type: 'uart', uart: 'UART1' },
+        'UART2_TX': { x: 200, y: 80, type: 'uart', uart: 'UART2' },
+        'UART2_RX': { x: 230, y: 80, type: 'uart', uart: 'UART2' },
+        'UART3_TX': { x: 200, y: 110, type: 'uart', uart: 'UART3' },
+        'UART3_RX': { x: 230, y: 110, type: 'uart', uart: 'UART3' },
+        'UART4_TX': { x: 200, y: 140, type: 'uart', uart: 'UART4' },
+        'UART4_RX': { x: 230, y: 140, type: 'uart', uart: 'UART4' },
+        'UART5_TX': { x: 200, y: 170, type: 'uart', uart: 'UART5' },
+        'UART5_RX': { x: 230, y: 170, type: 'uart', uart: 'UART5' },
+        'UART6_TX': { x: 200, y: 200, type: 'uart', uart: 'UART6' },
+        'UART6_RX': { x: 230, y: 200, type: 'uart', uart: 'UART6' }
+    };
+    
+    // Create SVG
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "800");
+    svg.setAttribute("height", "500");
+    svg.setAttribute("class", "wiring-diagram");
+    
+    // Draw Flight Controller Board
+    const fcBoard = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    fcBoard.setAttribute("x", "50");
+    fcBoard.setAttribute("y", "30");
+    fcBoard.setAttribute("width", "300");
+    fcBoard.setAttribute("height", "200");
+    fcBoard.setAttribute("class", "fc-board");
+    fcBoard.setAttribute("rx", "10");
+    svg.appendChild(fcBoard);
+    
+    // Add FC label
+    const fcLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    fcLabel.setAttribute("x", "200");
+    fcLabel.setAttribute("y", "20");
+    fcLabel.setAttribute("class", "peripheral-label");
+    fcLabel.textContent = "Flight Controller";
+    svg.appendChild(fcLabel);
+    
+    // Draw all pins
+    Object.entries(fcPins).forEach(([pinName, pin]) => {
+        const pinCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        pinCircle.setAttribute("cx", pin.x);
+        pinCircle.setAttribute("cy", pin.y);
+        pinCircle.setAttribute("r", "6");
+        pinCircle.setAttribute("class", `pin ${pin.type}`);
+        pinCircle.setAttribute("id", `pin-${pinName}`);
+        svg.appendChild(pinCircle);
+        
+        // Add pin label
+        const pinLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        pinLabel.setAttribute("x", pin.x);
+        pinLabel.setAttribute("y", pin.y - 15);
+        pinLabel.setAttribute("class", "pin-label");
+        pinLabel.textContent = pinName.replace('_', ' ');
+        svg.appendChild(pinLabel);
+    });
+    
+    // Draw peripherals and connections
+    let peripheralY = 280;
+    enabledPeripherals.forEach(([peripheral, config]) => {
+        if (peripheral === 'rc-receiver') {
+            drawRcReceiver(svg, config, fcPins, { x: 450, y: peripheralY });
+        } else {
+            drawPeripheral(svg, peripheral, config, fcPins, { x: 450, y: peripheralY });
+        }
+        peripheralY += 60;
+    });
+    
+    diagramContainer.innerHTML = '';
+    diagramContainer.appendChild(svg);
+}
+
+function drawRcReceiver(svg, config, fcPins, position) {
+    const rcReceiverData = rcReceiverTypes[config.type];
+    const rcProtocolData = rcProtocols[config.protocol];
+    
+    if (!rcReceiverData || !rcProtocolData) return;
+    
+    // Draw peripheral box
+    const box = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+    box.setAttribute("x", position.x);
+    box.setAttribute("y", position.y);
+    box.setAttribute("width", "200");
+    box.setAttribute("height", "40");
+    box.setAttribute("class", "peripheral-box");
+    svg.appendChild(box);
+    
+    // Add label
+    const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    label.setAttribute("x", position.x + 100);
+    label.setAttribute("y", position.y + 25);
+    label.setAttribute("class", "peripheral-label");
+    label.textContent = `${rcReceiverData.name} (${rcProtocolData.name})`;
+    svg.appendChild(label);
+    
+    // Draw connections
+    drawConnection(svg, config.uart, 'rc', fcPins, position);
+}
+
+function drawPeripheral(svg, peripheral, config, fcPins, position) {
+    const protocolData = peripheralProtocols[peripheral];
+    if (!protocolData) return;
+    
+    // Special handling for VTX
+    if (peripheral === 'vtx') {
+        const vtxProtocolData = vtxProtocols[config.protocol];
+        const vtxTypeData = vtxTypes[hardwareConfig.vtxType || 'walksnail'];
+        
+        if (vtxProtocolData && vtxTypeData) {
+            // Draw peripheral box
+            const box = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+            box.setAttribute("x", position.x);
+            box.setAttribute("y", position.y);
+            box.setAttribute("width", "200");
+            box.setAttribute("height", "40");
+            box.setAttribute("class", "peripheral-box");
+            svg.appendChild(box);
+            
+            // Add label
+            const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            label.setAttribute("x", position.x + 100);
+            label.setAttribute("y", position.y + 25);
+            label.setAttribute("class", "peripheral-label");
+            label.textContent = `${vtxTypeData.name} (${vtxProtocolData.name})`;
+            svg.appendChild(label);
+            
+            if (config.protocol !== 'none') {
+                drawConnection(svg, config.uart, 'video', fcPins, position);
+            }
+        }
+    } else {
+        // Standard peripheral
+        const box = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        box.setAttribute("x", position.x);
+        box.setAttribute("y", position.y);
+        box.setAttribute("width", "200");
+        box.setAttribute("height", "40");
+        box.setAttribute("class", "peripheral-box");
+        svg.appendChild(box);
+        
+        // Add label
+        const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        label.setAttribute("x", position.x + 100);
+        label.setAttribute("y", position.y + 25);
+        label.setAttribute("class", "peripheral-label");
+        label.textContent = protocolData.name;
+        svg.appendChild(label);
+        
+        // Determine connection type
+        let connectionType = 'uart';
+        if (peripheral.includes('gps')) connectionType = 'gps';
+        
+        drawConnection(svg, config.uart, connectionType, fcPins, position);
+    }
+}
+
+function drawConnection(svg, uart, connectionType, fcPins, peripheralPosition) {
+    const txPin = fcPins[`${uart}_TX`];
+    const rxPin = fcPins[`${uart}_RX`];
+    
+    if (!txPin || !rxPin) return;
+    
+    // Draw TX connection (FC TX -> Peripheral RX)
+    const txLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    txLine.setAttribute("x1", txPin.x);
+    txLine.setAttribute("y1", txPin.y);
+    txLine.setAttribute("x2", peripheralPosition.x + 50);
+    txLine.setAttribute("y2", peripheralPosition.y + 20);
+    txLine.setAttribute("class", `connection-line ${connectionType}`);
+    txLine.setAttribute("stroke-dasharray", "5,3");
+    svg.appendChild(txLine);
+    
+    // Draw RX connection (FC RX <- Peripheral TX)  
+    const rxLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    rxLine.setAttribute("x1", rxPin.x);
+    rxLine.setAttribute("y1", rxPin.y);
+    rxLine.setAttribute("x2", peripheralPosition.x + 150);
+    rxLine.setAttribute("y2", peripheralPosition.y + 20);
+    rxLine.setAttribute("class", `connection-line ${connectionType}`);
+    svg.appendChild(rxLine);
+    
+    // Mark pins as connected
+    const txPinElement = document.getElementById(`pin-${uart}_TX`);
+    const rxPinElement = document.getElementById(`pin-${uart}_RX`);
+    if (txPinElement) txPinElement.classList.add('connected', connectionType);
+    if (rxPinElement) rxPinElement.classList.add('connected', connectionType);
+    
+    // Add connection labels
+    const txLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    txLabel.setAttribute("x", (txPin.x + peripheralPosition.x + 50) / 2);
+    txLabel.setAttribute("y", (txPin.y + peripheralPosition.y + 20) / 2 - 5);
+    txLabel.setAttribute("class", "pin-label");
+    txLabel.setAttribute("font-size", "8");
+    txLabel.textContent = "TX→RX";
+    svg.appendChild(txLabel);
+    
+    const rxLabel = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    rxLabel.setAttribute("x", (rxPin.x + peripheralPosition.x + 150) / 2);
+    rxLabel.setAttribute("y", (rxPin.y + peripheralPosition.y + 20) / 2 - 5);
+    rxLabel.setAttribute("class", "pin-label");
+    rxLabel.setAttribute("font-size", "8");
+    rxLabel.textContent = "RX←TX";
+    svg.appendChild(rxLabel);
 }
 
 function getProtocolNumber(protocolName) {

@@ -1129,6 +1129,136 @@ footer a:hover {
     margin: 2px 0;
 }
 
+/* Wiring Diagram Styles */
+.diagram-container {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    min-height: 400px;
+    overflow-x: auto;
+}
+
+.wiring-diagram {
+    max-width: 100%;
+    height: auto;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.diagram-legend {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f1f3f4;
+    border-radius: 6px;
+}
+
+.legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* SVG Diagram Styles */
+.fc-board {
+    fill: #2c3e50;
+    stroke: #34495e;
+    stroke-width: 2;
+}
+
+.pin-group {
+    fill: #ecf0f1;
+    stroke: #bdc3c7;
+    stroke-width: 1;
+}
+
+.pin {
+    fill: #f4d03f;
+    stroke: #f1c40f;
+    stroke-width: 1;
+}
+
+.pin.connected {
+    fill: #e74c3c;
+    stroke: #c0392b;
+    stroke-width: 2;
+}
+
+.pin.uart {
+    fill: #3498db;
+    stroke: #2980b9;
+}
+
+.pin.gps {
+    fill: #f39c12;
+    stroke: #e67e22;
+}
+
+.pin.video {
+    fill: #9b59b6;
+    stroke: #8e44ad;
+}
+
+.pin.rc {
+    fill: #27ae60;
+    stroke: #229954;
+}
+
+.connection-line {
+    stroke-width: 3;
+    stroke-linecap: round;
+    fill: none;
+    opacity: 0.8;
+}
+
+.connection-line.uart { stroke: #3498db; }
+.connection-line.gps { stroke: #f39c12; }
+.connection-line.video { stroke: #9b59b6; }
+.connection-line.rc { stroke: #27ae60; }
+.connection-line.power { stroke: #e74c3c; }
+
+.pin-label {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    fill: #2c3e50;
+    text-anchor: middle;
+    dominant-baseline: central;
+}
+
+.peripheral-box {
+    fill: #ecf0f1;
+    stroke: #95a5a6;
+    stroke-width: 2;
+    rx: 5;
+}
+
+.peripheral-label {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    fill: #2c3e50;
+    text-anchor: middle;
+    dominant-baseline: central;
+    font-weight: bold;
+}
+
 /* Serial Port Table Styles */
 #dynamic-serial-table .config-table {
     margin: 20px 0;

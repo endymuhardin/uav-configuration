@@ -480,6 +480,43 @@
                 
                 <div class="instruction-card">
                     <div class="instruction-content">
+                        <h3>📊 Visual Wiring Diagram</h3>
+                        <p>Diagram dinamis berdasarkan konfigurasi peripheral Anda:</p>
+                        
+                        <div id="wiring-diagram-container" class="diagram-container">
+                            <!-- Will be populated with SVG diagram -->
+                        </div>
+                        
+                        <div class="diagram-legend">
+                            <h4>🎨 Legend:</h4>
+                            <div class="legend-items">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #e74c3c;"></span>
+                                    <span>Power (VCC/GND)</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #3498db;"></span>
+                                    <span>UART Communication</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #f39c12;"></span>
+                                    <span>GPS/Navigation</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #9b59b6;"></span>
+                                    <span>Video/OSD</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background: #27ae60;"></span>
+                                    <span>RC Receiver</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="instruction-card">
+                    <div class="instruction-content">
                         <h3>📝 Cara Setting di Mission Planner</h3>
                         <ol>
                             <li>Buka <strong>Config > Full Parameter List</strong></li>
