@@ -91,19 +91,19 @@ const motorMappings = {
     "1": { // Quad
         "0": { // Quad Plus
             positions: ["Front", "Right", "Back", "Left"],
-            rotations: ["CCW", "CW", "CCW", "CW"],
+            rotations: ["CCW", "CCW", "CW", "CW"],
             description: "Plus configuration with motors aligned to cardinal directions",
             diagram: "quad-plus.png"
         },
         "1": { // Quad X
             positions: ["Front Right", "Back Left", "Back Right", "Front Left"],
-            rotations: ["CCW", "CCW", "CW", "CW"],
+            rotations: ["CCW", "CW", "CCW", "CW"],
             description: "Standard X configuration, most common setup",
             diagram: "quad-x.png"
         },
         "18": { // Quad X (BF Reversed)
-            positions: ["Front Right", "Back Right", "Back Left", "Front Left"],
-            rotations: ["CW", "CW", "CCW", "CCW"],
+            positions: ["Front Right", "Back Left", "Back Right", "Front Left"],
+            rotations: ["CW", "CCW", "CW", "CCW"],
             description: "BetaFlight reversed (prop-out) - propellers spin outward",
             diagram: "quad-x-bf-reversed.png",
             servoMapping: {
@@ -114,13 +114,13 @@ const motorMappings = {
             }
         },
         "11": { // Quad X (BetaFlight)
-            positions: ["Back Right", "Front Right", "Back Left", "Front Left"],
+            positions: ["Front Right", "Front Left", "Back Left", "Back Right"],
             rotations: ["CCW", "CW", "CW", "CCW"],
             description: "BetaFlight motor order",
             diagram: "quad-x-bf.png"
         },
         "12": { // Quad X (DJI)
-            positions: ["Front Left", "Front Right", "Back Right", "Back Left"],
+            positions: ["Front Right CCW", "Front Right CW", "Back Right CCW", "Back Right CW"],
             rotations: ["CCW", "CW", "CCW", "CW"],
             description: "DJI motor order",
             diagram: "quad-x-dji.png"
@@ -128,28 +128,28 @@ const motorMappings = {
     },
     "2": { // Hexa
         "0": { // Hexa Plus
-            positions: ["Front", "Front Right", "Back Right", "Back", "Back Left", "Front Left"],
-            rotations: ["CCW", "CW", "CCW", "CW", "CCW", "CW"],
+            positions: ["Front", "Back", "Back Left", "Front Right", "Front Left", "Back Right"],
+            rotations: ["CW", "CCW", "CW", "CCW", "CCW", "CW"],
             description: "Plus configuration with 6 motors",
             diagram: "hexa-plus.png"
         },
         "1": { // Hexa X
-            positions: ["Front Right", "Right", "Back Right", "Back Left", "Left", "Front Left"],
-            rotations: ["CCW", "CW", "CCW", "CW", "CCW", "CW"],
+            positions: ["Right", "Left", "Front Left", "Back Right", "Front Right", "Back Left"],
+            rotations: ["CW", "CCW", "CW", "CCW", "CCW", "CW"],
             description: "X configuration with 6 motors",
             diagram: "hexa-x.png"
         }
     },
     "3": { // Octa
         "0": { // Octa Plus
-            positions: ["Front", "Front Right", "Right", "Back Right", "Back", "Back Left", "Left", "Front Left"],
-            rotations: ["CCW", "CW", "CCW", "CW", "CCW", "CW", "CCW", "CW"],
+            positions: ["Front", "Back", "Front Right Diag", "Back Right Diag", "Front Left Diag", "Back Left Diag", "Left", "Right"],
+            rotations: ["CW", "CW", "CCW", "CCW", "CCW", "CCW", "CW", "CW"],
             description: "Plus configuration with 8 motors",
             diagram: "octa-plus.png"
         },
         "1": { // Octa X
-            positions: ["Front Right", "Front Right Mid", "Back Right Mid", "Back Right", "Back Left", "Back Left Mid", "Front Left Mid", "Front Left"],
-            rotations: ["CCW", "CW", "CCW", "CW", "CCW", "CW", "CCW", "CW"],
+            positions: ["Front Right Near", "Back Left Near", "Front Right Far", "Back Right Near", "Front Left Near", "Back Left Far", "Front Left Far", "Back Right Far"],
+            rotations: ["CW", "CW", "CCW", "CCW", "CCW", "CCW", "CW", "CW"],
             description: "X configuration with 8 motors",
             diagram: "octa-x.png"
         }
