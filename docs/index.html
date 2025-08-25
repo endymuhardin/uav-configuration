@@ -380,9 +380,161 @@
                 </div>
             </section>
 
-            <!-- Step 3: Motor Order -->
+            <!-- Step 3: Flight Controller Orientation -->
             <section class="step-content" id="step3" style="display:none;">
-                <h2>3. Setup Urutan Motor</h2>
+                <h2>3. Orientasi Flight Controller</h2>
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>Konfigurasi Orientasi FC</h3>
+                        
+                        <div class="highlight-box">
+                            <h4>📐 Orientasi Standar (Default):</h4>
+                            <ul>
+                                <li><strong>AHRS_ORIENTATION = 0</strong> - FC dipasang normal (panah/USB menghadap ke depan)</li>
+                                <li><strong>Arrow/USB port</strong> menunjuk arah depan drone</li>
+                                <li><strong>Gyro axes</strong>: X = Roll, Y = Pitch, Z = Yaw</li>
+                            </ul>
+                        </div>
+
+                        <div class="param-section">
+                            <h4>Parameter Orientasi:</h4>
+                            <div class="param-item">
+                                <code>AHRS_ORIENTATION</code>
+                                <span>Orientasi mounting flight controller</span>
+                            </div>
+                        </div>
+
+                        <div class="orientation-table">
+                            <h4>Orientasi Non-Standar:</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Value</th>
+                                        <th>Orientasi</th>
+                                        <th>Deskripsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>None</td>
+                                        <td>Normal - panah/USB ke depan</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Yaw 90</td>
+                                        <td>Diputar 90° searah jarum jam</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Yaw 180</td>
+                                        <td>Diputar 180° (terbalik)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Yaw 270</td>
+                                        <td>Diputar 270° searah jarum jam</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Roll 180</td>
+                                        <td>Terbalik horizontal (upside down)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Roll 180 Yaw 90</td>
+                                        <td>Terbalik + putar 90°</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>Pitch 180</td>
+                                        <td>Terbalik vertikal</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="verification-section">
+                            <h4>🔍 Verifikasi Orientasi FC:</h4>
+                            
+                            <div class="method-box">
+                                <h5>Method 1: HUD Display</h5>
+                                <ol>
+                                    <li>Buka Mission Planner → Flight Data</li>
+                                    <li>Lihat HUD (Horizon Display)</li>
+                                    <li>Miringkan drone ke kanan → HUD harus menunjukkan roll ke kanan</li>
+                                    <li>Naikkan hidung drone → HUD harus menunjukkan pitch up</li>
+                                    <li>Putar drone ke kiri → HUD compass harus berputar ke kiri</li>
+                                </ol>
+                            </div>
+
+                            <div class="method-box">
+                                <h5>Method 2: Raw IMU Data</h5>
+                                <ol>
+                                    <li>Buka Flight Data → Status tab</li>
+                                    <li>Lihat nilai AccX, AccY, AccZ</li>
+                                    <li>Drone horizontal: AccZ ≈ -10 (gravitasi)</li>
+                                    <li>Miringkan kanan: AccY positif</li>
+                                    <li>Naikkan hidung: AccX negatif</li>
+                                </ol>
+                            </div>
+
+                            <div class="method-box">
+                                <h5>Method 3: Compass Heading</h5>
+                                <ol>
+                                    <li>Lihat compass heading di Mission Planner</li>
+                                    <li>Arahkan nose drone ke Utara</li>
+                                    <li>Heading harus menunjukkan ≈ 0° atau 360°</li>
+                                    <li>Putar drone searah jarum jam</li>
+                                    <li>Heading harus bertambah (90°, 180°, 270°)</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div class="troubleshooting-section">
+                            <h4>🛠️ Troubleshooting Orientasi Salah:</h4>
+                            
+                            <div class="problem-solution">
+                                <h5>Problem: HUD terbalik atau bergerak berlawanan</h5>
+                                <p><strong>Solution:</strong></p>
+                                <ul>
+                                    <li>Cek pemasangan fisik FC</li>
+                                    <li>Sesuaikan AHRS_ORIENTATION sesuai tabel</li>
+                                    <li>Restart FC dan re-test</li>
+                                </ul>
+                            </div>
+
+                            <div class="problem-solution">
+                                <h5>Problem: Compass heading tidak akurat</h5>
+                                <p><strong>Solution:</strong></p>
+                                <ul>
+                                    <li>Calibrasi compass (langkah terpisah)</li>
+                                    <li>Cek interferensi magnetic</li>
+                                    <li>Pastikan COMPASS_ORIENT sesuai dengan FC orientation</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Penting:</strong> Orientasi yang salah dapat menyebabkan drone crash! Selalu verifikasi dengan teliti sebelum flight test.
+                        </div>
+
+                        <div class="alert alert-info">
+                            <strong>💡 Tip:</strong> Jika menggunakan mounting non-standar, buat catatan orientasi untuk referensi future maintenance.
+                        </div>
+                    </div>
+                </div>
+                <div class="checklist">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="step-check" data-step="3">
+                        <span>Orientasi flight controller sudah dikonfigurasi dan diverifikasi</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Step 4: Motor Order -->
+            <section class="step-content" id="step4" style="display:none;">
+                <h2>4. Setup Urutan Motor</h2>
                 
                 <div class="motor-setup-section" id="motor-config-section">
                     <!-- Will be populated dynamically by JavaScript -->
@@ -448,15 +600,15 @@
 
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="3">
+                        <input type="checkbox" class="step-check" data-step="4">
                         <span id="motor-check-text">✅ Motor test berhasil, urutan dan arah putaran motor sudah benar</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 4: Serial Ports -->
-            <section class="step-content" id="step4" style="display:none;">
-                <h2>4. Konfigurasi Serial Port</h2>
+            <!-- Step 5: Serial Ports -->
+            <section class="step-content" id="step5" style="display:none;">
+                <h2>5. Konfigurasi Serial Port</h2>
                 
                 <div class="instruction-card">
                     <div class="instruction-content">
@@ -480,43 +632,6 @@
                 
                 <div class="instruction-card">
                     <div class="instruction-content">
-                        <h3>📊 Visual Wiring Diagram</h3>
-                        <p>Diagram dinamis berdasarkan konfigurasi peripheral Anda:</p>
-                        
-                        <div id="wiring-diagram-container" class="diagram-container">
-                            <!-- Will be populated with SVG diagram -->
-                        </div>
-                        
-                        <div class="diagram-legend">
-                            <h4>🎨 Legend:</h4>
-                            <div class="legend-items">
-                                <div class="legend-item">
-                                    <span class="legend-color" style="background: #e74c3c;"></span>
-                                    <span>Power (VCC/GND)</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color" style="background: #3498db;"></span>
-                                    <span>UART Communication</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color" style="background: #f39c12;"></span>
-                                    <span>GPS/Navigation</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color" style="background: #9b59b6;"></span>
-                                    <span>Video/OSD</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color" style="background: #27ae60;"></span>
-                                    <span>RC Receiver</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="instruction-card">
-                    <div class="instruction-content">
                         <h3>📝 Cara Setting di Mission Planner</h3>
                         <ol>
                             <li>Buka <strong>Config > Full Parameter List</strong></li>
@@ -535,15 +650,15 @@
                 
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="4">
+                        <input type="checkbox" class="step-check" data-step="5">
                         <span id="serial-check-text">Serial port sudah dikonfigurasi</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 5: ESC Type -->
-            <section class="step-content" id="step5" style="display:none;">
-                <h2>5. Jenis ESC</h2>
+            <!-- Step 6: ESC Type -->
+            <section class="step-content" id="step6" style="display:none;">
+                <h2>6. Jenis ESC</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Konfigurasi ESC</h3>
@@ -557,15 +672,15 @@
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="5">
+                        <input type="checkbox" class="step-check" data-step="6">
                         <span>Tipe ESC sudah diset ke DShot300</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 6: Flight Modes -->
-            <section class="step-content" id="step6" style="display:none;">
-                <h2>6. Set Flight Modes</h2>
+            <!-- Step 7: Flight Modes -->
+            <section class="step-content" id="step7" style="display:none;">
+                <h2>7. Set Flight Modes</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Mode Terbang</h3>
@@ -618,15 +733,15 @@
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="6">
+                        <input type="checkbox" class="step-check" data-step="7">
                         <span>Flight modes sudah dikonfigurasi</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 7: Arming Configuration -->
-            <section class="step-content" id="step7" style="display:none;">
-                <h2>7. Set Arming Channel</h2>
+            <!-- Step 8: Arming Configuration -->
+            <section class="step-content" id="step8" style="display:none;">
+                <h2>8. Set Arming Channel</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Konfigurasi Arming</h3>
@@ -717,15 +832,15 @@
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="7">
+                        <input type="checkbox" class="step-check" data-step="8">
                         <span>Arming channel sudah dikonfigurasi</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 8: Autotune -->
-            <section class="step-content" id="step8" style="display:none;">
-                <h2>8. Set Autotune Channel</h2>
+            <!-- Step 9: Autotune -->
+            <section class="step-content" id="step9" style="display:none;">
+                <h2>9. Set Autotune Channel</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Konfigurasi Autotune</h3>
@@ -740,41 +855,232 @@
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="8">
+                        <input type="checkbox" class="step-check" data-step="9">
                         <span>Autotune channel sudah diset</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 9: Motor Test -->
-            <section class="step-content" id="step9" style="display:none;">
-                <h2>9. Motor Test</h2>
+            <!-- Step 10: Motor Test -->
+            <section class="step-content" id="step10" style="display:none;">
+                <h2>10. Motor Test & RPM Balance Check</h2>
+                
                 <div class="instruction-card">
                     <div class="instruction-content">
-                        <h3>Test Motor</h3>
-                        <p>Lakukan motor test untuk memastikan:</p>
-                        <ul>
-                            <li>✓ Urutan motor sudah benar</li>
-                            <li>✓ Arah putaran motor sesuai</li>
-                            <li>✓ Semua motor berfungsi normal</li>
-                        </ul>
+                        <h3>🚁 Persiapan Motor Test</h3>
                         <div class="alert alert-danger">
-                            <strong>⚠️ PERHATIAN:</strong> Lepaskan propeller sebelum melakukan motor test!
+                            <strong>⚠️ SAFETY FIRST:</strong> 
+                            <ul>
+                                <li><strong>WAJIB lepas semua propeller</strong> sebelum test motor</li>
+                                <li>Pastikan drone terpasang aman di bench/mounting</li>
+                                <li>Siapkan ruang yang cukup untuk keamanan</li>
+                                <li>Matikan VTX untuk menghindari overheat (tidak ada airflow)</li>
+                            </ul>
+                        </div>
+                        
+                        <h4>📋 Checklist Pre-Test:</h4>
+                        <ul>
+                            <li>☑️ Propeller sudah dilepas semua</li>
+                            <li>☑️ Baterai terpasang dan terisi penuh</li>
+                            <li>☑️ FC terhubung ke Mission Planner</li>
+                            <li>☑️ ESC sudah dikalibrasi (jika perlu)</li>
+                            <li>☑️ Area test aman dan cukup luas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>🔧 Langkah Motor Test</h3>
+                        
+                        <h4>Step 1: Basic Motor Function Test</h4>
+                        <ol>
+                            <li>Buka <strong>Setup > Optional Hardware > Motor Test</strong></li>
+                            <li>Set throttle ke <strong>5-10%</strong> untuk test awal</li>
+                            <li>Test setiap motor dengan tombol <strong>Test Motor A, B, C, D</strong></li>
+                            <li>Verifikasi semua motor berputar dan tidak ada yang macet</li>
+                            <li>Cek tidak ada getaran berlebih atau suara abnormal</li>
+                        </ol>
+                        
+                        <h4>Step 2: RPM Balance Test</h4>
+                        <ol>
+                            <li>Naikkan throttle ke <strong>25-30%</strong></li>
+                            <li>Test motor satu per satu dengan durasi <strong>5-10 detik</strong></li>
+                            <li>Perhatikan dan catat RPM setiap motor (jika tersedia)</li>
+                            <li>Dengarkan pitch sound dari setiap motor</li>
+                            <li>Motor yang seimbang akan memiliki sound pitch yang sama</li>
+                        </ol>
+                        
+                        <h4>Step 3: Visual & Audio Assessment</h4>
+                        <table class="config-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Normal</th>
+                                    <th>Abnormal</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Sound</strong></td>
+                                    <td>✅ Smooth, pitch sama</td>
+                                    <td>❌ Kasar, pitch beda</td>
+                                    <td>Cek bearing motor</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vibration</strong></td>
+                                    <td>✅ Minimal vibration</td>
+                                    <td>❌ Getaran berlebih</td>
+                                    <td>Balance motor/prop</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Startup</strong></td>
+                                    <td>✅ Smooth start</td>
+                                    <td>❌ Jerky/hesitant</td>
+                                    <td>Kalibrasi ESC</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Temperature</strong></td>
+                                    <td>✅ Cool/warm</td>
+                                    <td>❌ Hot to touch</td>
+                                    <td>Cek motor/ESC</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>📊 RPM Balance Analysis</h3>
+                        
+                        <h4>🎯 Target RPM Balance:</h4>
+                        <div class="highlight-box">
+                            <ul>
+                                <li><strong>Excellent</strong>: RPM difference ≤ 2% antar motor</li>
+                                <li><strong>Good</strong>: RPM difference ≤ 5% antar motor</li>
+                                <li><strong>Acceptable</strong>: RPM difference ≤ 8% antar motor</li>
+                                <li><strong>Poor</strong>: RPM difference > 8% (perlu perbaikan)</li>
+                            </ul>
+                        </div>
+                        
+                        <h4>🔍 Cara Mengecek RPM Balance:</h4>
+                        <ol>
+                            <li><strong>Metode 1 - Sound Pitch</strong>:
+                                <ul>
+                                    <li>Test setiap motor di throttle yang sama (25-30%)</li>
+                                    <li>Dengarkan pitch/nada suara motor</li>
+                                    <li>Motor yang RPM-nya sama akan punya pitch yang identik</li>
+                                    <li>Gunakan tuner app di HP untuk mengukur frequency</li>
+                                </ul>
+                            </li>
+                            <li><strong>Metode 2 - Visual Observation</strong>:
+                                <ul>
+                                    <li>Lihat kecepatan putaran motor secara visual</li>
+                                    <li>Motor yang balance akan terlihat berputar dengan kecepatan sama</li>
+                                    <li>Gunakan smartphone camera dengan slow motion jika perlu</li>
+                                </ul>
+                            </li>
+                            <li><strong>Metode 3 - ESC Telemetry (jika ada)</strong>:
+                                <ul>
+                                    <li>Gunakan ESC dengan telemetry untuk monitoring RPM real-time</li>
+                                    <li>Baca data RPM dari Mission Planner atau OSD</li>
+                                    <li>Catat dan bandingkan RPM setiap motor</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <h4>🛠️ Troubleshooting RPM Imbalance:</h4>
+                        <div class="step-by-step">
+                            <h5>Jika RPM tidak seimbang:</h5>
+                            <ol>
+                                <li><strong>Cek propeller balance</strong> (jika terpasang saat test)</li>
+                                <li><strong>Kalibrasi ESC</strong> - pastikan semua ESC terkalibrasi sama</li>
+                                <li><strong>Cek motor bearing</strong> - ganti jika ada yang kasar</li>
+                                <li><strong>Verifikasi motor KV</strong> - pastikan semua motor sama KV</li>
+                                <li><strong>Cek wiring</strong> - pastikan tidak ada voltage drop</li>
+                                <li><strong>Test dengan propeller berbeda</strong> untuk isolasi masalah</li>
+                            </ol>
                         </div>
                     </div>
-                    <img src="../ardupilot/nazgul/img/07-motor-test.png" alt="Motor Test" class="instruction-img">
                 </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>📝 Motor Test Checklist</h3>
+                        <div class="motor-test-checklist">
+                            <h4>✅ Pre-Flight Motor Test Results:</h4>
+                            <div class="checklist-grid">
+                                <div class="checklist-item">
+                                    <label>
+                                        <input type="checkbox" class="motor-item-check">
+                                        Motor A - RPM normal & smooth
+                                    </label>
+                                </div>
+                                <div class="checklist-item">
+                                    <label>
+                                        <input type="checkbox" class="motor-item-check">
+                                        Motor B - RPM normal & smooth
+                                    </label>
+                                </div>
+                                <div class="checklist-item">
+                                    <label>
+                                        <input type="checkbox" class="motor-item-check">
+                                        Motor C - RPM normal & smooth
+                                    </label>
+                                </div>
+                                <div class="checklist-item">
+                                    <label>
+                                        <input type="checkbox" class="motor-item-check">
+                                        Motor D - RPM normal & smooth
+                                    </label>
+                                </div>
+                                <div class="checklist-item">
+                                    <label>
+                                        <input type="checkbox" class="motor-item-check">
+                                        Semua motor sound pitch sama
+                                    </label>
+                                </div>
+                                <div class="checklist-item">
+                                    <label>
+                                        <input type="checkbox" class="motor-item-check">
+                                        Tidak ada getaran abnormal
+                                    </label>
+                                </div>
+                                <div class="checklist-item">
+                                    <label>
+                                        <input type="checkbox" class="motor-item-check">
+                                        Tidak ada motor yang overheat
+                                    </label>
+                                </div>
+                                <div class="checklist-item">
+                                    <label>
+                                        <input type="checkbox" class="motor-item-check">
+                                        RPM balance dalam range yang dapat diterima (≤8%)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-success" style="margin-top: 20px;">
+                            <strong>💡 Pro Tip:</strong> Motor test yang bagus adalah fondasi untuk flight performance yang optimal. 
+                            Jangan skip step ini - motor yang tidak balance akan menyebabkan vibration dan mengurangi flight time!
+                        </div>
+                    </div>
+                </div>
+
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="9">
-                        <span>Motor test sudah dilakukan dan berhasil</span>
+                        <input type="checkbox" class="step-check" data-step="10">
+                        <span>Motor test lengkap sudah dilakukan, RPM balance verified, semua motor normal</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 10: MavLink ELRS -->
-            <section class="step-content" id="step10" style="display:none;">
-                <h2>10. MavLink via ELRS Backpack</h2>
+            <!-- Step 11: MavLink ELRS -->
+            <section class="step-content" id="step11" style="display:none;">
+                <h2>11. MavLink via ELRS Backpack</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Konfigurasi ELRS MavLink</h3>
@@ -792,18 +1098,18 @@
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="10">
+                        <input type="checkbox" class="step-check" data-step="11">
                         <span>MavLink ELRS sudah dikonfigurasi</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 11: Walksnail OSD -->
-            <section class="step-content" id="step11" style="display:none;">
-                <h2>11. Setup Walksnail OSD</h2>
+            <!-- Step 12: VTX/OSD -->
+            <section class="step-content" id="step12" style="display:none;">
+                <h2>12. Setup VTX/OSD</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
-                        <h3>Parameter OSD</h3>
+                        <h3>Parameter VTX/OSD</h3>
                         <div class="param-list">
                             <div class="param-item">
                                 <code>OSD_TYPE = 5</code>
@@ -830,15 +1136,15 @@
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="11">
-                        <span>Walksnail OSD sudah dikonfigurasi</span>
+                        <input type="checkbox" class="step-check" data-step="12">
+                        <span>VTX/OSD sudah dikonfigurasi</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 12: Failsafe Configuration -->
-            <section class="step-content" id="step12" style="display:none;">
-                <h2>12. Konfigurasi Failsafe</h2>
+            <!-- Step 13: Failsafe Configuration -->
+            <section class="step-content" id="step13" style="display:none;">
+                <h2>13. Konfigurasi Failsafe</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <p>Failsafe adalah sistem keamanan otomatis yang mengambil kontrol drone ketika terjadi masalah. ArduPilot memiliki 3 jenis failsafe utama:</p>
@@ -1035,15 +1341,15 @@
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="12">
+                        <input type="checkbox" class="step-check" data-step="13">
                         <span>Failsafe configuration sudah dikonfigurasi dengan aman</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 13: Acro Settings -->
-            <section class="step-content" id="step13" style="display:none;">
-                <h2>13. Acro Settings</h2>
+            <!-- Step 14: Acro Settings -->
+            <section class="step-content" id="step14" style="display:none;">
+                <h2>14. Acro Settings</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Disable Acro Trainer</h3>
@@ -1058,15 +1364,15 @@
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="13">
+                        <input type="checkbox" class="step-check" data-step="14">
                         <span>Acro trainer sudah di-disable</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 14: Initial Tuning Parameters -->
-            <section class="step-content" id="step14" style="display:none;">
-                <h2>14. Initial Tuning Parameters</h2>
+            <!-- Step 15: Initial Tuning Parameters -->
+            <section class="step-content" id="step15" style="display:none;">
+                <h2>15. Initial Tuning Parameters</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Parameter Tuning untuk 5 inch 6S</h3>
@@ -1130,15 +1436,15 @@ SERVO_DSHOT_ESC,2</pre>
                 
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="14">
+                        <input type="checkbox" class="step-check" data-step="15">
                         <span>Initial tuning parameters sudah di-load</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 15: Autotune Process -->
-            <section class="step-content" id="step15" style="display:none;">
-                <h2>15. Proses Autotune</h2>
+            <!-- Step 16: Autotune Process -->
+            <section class="step-content" id="step16" style="display:none;">
+                <h2>16. Proses Autotune</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Persiapan Autotune</h3>
@@ -1167,15 +1473,15 @@ SERVO_DSHOT_ESC,2</pre>
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="15">
+                        <input type="checkbox" class="step-check" data-step="16">
                         <span>Autotune sudah dilakukan</span>
                     </label>
                 </div>
             </section>
 
-            <!-- Step 16: Remote Control -->
-            <section class="step-content" id="step16" style="display:none;">
-                <h2>16. Remote Control Settings</h2>
+            <!-- Step 17: Remote Control -->
+            <section class="step-content" id="step17" style="display:none;">
+                <h2>17. Remote Control Settings</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Radiomaster Pocket ELRS</h3>
@@ -1222,14 +1528,14 @@ SERVO_DSHOT_ESC,2</pre>
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="16">
+                        <input type="checkbox" class="step-check" data-step="17">
                         <span>Remote control sudah dikonfigurasi</span>
                     </label>
                 </div>
             </section>
 
             <!-- Completion -->
-            <section class="step-content" id="step17" style="display:none;">
+            <section class="step-content" id="step18" style="display:none;">
                 <h2>🎉 Setup Selesai!</h2>
                 <div class="completion-card">
                     <div class="success-icon">✅</div>

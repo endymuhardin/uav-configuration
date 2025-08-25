@@ -1129,134 +1129,55 @@ footer a:hover {
     margin: 2px 0;
 }
 
-/* Wiring Diagram Styles */
-.diagram-container {
+
+/* Motor Test Checklist Styles */
+.motor-test-checklist {
     background: #f8f9fa;
-    border: 2px solid #e9ecef;
-    border-radius: 8px;
     padding: 20px;
+    border-radius: 8px;
     margin: 20px 0;
-    text-align: center;
-    min-height: 400px;
-    overflow-x: auto;
 }
 
-.wiring-diagram {
-    max-width: 100%;
-    height: auto;
+.checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.checklist-item {
     background: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.diagram-legend {
-    margin-top: 20px;
-    padding: 15px;
-    background: #f1f3f4;
+    padding: 12px;
     border-radius: 6px;
+    border-left: 4px solid #28a745;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.legend-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-}
-
-.legend-item {
+.checklist-item label {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 14px;
+    gap: 10px;
+    font-weight: 500;
+    color: #2c3e50;
+    cursor: pointer;
+    margin: 0;
 }
 
-.legend-color {
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    display: inline-block;
+.checklist-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
 }
 
-/* SVG Diagram Styles */
-.fc-board {
-    fill: #2c3e50;
-    stroke: #34495e;
-    stroke-width: 2;
+.checklist-item:has(input:checked) {
+    background: #d4edda;
+    border-left-color: #155724;
 }
 
-.pin-group {
-    fill: #ecf0f1;
-    stroke: #bdc3c7;
-    stroke-width: 1;
-}
-
-.pin {
-    fill: #f4d03f;
-    stroke: #f1c40f;
-    stroke-width: 1;
-}
-
-.pin.connected {
-    fill: #e74c3c;
-    stroke: #c0392b;
-    stroke-width: 2;
-}
-
-.pin.uart {
-    fill: #3498db;
-    stroke: #2980b9;
-}
-
-.pin.gps {
-    fill: #f39c12;
-    stroke: #e67e22;
-}
-
-.pin.video {
-    fill: #9b59b6;
-    stroke: #8e44ad;
-}
-
-.pin.rc {
-    fill: #27ae60;
-    stroke: #229954;
-}
-
-.connection-line {
-    stroke-width: 3;
-    stroke-linecap: round;
-    fill: none;
-    opacity: 0.8;
-}
-
-.connection-line.uart { stroke: #3498db; }
-.connection-line.gps { stroke: #f39c12; }
-.connection-line.video { stroke: #9b59b6; }
-.connection-line.rc { stroke: #27ae60; }
-.connection-line.power { stroke: #e74c3c; }
-
-.pin-label {
-    font-family: 'Courier New', monospace;
-    font-size: 10px;
-    fill: #2c3e50;
-    text-anchor: middle;
-    dominant-baseline: central;
-}
-
-.peripheral-box {
-    fill: #ecf0f1;
-    stroke: #95a5a6;
-    stroke-width: 2;
-    rx: 5;
-}
-
-.peripheral-label {
-    font-family: Arial, sans-serif;
-    font-size: 12px;
-    fill: #2c3e50;
-    text-anchor: middle;
-    dominant-baseline: central;
-    font-weight: bold;
+.step-by-step h5 {
+    color: #e74c3c;
+    margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 /* Serial Port Table Styles */
@@ -1384,5 +1305,152 @@ footer a:hover {
         flex-direction: column;
         text-align: center;
         gap: 10px;
+    }
+}
+
+/* Flight Controller Orientation Styles */
+.orientation-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.orientation-table thead {
+    background: var(--primary-color);
+    color: white;
+}
+
+.orientation-table th,
+.orientation-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.orientation-table tbody tr:hover {
+    background: var(--bg-primary);
+}
+
+.orientation-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.verification-section {
+    margin: 20px 0;
+}
+
+.method-box {
+    background: var(--bg-primary);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 4px solid var(--primary-color);
+}
+
+.method-box h5 {
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.method-box ol {
+    margin-left: 20px;
+    line-height: 1.6;
+}
+
+.method-box li {
+    margin-bottom: 5px;
+}
+
+.troubleshooting-section {
+    margin: 20px 0;
+}
+
+.problem-solution {
+    background: var(--bg-primary);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 4px solid var(--warning-color);
+}
+
+.problem-solution h5 {
+    color: var(--warning-color);
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.problem-solution p {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.problem-solution ul {
+    margin-left: 20px;
+    line-height: 1.6;
+}
+
+.problem-solution li {
+    margin-bottom: 5px;
+}
+
+.param-section {
+    margin: 20px 0;
+}
+
+.param-section h4 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+}
+
+/* Mobile responsiveness for orientation tables */
+@media (max-width: 768px) {
+    .orientation-table table,
+    .orientation-table thead,
+    .orientation-table tbody,
+    .orientation-table th,
+    .orientation-table td,
+    .orientation-table tr {
+        display: block;
+    }
+
+    .orientation-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .orientation-table tr {
+        border: 1px solid var(--border-color);
+        margin-bottom: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .orientation-table td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .orientation-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .method-box ol {
+        margin-left: 10px;
     }
 }
