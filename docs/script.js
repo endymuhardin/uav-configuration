@@ -371,28 +371,28 @@ const fcOrientations = {
         description: "FC dipasang normal (panah/USB menghadap ke depan)",
         rotation: "None",
         useCase: "Orientasi standar untuk sebagian besar setup",
-        visualization: "→"
+        visualization: "↑"
     },
     "1": {
         name: "Yaw 90°",
         description: "Diputar 90° searah jarum jam",
         rotation: "90° CW",
         useCase: "FC dipasang menyamping, panah menghadap kanan",
-        visualization: "↓"
+        visualization: "→"
     },
     "2": {
         name: "Yaw 180°",
         description: "Diputar 180°",
         rotation: "180°",
         useCase: "FC dipasang dengan panah menghadap ke belakang",
-        visualization: "←"
+        visualization: "↓"
     },
     "3": {
         name: "Yaw 270°",
         description: "Diputar 270° searah jarum jam",
         rotation: "270° CW",
         useCase: "FC dipasang menyamping, panah menghadap kiri",
-        visualization: "↑"
+        visualization: "←"
     },
     "4": {
         name: "Roll 180°",
@@ -406,21 +406,21 @@ const fcOrientations = {
         description: "Upside down + putar 90°",
         rotation: "Upside Down + 90° CW",
         useCase: "FC di sisi bawah dengan panah menghadap ke kanan",
-        visualization: "⟲↓"
+        visualization: "⟲→"
     },
     "8": {
         name: "Pitch 180°",
         description: "Pitch inverted",
         rotation: "Pitch Inverted",
-        useCase: "FC dipasang dengan pitch inverted (depan-belakang tertukar)",
-        visualization: "⤴"
+        useCase: "FC dipasang di sisi bawah dengan panah menghadap ke belakang",
+        visualization: "⟲↓"
     },
     "12": {
         name: "Yaw 90° + Roll 180°",
         description: "Putar 90° + upside down",
         rotation: "90° CW + Upside Down",
         useCase: "FC di sisi bawah dengan panah menghadap ke kanan",
-        visualization: "⟲↓"
+        visualization: "⟲→"
     },
     "13": {
         name: "Yaw 180° + Roll 180°",
