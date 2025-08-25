@@ -248,6 +248,122 @@ const rcProtocols = {
     }
 };
 
+// ESC Protocol Database
+const escProtocols = {
+    "dshot300": {
+        name: "DShot300",
+        ardupilotParam: "6",
+        frequency: 300000,  // 300kHz
+        description: "Optimal balance antara performance dan reliability",
+        features: ["Digital control", "Bidirectional", "CRC error detection", "Low power consumption"],
+        compatibility: "Semua ESC modern BLHeli_S & BLHeli_32",
+        params: [
+            { param: "SERVO1_FUNCTION", value: "33" },  // Motor 1
+            { param: "SERVO2_FUNCTION", value: "34" },  // Motor 2
+            { param: "SERVO3_FUNCTION", value: "35" },  // Motor 3
+            { param: "SERVO4_FUNCTION", value: "36" },  // Motor 4
+            { param: "MOT_PWM_TYPE", value: "6" }       // DShot300
+        ]
+    },
+    "dshot600": {
+        name: "DShot600",
+        ardupilotParam: "7",
+        frequency: 600000,  // 600kHz
+        description: "High performance untuk racing dan acrobatic",
+        features: ["Digital control", "Bidirectional", "CRC error detection", "High precision"],
+        compatibility: "ESC BLHeli_S 16.7+ & BLHeli_32",
+        params: [
+            { param: "SERVO1_FUNCTION", value: "33" },
+            { param: "SERVO2_FUNCTION", value: "34" },
+            { param: "SERVO3_FUNCTION", value: "35" },
+            { param: "SERVO4_FUNCTION", value: "36" },
+            { param: "MOT_PWM_TYPE", value: "7" }       // DShot600
+        ]
+    },
+    "dshot1200": {
+        name: "DShot1200",
+        ardupilotParam: "8",
+        frequency: 1200000, // 1.2MHz
+        description: "Ultra high performance untuk professional racing",
+        features: ["Digital control", "Bidirectional", "CRC error detection", "Ultra high precision"],
+        compatibility: "ESC BLHeli_32 only (high-end)",
+        params: [
+            { param: "SERVO1_FUNCTION", value: "33" },
+            { param: "SERVO2_FUNCTION", value: "34" },
+            { param: "SERVO3_FUNCTION", value: "35" },
+            { param: "SERVO4_FUNCTION", value: "36" },
+            { param: "MOT_PWM_TYPE", value: "8" }       // DShot1200
+        ],
+        warnings: ["Butuh FC dengan processor powerful (F7/H7)", "Konsumsi daya lebih tinggi"]
+    },
+    "pwm": {
+        name: "PWM",
+        ardupilotParam: "0",
+        frequency: 490,     // 490Hz default
+        description: "Traditional PWM untuk ESC lama atau budget",
+        features: ["Analog control", "Universal compatibility", "Simple wiring"],
+        compatibility: "Semua jenis ESC (termasuk yang lama)",
+        params: [
+            { param: "SERVO1_FUNCTION", value: "33" },
+            { param: "SERVO2_FUNCTION", value: "34" },
+            { param: "SERVO3_FUNCTION", value: "35" },
+            { param: "SERVO4_FUNCTION", value: "36" },
+            { param: "MOT_PWM_TYPE", value: "0" },      // PWM
+            { param: "MOT_PWM_MAX", value: "2000" },    // Max throttle
+            { param: "MOT_PWM_MIN", value: "1000" }     // Min throttle
+        ],
+        calibrationRequired: true
+    },
+    "oneshot125": {
+        name: "OneShot125",
+        ardupilotParam: "1",
+        frequency: 8000,    // 8kHz
+        description: "Legacy high performance protocol",
+        features: ["Analog control", "8x faster than PWM", "Good precision"],
+        compatibility: "BLHeli ESCs, beberapa ESC lama",
+        params: [
+            { param: "SERVO1_FUNCTION", value: "33" },
+            { param: "SERVO2_FUNCTION", value: "34" },
+            { param: "SERVO3_FUNCTION", value: "35" },
+            { param: "SERVO4_FUNCTION", value: "36" },
+            { param: "MOT_PWM_TYPE", value: "1" }       // OneShot125
+        ],
+        calibrationRequired: true
+    },
+    "oneshot42": {
+        name: "OneShot42", 
+        ardupilotParam: "2",
+        frequency: 24000,   // 24kHz
+        description: "Legacy ultra-fast analog protocol",
+        features: ["Analog control", "24x faster than PWM", "High precision"],
+        compatibility: "BLHeli ESCs only",
+        params: [
+            { param: "SERVO1_FUNCTION", value: "33" },
+            { param: "SERVO2_FUNCTION", value: "34" },
+            { param: "SERVO3_FUNCTION", value: "35" },
+            { param: "SERVO4_FUNCTION", value: "36" },
+            { param: "MOT_PWM_TYPE", value: "2" }       // OneShot42
+        ],
+        calibrationRequired: true
+    },
+    "multishot": {
+        name: "Multishot",
+        ardupilotParam: "3",
+        frequency: 32000,   // 32kHz
+        description: "Legacy racing protocol untuk competitive flying",
+        features: ["Analog control", "32x faster than PWM", "Racing precision"],
+        compatibility: "BLHeli ESCs only",
+        params: [
+            { param: "SERVO1_FUNCTION", value: "33" },
+            { param: "SERVO2_FUNCTION", value: "34" },
+            { param: "SERVO3_FUNCTION", value: "35" },
+            { param: "SERVO4_FUNCTION", value: "36" },
+            { param: "MOT_PWM_TYPE", value: "3" }       // Multishot
+        ],
+        calibrationRequired: true
+    }
+};
+
 // VTX types database
 const vtxTypes = {
     "walksnail": {
@@ -444,11 +560,17 @@ function updateStepContent(stepNumber) {
         case 1: // Frame Type step
             updateFrameTypeStep();
             break;
-        case 3: // Motor Setup step
-            updateMotorSetupStep();
-            break;
-        case 4: // Serial Port Configuration step
+        case 4: // Serial Port Configuration step 
             updateSerialPortStep();
+            break;
+        case 5: // ESC Configuration step
+            updateEscStep();
+            break;
+        case 6: // Motor Test step
+            updateMotorSetupStep(); // Motor test uses the same motor setup function
+            break;
+        case 7: // Motor Order & Servo Output step 
+            updateMotorSetupStep();
             break;
         // Add other step-specific updates here
     }
@@ -632,6 +754,94 @@ function updateSerialPortStep() {
     updateSerialPortTable(enabledPeripherals);
     updateWiringDiagram(enabledPeripherals);
     updateSerialCheckText(enabledPeripherals);
+}
+
+function updateEscStep() {
+    const escProtocol = hardwareConfig.escProtocol || 'dshot300';
+    const escData = escProtocols[escProtocol];
+    
+    if (!escData) return;
+    
+    // Update ESC configuration display
+    const escConfigDisplay = document.getElementById('esc-config-display');
+    if (escConfigDisplay) {
+        let warningsHtml = '';
+        if (escData.warnings) {
+            warningsHtml = `
+                <div class="alert alert-warning">
+                    <strong>⚠️ Perhatian:</strong>
+                    <ul>
+                        ${escData.warnings.map(warning => `<li>${warning}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+        
+        let calibrationHtml = '';
+        if (escData.calibrationRequired) {
+            calibrationHtml = `
+                <div class="alert alert-info">
+                    <strong>🔧 Kalibrasi Diperlukan:</strong> Protocol ${escData.name} memerlukan kalibrasi ESC manual. 
+                    Lakukan kalibrasi ESC setelah setting parameter.
+                </div>
+            `;
+        }
+        
+        escConfigDisplay.innerHTML = `
+            <div class="esc-protocol-info">
+                <h4>📡 Protocol: ${escData.name}</h4>
+                <div class="protocol-details">
+                    <p><strong>Frequency:</strong> ${escData.frequency.toLocaleString()} Hz</p>
+                    <p><strong>Description:</strong> ${escData.description}</p>
+                    <p><strong>Compatibility:</strong> ${escData.compatibility}</p>
+                </div>
+                
+                <div class="protocol-features">
+                    <h5>✨ Features:</h5>
+                    <ul>
+                        ${escData.features.map(feature => `<li>${feature}</li>`).join('')}
+                    </ul>
+                </div>
+                
+                ${warningsHtml}
+                ${calibrationHtml}
+            </div>
+        `;
+    }
+    
+    // Update parameters display
+    const escParamsDisplay = document.getElementById('esc-params-display');
+    if (escParamsDisplay && escData.params) {
+        escParamsDisplay.innerHTML = `
+            <div class="param-list">
+                ${escData.params.map(param => `
+                    <div class="param-item">
+                        <code>${param.param} = ${param.value}</code>
+                        <span>${getParamDescription(param.param)}</span>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    
+    // Update checkbox text
+    const escCheckText = document.getElementById('esc-check-text');
+    if (escCheckText) {
+        escCheckText.textContent = `Protocol ESC diset ke ${escData.name}`;
+    }
+}
+
+function getParamDescription(paramName) {
+    const descriptions = {
+        'SERVO1_FUNCTION': 'Motor 1 output',
+        'SERVO2_FUNCTION': 'Motor 2 output',
+        'SERVO3_FUNCTION': 'Motor 3 output', 
+        'SERVO4_FUNCTION': 'Motor 4 output',
+        'MOT_PWM_TYPE': 'ESC protocol type',
+        'MOT_PWM_MAX': 'Maximum throttle value',
+        'MOT_PWM_MIN': 'Minimum throttle value'
+    };
+    return descriptions[paramName] || 'ESC parameter';
 }
 
 function updateSerialPortTable(enabledPeripherals) {
@@ -1202,6 +1412,7 @@ function initializeHardwareConfig() {
         frameSize: '5',
         frameClass: '1', // Quad
         frameType: '18', // Quad X (BF Reversed) - prop-out
+        escProtocol: 'dshot300', // ESC Protocol
         vtxType: 'walksnail',
         vtxModel: 'Avatar Mini',
         notes: '',
@@ -1238,6 +1449,9 @@ function initializeHardwareConfig() {
     populateHardwareForm();
     updateHardwareSummary();
     
+    // Update step content with loaded configuration
+    updateStepContent(currentStep);
+    
     // Add event listeners
     addHardwareEventListeners();
 }
@@ -1259,6 +1473,7 @@ function populateHardwareForm() {
     // Update frame type options based on frame class
     updateFrameTypeOptions();
     document.getElementById('frame-type-input').value = hardwareConfig.frameType || '18';
+    document.getElementById('esc-protocol-select').value = hardwareConfig.escProtocol || 'dshot300';
     
     // Populate peripheral configuration
     populatePeripheralConfig();
@@ -1411,6 +1626,39 @@ function addHardwareEventListeners() {
         const firstFrameType = Object.keys(frameDatabase[frameClass].frameTypes)[0];
         document.getElementById('frame-type-input').value = firstFrameType;
         updateHardwareFromForm();
+        
+        // Immediately update step content if on relevant steps
+        if (currentStep === 1) {
+            updateFrameTypeStep();
+        } else if (currentStep === 6) {
+            updateMotorSetupStep(); // Motor Test
+        } else if (currentStep === 7) {
+            updateMotorSetupStep(); // Motor Order
+        }
+    });
+    
+    // Special listener for frame type changes
+    document.getElementById('frame-type-input').addEventListener('change', function() {
+        updateHardwareFromForm();
+        
+        // Immediately update step content if on relevant steps
+        if (currentStep === 1) {
+            updateFrameTypeStep();
+        } else if (currentStep === 6) {
+            updateMotorSetupStep(); // Motor Test
+        } else if (currentStep === 7) {
+            updateMotorSetupStep(); // Motor Order
+        }
+    });
+    
+    // Special listener for ESC protocol changes
+    document.getElementById('esc-protocol-select').addEventListener('change', function() {
+        updateHardwareFromForm();
+        
+        // Immediately update ESC step if currently viewing it
+        if (currentStep === 5) {
+            updateEscStep();
+        }
     });
     
     // Add peripheral event listeners
@@ -1549,6 +1797,7 @@ function updateHardwareFromForm() {
         frameSize: document.getElementById('frame-size-input').value,
         frameClass: document.getElementById('frame-class-input').value,
         frameType: document.getElementById('frame-type-input').value,
+        escProtocol: document.getElementById('esc-protocol-select').value,
         vtxType: document.getElementById('vtx-type-select').value,
         vtxModel: document.getElementById('vtx-model-input').value.trim(),
         notes: document.getElementById('notes-input').value.trim()
@@ -1556,6 +1805,20 @@ function updateHardwareFromForm() {
     
     updateHardwareSummary();
     saveHardwareConfig();
+    
+    // Update step content if currently viewing relevant steps
+    if (currentStep === 1) {
+        updateFrameTypeStep();
+    } else if (currentStep === 4) {
+        updateSerialPortStep();
+    } else if (currentStep === 5) {
+        updateEscStep();
+    } else if (currentStep === 6) {
+        updateMotorSetupStep(); // Motor Test
+    } else if (currentStep === 7) {
+        updateMotorSetupStep(); // Motor Order
+    }
+    
 }
 
 function updateFrameTypeOptions() {
@@ -1626,6 +1889,10 @@ function updateHardwareSummary() {
         <div class="summary-item">
             <span class="summary-label">ArduPilot Parameters:</span>
             <span class="summary-value">FRAME_CLASS=${hardwareConfig.frameClass}, FRAME_TYPE=${hardwareConfig.frameType}</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">ESC Protocol:</span>
+            <span class="summary-value">${escProtocols[hardwareConfig.escProtocol]?.name || 'DShot300'}</span>
         </div>
         <div class="summary-item">
             <span class="summary-label">VTX:</span>
