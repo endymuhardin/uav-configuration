@@ -33,16 +33,16 @@ Panduan interaktif universal untuk setup ArduPilot pada semua jenis hardware dro
 3. **Setup Motor** - Panduan detail urutan dan arah putaran motor
 4. **Serial Port** - Konfigurasi UART untuk berbagai perangkat
 5. **ESC Configuration** - Setup DShot300 dan Bluejay firmware
-6. **Flight Modes** - Konfigurasi 6 mode terbang
-7. **Arming Setup** - Pengaturan switch arming
-8. **Autotune** - Setup channel untuk autotune otomatis
-9. **Motor Test** - Verifikasi urutan dan arah motor
-10. **MavLink ELRS** - Setup telemetry via ExpressLRS
-11. **Walksnail OSD** - Konfigurasi OSD untuk VTX
-12. **Battery Failsafe** - Pengaturan failsafe baterai
-13. **Acro Settings** - Disable acro trainer
-14. **Tuning Parameters** - Parameter tuning untuk 5 inch 6S
-15. **Autotune Process** - Prosedur menjalankan autotune
+6. **Motor Test** - Verifikasi urutan dan arah motor dengan RPM balance
+7. **Motor Order & Servo Output** - Mapping motor dan arah putaran
+8. **Flight Modes** - Konfigurasi 6 mode terbang
+9. **Arming Setup** - Pengaturan switch arming dengan safety checks
+10. **Autotune Setup & Process** - Setup channel dan prosedur autotune lengkap
+11. **MavLink ELRS** - Setup telemetry via ExpressLRS (conditional)
+12. **Walksnail OSD** - Konfigurasi OSD untuk VTX
+13. **Battery Failsafe** - Pengaturan failsafe baterai
+14. **Acro Settings** - Disable acro trainer
+15. **Tuning Parameters** - Parameter tuning untuk 5 inch 6S
 16. **Remote Control** - Setup Radiomaster Pocket ELRS
 17. **Selesai!** - Checklist final dan tips keamanan
 

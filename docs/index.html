@@ -1073,306 +1073,14 @@
                 <h2>9. Set Arming Channel</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
-                        <h3>Konfigurasi Arming</h3>
-                            <li>Verifikasi semua motor berputar dan tidak ada yang macet</li>
-                            <li>Cek tidak ada getaran berlebih atau suara abnormal</li>
-                        </ol>
+                        <h3>🔧 Cara Setting Switch Arming/Disarm</h3>
                         
-                        <h4>Step 2: RPM Balance Test</h4>
-                        <ol>
-                            <li>Naikkan throttle ke <strong>25-30%</strong></li>
-                            <li>Test motor satu per satu dengan durasi <strong>5-10 detik</strong></li>
-                            <li>Perhatikan dan catat RPM setiap motor (jika tersedia)</li>
-                            <li>Dengarkan pitch sound dari setiap motor</li>
-                            <li>Motor yang seimbang akan memiliki sound pitch yang sama</li>
-                        </ol>
-                        
-                        <h4>Step 3: Visual & Audio Assessment</h4>
-                        <table class="config-table">
-                            <thead>
-                                <tr>
-                                    <th>Parameter</th>
-                                    <th>Normal</th>
-                                    <th>Abnormal</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Sound</strong></td>
-                                    <td>✅ Smooth, pitch sama</td>
-                                    <td>❌ Kasar, pitch beda</td>
-                                    <td>Cek bearing motor</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Vibration</strong></td>
-                                    <td>✅ Minimal vibration</td>
-                                    <td>❌ Getaran berlebih</td>
-                                    <td>Balance motor/prop</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Startup</strong></td>
-                                    <td>✅ Smooth start</td>
-                                    <td>❌ Jerky/hesitant</td>
-                                    <td>Kalibrasi ESC</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Temperature</strong></td>
-                                    <td>✅ Cool/warm</td>
-                                    <td>❌ Hot to touch</td>
-                                    <td>Cek motor/ESC</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="instruction-card">
-                    <div class="instruction-content">
-                        <h3>📊 RPM Balance Analysis</h3>
-                        
-                        <h4>🎯 Target RPM Balance:</h4>
-                        <div class="highlight-box">
-                            <ul>
-                                <li><strong>Excellent</strong>: RPM difference ≤ 2% antar motor</li>
-                                <li><strong>Good</strong>: RPM difference ≤ 5% antar motor</li>
-                                <li><strong>Acceptable</strong>: RPM difference ≤ 8% antar motor</li>
-                                <li><strong>Poor</strong>: RPM difference > 8% (perlu perbaikan)</li>
-                            </ul>
-                        </div>
-                        
-                        <h4>🔍 Cara Mengecek RPM Balance:</h4>
-                        <ol>
-                            <li><strong>Metode 1 - Sound Pitch</strong>:
-                                <ul>
-                                    <li>Test setiap motor di throttle yang sama (25-30%)</li>
-                                    <li>Dengarkan pitch/nada suara motor</li>
-                                    <li>Motor yang RPM-nya sama akan punya pitch yang identik</li>
-                                    <li>Gunakan tuner app di HP untuk mengukur frequency</li>
-                                </ul>
-                            </li>
-                            <li><strong>Metode 2 - Visual Observation</strong>:
-                                <ul>
-                                    <li>Lihat kecepatan putaran motor secara visual</li>
-                                    <li>Motor yang balance akan terlihat berputar dengan kecepatan sama</li>
-                                    <li>Gunakan smartphone camera dengan slow motion jika perlu</li>
-                                </ul>
-                            </li>
-                            <li><strong>Metode 3 - ESC Telemetry (jika ada)</strong>:
-                                <ul>
-                                    <li>Gunakan ESC dengan telemetry untuk monitoring RPM real-time</li>
-                                    <li>Baca data RPM dari Mission Planner atau OSD</li>
-                                    <li>Catat dan bandingkan RPM setiap motor</li>
-                                </ul>
-                            </li>
-                        </ol>
-                        
-                        <h4>🛠️ Troubleshooting RPM Imbalance Checklist:</h4>
-                        <div class="troubleshooting-checklist">
-                            <h5>Jika RPM tidak seimbang, lakukan pemeriksaan berikut:</h5>
-                            <div class="checklist-grid">
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Cek propeller balance</strong> (jika terpasang saat test)
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Kalibrasi ESC</strong> - pastikan semua ESC terkalibrasi sama
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Cek motor bearing</strong> - ganti jika ada yang kasar
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Verifikasi motor KV</strong> - pastikan semua motor sama KV
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Cek wiring</strong> - pastikan tidak ada voltage drop
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Cek solderan motor</strong> - pastikan tidak ada serabut yang kontak dengan pad di sebelahnya
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Cek kabel motor</strong> - pastikan tidak ada yang terkupas dan menyentuh arm/frame
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Cek baut motor</strong> - pastikan tidak ada yang menyentuh gulungan
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="troubleshoot-check">
-                                        <strong>Test dengan propeller berbeda</strong> untuk isolasi masalah
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="instruction-card">
-                    <div class="instruction-content">
-                        <h3>📝 Motor Test Checklist</h3>
-                        <div class="motor-test-checklist">
-                            <h4>✅ Pre-Flight Motor Test Results:</h4>
-                            <div class="checklist-grid">
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="motor-item-check">
-                                        Motor A - RPM normal & smooth
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="motor-item-check">
-                                        Motor B - RPM normal & smooth
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="motor-item-check">
-                                        Motor C - RPM normal & smooth
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="motor-item-check">
-                                        Motor D - RPM normal & smooth
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="motor-item-check">
-                                        Semua motor sound pitch sama
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="motor-item-check">
-                                        Tidak ada getaran abnormal
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="motor-item-check">
-                                        Tidak ada motor yang overheat
-                                    </label>
-                                </div>
-                                <div class="checklist-item">
-                                    <label>
-                                        <input type="checkbox" class="motor-item-check">
-                                        RPM balance dalam range yang dapat diterima (≤8%)
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="alert alert-success" style="margin-top: 20px;">
-                            <strong>💡 Pro Tip:</strong> Motor test yang bagus adalah fondasi untuk flight performance yang optimal. 
-                            Jangan skip step ini - motor yang tidak balance akan menyebabkan vibration dan mengurangi flight time!
-                        </div>
-                    </div>
-                </div>
-
-                <div class="checklist">
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="7">
-                        <span>Motor test lengkap sudah dilakukan, RPM balance verified, semua motor normal</span>
-                    </label>
-                </div>
-            </section>
-
-            <!-- Step 8: Flight Modes -->
-            <section class="step-content" id="step8" style="display:none;">
-                <h2>8. Set Flight Modes</h2>
-                <div class="instruction-card">
-                    <div class="instruction-content">
-                        <h3>Mode Terbang</h3>
-                        <table class="config-table">
-                            <thead>
-                                <tr>
-                                    <th>Mode</th>
-                                    <th>Fungsi</th>
-                                    <th>Deskripsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Stabilize</td>
-                                    <td>Manual flight dengan stabilisasi otomatis. Drone akan self-level saat stick dilepas.</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Acro</td>
-                                    <td>Mode acrobatic tanpa stabilisasi. Full manual control untuk freestyle/aerobatic.</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Loiter</td>
-                                    <td>GPS hold position. Drone hover di satu titik menggunakan GPS untuk positioning.</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Auto / Mission</td>
-                                    <td>Autonomous flight mengikuti waypoint mission yang sudah diprogram.</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>Guided</td>
-                                    <td>Remote guided flight. Drone mengikuti perintah dari ground control station.</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>Return to Launch</td>
-                                    <td>Otomatis kembali ke titik takeoff dan landing dengan GPS guidance.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="param-box">
-                            <strong>Parameter:</strong> FLTMODE_CH = 7 (Channel 7)
-                        </div>
-                    </div>
-                    <img src="../ardupilot/nazgul/img/06-flight-modes.png" alt="Flight Modes Configuration" class="instruction-img">
-                </div>
-                <div class="checklist">
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="8">
-                        <span>Flight modes sudah dikonfigurasi</span>
-                    </label>
-                </div>
-            </section>
-
-            <!-- Step 9: Arming Configuration -->
-            <section class="step-content" id="step9" style="display:none;">
-                <h2>9. Set Arming Channel</h2>
-                <div class="instruction-card">
-                    <div class="instruction-content">
-                        <h3>Konfigurasi Arming</h3>
+                        <h4>Step 1: Konfigurasi Channel Arming</h4>
+                        <p>Pilih channel AUX untuk arming switch (biasanya AUX1/Channel 5):</p>
                         <div class="param-list">
                             <div class="param-item">
                                 <code>RC5_OPTION = 154</code>
-                                <span>Channel 5 / AUX 1 untuk arming</span>
+                                <span>Channel 5 (AUX1) untuk Arm/Disarm</span>
                             </div>
                             <div class="param-item">
                                 <code>ARMING_RUDDER = 0</code>
@@ -1380,84 +1088,86 @@
                             </div>
                         </div>
                         
-                        <h4>🛡️ ARMING_CHECK Settings</h4>
-                        <p>Parameter <strong>ARMING_CHECK</strong> mengontrol pemeriksaan keamanan sebelum arming:</p>
-                        <table class="config-table">
-                            <thead>
-                                <tr>
-                                    <th>Nilai</th>
-                                    <th>Nama</th>
-                                    <th>Deskripsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>0</td>
-                                    <td>NONE</td>
-                                    <td>⚠️ Bypass semua arming checks (BERBAHAYA!)</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>ALL</td>
-                                    <td>✅ Enable semua arming checks (DIREKOMENDASIKAN)</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>BAROMETER</td>
-                                    <td>Check barometer/altitude sensor</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>COMPASS</td>
-                                    <td>Check compass/magnetometer</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td>GPS</td>
-                                    <td>Check GPS lock dan satelit count</td>
-                                </tr>
-                                <tr>
-                                    <td>16</td>
-                                    <td>INS</td>
-                                    <td>Check inertial navigation system</td>
-                                </tr>
-                                <tr>
-                                    <td>32</td>
-                                    <td>PARAMETERS</td>
-                                    <td>Check parameter consistency</td>
-                                </tr>
-                                <tr>
-                                    <td>64</td>
-                                    <td>RC</td>
-                                    <td>Check radio control connection</td>
-                                </tr>
-                                <tr>
-                                    <td>128</td>
-                                    <td>VOLTAGE</td>
-                                    <td>Check battery voltage levels</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <h4>Step 2: Setup Switch di Radio</h4>
+                        <ol>
+                            <li><strong>Pilih switch 2-posisi</strong> untuk arming (contoh: SA, SB, atau SC)</li>
+                            <li><strong>Assign ke channel AUX1</strong> di mixer radio</li>
+                            <li><strong>Set nilai switch</strong>:
+                                <ul>
+                                    <li>Position UP (DISARM) = ~1000μs</li>
+                                    <li>Position DOWN (ARM) = ~2000μs</li>
+                                </ul>
+                            </li>
+                            <li><strong>Test di Mission Planner</strong>: Radio Calibration untuk verifikasi channel value</li>
+                        </ol>
                         
+                        <h4>Step 3: Test Switch Functionality</h4>
                         <div class="highlight-box">
-                            <h4>💡 Tips Arming Check:</h4>
-                            <ul>
-                                <li><strong>ARMING_CHECK=1 (ALL)</strong>: Paling aman, semua sensor dicek</li>
-                                <li><strong>Custom value</strong>: Jumlahkan nilai yang diinginkan (contoh: 2+4+64 = 70)</li>
-                                <li><strong>Testing/Debug</strong>: Bisa temporary set ke 0, tapi JANGAN untuk flight!</li>
-                                <li><strong>Common issues</strong>: GPS (8), Compass (4), RC (64) sering jadi masalah</li>
-                            </ul>
+                            <h5>🚨 CRITICAL SAFETY TEST:</h5>
+                            <ol>
+                                <li><strong>Switch DISARM harus berfungsi</strong> - pastikan drone bisa disarm kapan saja</li>
+                                <li><strong>Test emergency disarm</strong> - coba disarm saat motor berputar (motor test)</li>
+                                <li><strong>Verifikasi switch direction</strong> - pastikan arah switch sesuai logika (UP=DISARM, DOWN=ARM)</li>
+                                <li><strong>Test arming sequence</strong> - coba arm/disarm beberapa kali</li>
+                            </ol>
                         </div>
                         
-                        <div class="alert alert-warning">
-                            <strong>⚠️ Safety:</strong> Pastikan switch arming berada di posisi yang aman dan ARMING_CHECK=1 untuk keamanan maksimal
+                        <div class="alert alert-danger">
+                            <strong>⛔ DILARANG TAKEOFF</strong> sebelum switch disarm berfungsi dengan sempurna!<br>
+                            Switch disarm adalah safety feature utama untuk emergency situation.
                         </div>
                     </div>
                 </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>🛡️ Safety Checklist Arming</h3>
+                        
+                        <div class="checklist-grid">
+                            <div class="checklist-item">
+                                <label>
+                                    <input type="checkbox" class="arming-safety-check">
+                                    <strong>Switch arming response test</strong> - switch berfungsi dengan baik
+                                </label>
+                            </div>
+                            <div class="checklist-item">
+                                <label>
+                                    <input type="checkbox" class="arming-safety-check">
+                                    <strong>Emergency disarm test</strong> - bisa disarm kapan saja
+                                </label>
+                            </div>
+                            <div class="checklist-item">
+                                <label>
+                                    <input type="checkbox" class="arming-safety-check">
+                                    <strong>Switch direction correct</strong> - UP=DISARM, DOWN=ARM
+                                </label>
+                            </div>
+                            <div class="checklist-item">
+                                <label>
+                                    <input type="checkbox" class="arming-safety-check">
+                                    <strong>Radio failsafe configured</strong> - behavior saat signal loss
+                                </label>
+                            </div>
+                            <div class="checklist-item">
+                                <label>
+                                    <input type="checkbox" class="arming-safety-check">
+                                    <strong>Battery failsafe configured</strong> - behavior saat low voltage
+                                </label>
+                            </div>
+                            <div class="checklist-item">
+                                <label>
+                                    <input type="checkbox" class="arming-safety-check">
+                                    <strong>Arming checks enabled</strong> - ARMING_CHECK = 1 (ALL)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="checklist">
                     <label class="checkbox-item">
                         <input type="checkbox" class="step-check" data-step="9">
-                        <span>Arming channel sudah dikonfigurasi</span>
+                        <span>Switch arming/disarm sudah dikonfigurasi dan safety test selesai</span>
                     </label>
                 </div>
             </section>
@@ -1467,20 +1177,106 @@
                 <h2>10. Set Autotune Channel</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
-                        <h3>Konfigurasi Autotune</h3>
-                        <div class="param-item">
-                            <code>RC6_OPTION = 17</code>
-                            <span>Channel 6 untuk Autotune</span>
+                        <h3>🔧 Setup Switch Autotune</h3>
+                        
+                        <h4>Step 1: Konfigurasi Channel Autotune</h4>
+                        <p>Assign autotune ke switch tersendiri (jangan digabung dengan switch lain):</p>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <code>RC6_OPTION = 17</code>
+                                <span>Channel 6 (AUX2) untuk Autotune</span>
+                            </div>
                         </div>
-                        <div class="alert alert-info">
-                            <strong>💡 Tips:</strong> Autotune akan membantu mengoptimalkan PID secara otomatis
+                        
+                        <h4>Step 2: Setup Switch di Radio</h4>
+                        <ol>
+                            <li><strong>Pilih switch 2-posisi terpisah</strong> khusus untuk autotune</li>
+                            <li><strong>Assign ke channel AUX2</strong> (Channel 6)</li>
+                            <li><strong>Set nilai switch</strong>:
+                                <ul>
+                                    <li>Position UP (OFF) = ~1000μs</li>
+                                    <li>Position DOWN (ON) = ~2000μs</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <div class="highlight-box">
+                            <h4>🎯 Tips Autotune Penting:</h4>
+                            <ol>
+                                <li><strong>Setting autotune di switch tersendiri</strong> - jangan share dengan fungsi lain</li>
+                                <li><strong>Autotune bisa diaktifkan di mode:</strong>
+                                    <ul>
+                                        <li>✅ <strong>Stabilize</strong> (DIREKOMENDASIKAN)</li>
+                                        <li>✅ Alt-Hold</li>
+                                        <li>✅ Loiter</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Rekomendasi: Start autotune dari mode Stabilize</strong> untuk hasil optimal</li>
+                                <li><strong>Pastikan baterai penuh</strong> - autotune membutuhkan waktu 10-15 menit</li>
+                                <li><strong>Area terbuka minimal 20x20 meter</strong> untuk pergerakan autotune</li>
+                                <li><strong>Cuaca tenang</strong> - hindari angin kencang saat autotune</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Catatan Penting:</strong> Autotune akan menggerakkan drone secara otomatis. 
+                            Pastikan Anda siap mengambil kontrol manual jika diperlukan dengan switch arming atau mode flight.
                         </div>
                     </div>
                 </div>
+
+                <div class="instruction-card">
+                    <div class="instruction-content">
+                        <h3>🚁 Proses Autotune</h3>
+                        <p>Setelah hover stabil di mode Stabilize, Altitude Hold, dan Loiter:</p>
+                        
+                        <h4>Step 3: Parameter Autotune</h4>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <code>AUTOTUNE_AGGR = 0.1</code>
+                                <span>Aggressiveness level (0.1 = conservative, 0.2 = aggressive)</span>
+                            </div>
+                            <div class="param-item">
+                                <code>AUTOTUNE_AXES = 7</code>
+                                <span>Axes to tune (1=Roll, 2=Pitch, 4=Yaw, 7=All)</span>
+                            </div>
+                        </div>
+                        
+                        <h4>Step 4: Prosedur Autotune</h4>
+                        <div class="highlight-box">
+                            <ol class="process-list">
+                                <li><strong>Pastikan baterai penuh</strong> - autotune butuh 10-15 menit</li>
+                                <li><strong>Hover di area luas dan aman</strong> - minimal 20x20 meter</li>
+                                <li><strong>Takeoff dalam mode Stabilize</strong> dan hover stabil</li>
+                                <li><strong>Aktifkan autotune via switch</strong> - drone akan mulai bergerak otomatis</li>
+                                <li><strong>Jangan sentuh stick</strong> - biarkan autotune bekerja</li>
+                                <li><strong>Tunggu sampai selesai</strong> - drone akan berhenti bergerak dan hover normal</li>
+                                <li><strong>Matikan switch autotune</strong> dan land dengan aman</li>
+                                <li><strong>Save parameter</strong> di Mission Planner</li>
+                            </ol>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <strong>💡 Tips Hemat Baterai:</strong> Untuk drone besar atau baterai kecil, lakukan autotune per axis: 
+                            Set AUTOTUNE_AXES=1 (Roll only) → land → ganti baterai → AUTOTUNE_AXES=2 (Pitch) → dan seterusnya.
+                        </div>
+                        
+                        <div class="alert alert-success">
+                            <strong>✅ Tanda Autotune Berhasil:</strong>
+                            <ul>
+                                <li>Drone hover lebih stabil tanpa oscillation</li>
+                                <li>Response stick lebih crisp dan presisi</li>
+                                <li>Parameter P, I, D sudah terupdate otomatis</li>
+                                <li>Pesan "AutoTune: Success" muncul di HUD</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="checklist">
                     <label class="checkbox-item">
                         <input type="checkbox" class="step-check" data-step="10">
-                        <span>Autotune channel sudah diset</span>
+                        <span>Autotune channel diset dan proses autotune selesai</span>
                     </label>
                 </div>
             </section>
@@ -1850,46 +1646,9 @@ SERVO_DSHOT_ESC,2</pre>
                 </div>
             </section>
 
-            <!-- Step 16: Autotune Process -->
+            <!-- Step 16: Remote Control -->
             <section class="step-content" id="step16" style="display:none;">
-                <h2>16. Proses Autotune</h2>
-                <div class="instruction-card">
-                    <div class="instruction-content">
-                        <h3>Persiapan Autotune</h3>
-                        <p>Setelah hover stabil di mode Stabilize, Altitude Hold, dan Loiter:</p>
-                        <div class="param-list">
-                            <div class="param-item">
-                                <code>AUTOTUNE_AGGR = 0.1</code>
-                                <span>Aggressiveness level (0.1 = conservative)</span>
-                            </div>
-                            <div class="param-item">
-                                <code>AUTOTUNE_AXES = 3</code>
-                                <span>Axes to tune (3 = Yaw only, 7 = All)</span>
-                            </div>
-                        </div>
-                        <div class="alert alert-info">
-                            <strong>💡 Tips:</strong> Lakukan autotune per axis secara bergantian untuk menghemat baterai
-                        </div>
-                        <ol class="process-list">
-                            <li>Pastikan baterai penuh</li>
-                            <li>Hover di area yang luas dan aman</li>
-                            <li>Aktifkan autotune via switch</li>
-                            <li>Biarkan proses berjalan sampai selesai</li>
-                            <li>Land dan save parameter</li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="checklist">
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="16">
-                        <span>Autotune sudah dilakukan</span>
-                    </label>
-                </div>
-            </section>
-
-            <!-- Step 17: Remote Control -->
-            <section class="step-content" id="step17" style="display:none;">
-                <h2>17. Remote Control Settings</h2>
+                <h2>16. Remote Control Settings</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
                         <h3>Radiomaster Pocket ELRS</h3>
@@ -1936,14 +1695,14 @@ SERVO_DSHOT_ESC,2</pre>
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
-                        <input type="checkbox" class="step-check" data-step="17">
+                        <input type="checkbox" class="step-check" data-step="16">
                         <span>Remote control sudah dikonfigurasi</span>
                     </label>
                 </div>
             </section>
 
             <!-- Completion -->
-            <section class="step-content" id="step18" style="display:none;">
+            <section class="step-content" id="step17" style="display:none;">
                 <h2>🎉 Setup Selesai!</h2>
                 <div class="completion-card">
                     <div class="success-icon">✅</div>

@@ -1,6 +1,6 @@
 // Interactive Guide JavaScript
 let currentStep = 0;
-const totalSteps = 18; // Including completion step (0-17)
+const totalSteps = 17; // Including completion step (0-16), merged autotune steps
 const stepChecks = {}; // Track completed steps
 let hardwareConfig = {}; // Store hardware configuration
 
@@ -663,6 +663,9 @@ function updateStepContent(stepNumber) {
         case 7: // Motor Order & Servo Output step 
             updateMotorSetupStep();
             break;
+        case 11: // MavLink ELRS step - conditional visibility
+            updateMavLinkElrsStepVisibility();
+            break;
         // Add other step-specific updates here
     }
 }
@@ -752,6 +755,27 @@ function updateFcOrientationStep() {
     if (fcOrientationCheckText) {
         fcOrientationCheckText.textContent = `Orientasi FC diset ke ${orientationData.name} (AHRS_ORIENTATION = ${fcOrientation})`;
     }
+}
+
+function updateMavLinkElrsStepVisibility() {
+    // Check if RC receiver is using MavLink protocol
+    const rcConfig = hardwareConfig.peripherals?.['rc-receiver'];
+    const shouldShow = rcConfig && rcConfig.enabled && rcConfig.protocol === 'mavlink';
+    
+    // Hide/show the MavLink ELRS step based on protocol
+    const mavlinkStep = document.getElementById('step11');
+    if (mavlinkStep) {
+        mavlinkStep.style.display = shouldShow ? 'block' : 'none';
+    }
+    
+    // Update step navigation to skip hidden step
+    updateStepNavigation();
+}
+
+function updateStepNavigation() {
+    // This function will be called to update step navigation when steps are hidden/shown
+    // For now, we'll handle this in the existing navigation functions
+    console.log('Step navigation updated based on conditional steps');
 }
 
 function updateMotorSetupStep() {
@@ -1605,6 +1629,9 @@ function initializeHardwareConfig() {
     // Update step content with loaded configuration
     updateStepContent(currentStep);
     
+    // Initialize conditional step visibility
+    updateMavLinkElrsStepVisibility();
+    
     // Add event listeners
     addHardwareEventListeners();
 }
@@ -1928,6 +1955,9 @@ function updatePeripheralConfig() {
             type: rcReceiverType.value,
             protocol: rcProtocol.value
         };
+        
+        // Update MavLink ELRS step visibility based on protocol
+        updateMavLinkElrsStepVisibility();
     }
     
     // Handle other peripherals
