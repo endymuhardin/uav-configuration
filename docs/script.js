@@ -364,6 +364,94 @@ const escProtocols = {
     }
 };
 
+// FC Orientation Database
+const fcOrientations = {
+    "0": {
+        name: "Normal",
+        description: "FC dipasang normal (panah/USB menghadap ke depan)",
+        rotation: "None",
+        useCase: "Orientasi standar untuk sebagian besar setup",
+        visualization: "→"
+    },
+    "1": {
+        name: "Yaw 90°",
+        description: "Diputar 90° searah jarum jam",
+        rotation: "90° CW",
+        useCase: "FC dipasang menyamping, panah menghadap kanan",
+        visualization: "↓"
+    },
+    "2": {
+        name: "Yaw 180°",
+        description: "Diputar 180° (terbalik)",
+        rotation: "180°",
+        useCase: "FC dipasang terbalik, panah menghadap belakang",
+        visualization: "←"
+    },
+    "3": {
+        name: "Yaw 270°",
+        description: "Diputar 270° searah jarum jam",
+        rotation: "270° CW",
+        useCase: "FC dipasang menyamping, panah menghadap kiri",
+        visualization: "↑"
+    },
+    "4": {
+        name: "Roll 180°",
+        description: "Terbalik horizontal (upside down)",
+        rotation: "Upside Down",
+        useCase: "FC dipasang terbalik di bawah frame",
+        visualization: "⟲"
+    },
+    "5": {
+        name: "Roll 180° + Yaw 90°",
+        description: "Terbalik + putar 90°",
+        rotation: "Upside Down + 90° CW",
+        useCase: "FC terbalik dan diputar 90°",
+        visualization: "⟲↓"
+    },
+    "8": {
+        name: "Pitch 180°",
+        description: "Terbalik vertikal",
+        rotation: "Pitch Inverted",
+        useCase: "FC dipasang dengan pitch terbalik",
+        visualization: "⤴"
+    },
+    "12": {
+        name: "Yaw 90° + Roll 180°",
+        description: "Putar 90° + terbalik horizontal",
+        rotation: "90° CW + Upside Down",
+        useCase: "FC terbalik dan diputar 90°",
+        visualization: "⟲↓"
+    },
+    "13": {
+        name: "Yaw 180° + Roll 180°",
+        description: "Putar 180° + terbalik horizontal",
+        rotation: "180° + Upside Down",
+        useCase: "FC terbalik dan diputar 180°",
+        visualization: "⟲←"
+    },
+    "14": {
+        name: "Yaw 270° + Roll 180°",
+        description: "Putar 270° + terbalik horizontal",
+        rotation: "270° CW + Upside Down",
+        useCase: "FC terbalik dan diputar 270°",
+        visualization: "⟲↑"
+    },
+    "20": {
+        name: "Pitch 90°",
+        description: "Hidung naik 90°",
+        rotation: "Pitch Up 90°",
+        useCase: "FC dipasang vertikal, hidung ke atas",
+        visualization: "⤴"
+    },
+    "21": {
+        name: "Pitch 270°",
+        description: "Hidung turun 90°",
+        rotation: "Pitch Down 90°",
+        useCase: "FC dipasang vertikal, hidung ke bawah",
+        visualization: "⤵"
+    }
+};
+
 // VTX types database
 const vtxTypes = {
     "walksnail": {
@@ -560,6 +648,9 @@ function updateStepContent(stepNumber) {
         case 1: // Frame Type step
             updateFrameTypeStep();
             break;
+        case 3: // FC Orientation step
+            updateFcOrientationStep();
+            break;
         case 4: // Serial Port Configuration step 
             updateSerialPortStep();
             break;
@@ -613,6 +704,53 @@ function updateFrameTypeStep() {
     const frameCheckText = document.getElementById('frame-check-text');
     if (frameCheckText) {
         frameCheckText.textContent = `Frame type diset ke ${frameInfo.name}`;
+    }
+}
+
+function updateFcOrientationStep() {
+    const fcOrientation = hardwareConfig.fcOrientation || '0';
+    const orientationData = fcOrientations[fcOrientation];
+    
+    if (!orientationData) return;
+    
+    // Update FC orientation display
+    const fcOrientationDisplay = document.getElementById('fc-orientation-display');
+    if (fcOrientationDisplay) {
+        fcOrientationDisplay.innerHTML = `
+            <div class="fc-orientation-info">
+                <h4>📡 Parameter ArduPilot:</h4>
+                <div class="param-item">
+                    <code>AHRS_ORIENTATION = ${fcOrientation}</code>
+                    <span>${orientationData.name}</span>
+                </div>
+                
+                <div class="orientation-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Rotasi:</span>
+                        <span class="detail-value">${orientationData.rotation}</span>
+                        <span class="orientation-visual">${orientationData.visualization}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Deskripsi:</span>
+                        <span class="detail-value">${orientationData.description}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Use Case:</span>
+                        <span class="detail-value">${orientationData.useCase}</span>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info">
+                    <strong>💡 Verifikasi:</strong> Setelah setting parameter, pastikan HUD di Mission Planner bergerak sesuai dengan gerakan drone fisik.
+                </div>
+            </div>
+        `;
+    }
+    
+    // Update checkbox text
+    const fcOrientationCheckText = document.getElementById('fc-orientation-check-text');
+    if (fcOrientationCheckText) {
+        fcOrientationCheckText.textContent = `Orientasi FC diset ke ${orientationData.name} (AHRS_ORIENTATION = ${fcOrientation})`;
     }
 }
 
@@ -1427,6 +1565,7 @@ function initializeHardwareConfig() {
         frameClass: '1', // Quad
         frameType: '18', // Quad X (BF Reversed) - prop-out
         escProtocol: 'dshot300', // ESC Protocol
+        fcOrientation: '0', // FC Orientation (Normal)
         vtxType: 'walksnail',
         vtxModel: 'Avatar Mini',
         notes: '',
@@ -1488,6 +1627,7 @@ function populateHardwareForm() {
     updateFrameTypeOptions();
     document.getElementById('frame-type-input').value = hardwareConfig.frameType || '18';
     document.getElementById('esc-protocol-select').value = hardwareConfig.escProtocol || 'dshot300';
+    document.getElementById('fc-orientation-select').value = hardwareConfig.fcOrientation || '0';
     
     // Populate peripheral configuration
     populatePeripheralConfig();
@@ -1687,6 +1827,16 @@ function addHardwareEventListeners() {
         }
     });
     
+    // Special listener for FC orientation changes
+    document.getElementById('fc-orientation-select').addEventListener('change', function() {
+        updateHardwareFromForm();
+        
+        // Immediately update FC orientation step if currently viewing it
+        if (currentStep === 3) {
+            updateFcOrientationStep();
+        }
+    });
+    
     // Add peripheral event listeners
     addPeripheralEventListeners();
 }
@@ -1824,6 +1974,7 @@ function updateHardwareFromForm() {
         frameClass: document.getElementById('frame-class-input').value,
         frameType: document.getElementById('frame-type-input').value,
         escProtocol: document.getElementById('esc-protocol-select').value,
+        fcOrientation: document.getElementById('fc-orientation-select').value,
         vtxType: document.getElementById('vtx-type-select').value,
         vtxModel: document.getElementById('vtx-model-input').value.trim(),
         notes: document.getElementById('notes-input').value.trim()
@@ -1835,6 +1986,8 @@ function updateHardwareFromForm() {
     // Update step content if currently viewing relevant steps
     if (currentStep === 1) {
         updateFrameTypeStep();
+    } else if (currentStep === 3) {
+        updateFcOrientationStep();
     } else if (currentStep === 4) {
         updateSerialPortStep();
     } else if (currentStep === 5) {
@@ -1931,6 +2084,10 @@ function updateHardwareSummary() {
         <div class="summary-item">
             <span class="summary-label">ESC Protocol:</span>
             <span class="summary-value">${escProtocols[hardwareConfig.escProtocol]?.name || 'DShot300'}</span>
+        </div>
+        <div class="summary-item">
+            <span class="summary-label">FC Orientation:</span>
+            <span class="summary-value">${fcOrientations[hardwareConfig.fcOrientation]?.name || 'Normal'} (AHRS_ORIENTATION=${hardwareConfig.fcOrientation || '0'})</span>
         </div>
         <div class="summary-item">
             <span class="summary-label">VTX:</span>
@@ -2177,6 +2334,7 @@ Lanjutkan reset?`;
             frameClass: '1', // Quad
             frameType: '18', // Quad X (BF Reversed) - prop-out
             escProtocol: 'dshot300', // ESC Protocol
+            fcOrientation: '0', // FC Orientation (Normal)
             vtxType: 'walksnail',
             vtxModel: 'Avatar Mini',
             notes: '',

@@ -386,23 +386,38 @@
                 <h2>3. Orientasi Flight Controller</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
-                        <h3>Konfigurasi Orientasi FC</h3>
+                        <h3>📐 Pilih Orientasi Flight Controller</h3>
                         
-                        <div class="highlight-box">
-                            <h4>📐 Orientasi Standar (Default):</h4>
-                            <ul>
-                                <li><strong>AHRS_ORIENTATION = 0</strong> - FC dipasang normal (panah/USB menghadap ke depan)</li>
-                                <li><strong>Arrow/USB port</strong> menunjuk arah depan drone</li>
-                                <li><strong>Gyro axes</strong>: X = Roll, Y = Pitch, Z = Yaw</li>
-                            </ul>
+                        <div class="fc-orientation-selection">
+                            <h4>Orientasi FC Anda:</h4>
+                            <select id="fc-orientation-select" class="hw-input">
+                                <option value="0">Normal - Panah/USB menghadap ke depan</option>
+                                <option value="1">Yaw 90° - Diputar 90° searah jarum jam</option>
+                                <option value="2">Yaw 180° - Diputar 180° (terbalik)</option>
+                                <option value="3">Yaw 270° - Diputar 270° searah jarum jam</option>
+                                <option value="4">Roll 180° - Terbalik horizontal (upside down)</option>
+                                <option value="5">Roll 180° + Yaw 90° - Terbalik + putar 90°</option>
+                                <option value="8">Pitch 180° - Terbalik vertikal</option>
+                                <option value="12">Yaw 90° + Roll 180° - Putar 90° + terbalik horizontal</option>
+                                <option value="13">Yaw 180° + Roll 180° - Putar 180° + terbalik horizontal</option>
+                                <option value="14">Yaw 270° + Roll 180° - Putar 270° + terbalik horizontal</option>
+                                <option value="20">Pitch 90° - Hidung naik 90°</option>
+                                <option value="21">Pitch 270° - Hidung turun 90°</option>
+                            </select>
+                        </div>
+                        
+                        <div id="fc-orientation-display">
+                            <!-- Will be populated by JavaScript -->
                         </div>
 
-                        <div class="param-section">
-                            <h4>Parameter Orientasi:</h4>
-                            <div class="param-item">
-                                <code>AHRS_ORIENTATION</code>
-                                <span>Orientasi mounting flight controller</span>
-                            </div>
+                        <div class="highlight-box">
+                            <h4>💡 Tips Memilih Orientasi:</h4>
+                            <ul>
+                                <li><strong>Normal (0)</strong>: Orientasi paling umum - panah FC menghadap depan drone</li>
+                                <li><strong>Yaw rotations</strong>: Untuk FC yang diputar secara horizontal</li>
+                                <li><strong>Roll 180°</strong>: Untuk FC yang dipasang terbalik (upside down)</li>
+                                <li><strong>Pitch rotations</strong>: Untuk FC yang dipasang miring ke atas/bawah</li>
+                            </ul>
                         </div>
 
                         <div class="orientation-table">
@@ -528,7 +543,7 @@
                 <div class="checklist">
                     <label class="checkbox-item">
                         <input type="checkbox" class="step-check" data-step="3">
-                        <span>Orientasi flight controller sudah dikonfigurasi dan diverifikasi</span>
+                        <span id="fc-orientation-check-text">Orientasi flight controller sudah dikonfigurasi dan diverifikasi</span>
                     </label>
                 </div>
             </section>
