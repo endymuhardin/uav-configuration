@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan Setup ArduPilot Nazgul - UAV Configuration</title>
+    <title>Panduan Setup ArduPilot - UAV Configuration</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🚁 Panduan Interaktif Setup ArduPilot</h1>
-            <p class="subtitle">Untuk Nazgul dengan SpeedyBee F405 V4</p>
+            <p class="subtitle">Panduan Universal Setup ArduPilot untuk Semua Hardware</p>
         </header>
 
         <div class="progress-container">
@@ -94,14 +94,9 @@
                         </div>
                         
                         <div class="config-item">
-                            <label for="frame-size-input">Ukuran Frame:</label>
-                            <select id="frame-size-input" class="hw-input">
-                                <option value="5inch">5 inch</option>
-                                <option value="7inch">7 inch</option>
-                                <option value="6inch">6 inch</option>
-                                <option value="4inch">4 inch</option>
-                                <option value="3inch">3 inch</option>
-                            </select>
+                            <label for="frame-size-input">Ukuran Frame (inch):</label>
+                            <input type="text" id="frame-size-input" class="hw-input" value="5" 
+                                   placeholder="Contoh: 5, 7, 10, 20, dll">
                         </div>
                         
                         <div class="config-item">
@@ -126,9 +121,19 @@
                         </div>
                         
                         <div class="config-item">
-                            <label for="vtx-input">VTX:</label>
-                            <input type="text" id="vtx-input" class="hw-input" value="Walksnail Avatar Mini" 
-                                   placeholder="Contoh: Walksnail Avatar Mini">
+                            <label for="vtx-type-select">Tipe VTX:</label>
+                            <select id="vtx-type-select" class="hw-input">
+                                <option value="walksnail">Walksnail/Avatar HD</option>
+                                <option value="dji">DJI (dengan WTF-OSD)</option>
+                                <option value="analog">Analog/Traditional</option>
+                                <option value="hdzero">HDZero</option>
+                            </select>
+                        </div>
+                        
+                        <div class="config-item">
+                            <label for="vtx-model-input">Model VTX:</label>
+                            <input type="text" id="vtx-model-input" class="hw-input" value="Avatar Mini" 
+                                   placeholder="Contoh: Avatar Mini, Air Unit, etc">
                         </div>
                     </div>
                     
@@ -170,16 +175,22 @@
                             <div class="config-item">
                                 <label>
                                     <input type="checkbox" id="peripheral-vtx" class="peripheral-checkbox" checked>
-                                    VTX (OSD DisplayPort)
+                                    VTX (OSD)
                                 </label>
-                                <select id="vtx-uart-select" class="hw-input peripheral-uart">
-                                    <option value="UART1" selected>UART1</option>
-                                    <option value="UART2">UART2</option>
-                                    <option value="UART3">UART3</option>
-                                    <option value="UART4">UART4</option>
-                                    <option value="UART5">UART5</option>
-                                    <option value="UART6">UART6</option>
-                                </select>
+                                <div class="vtx-config-details" style="margin-top: 10px;">
+                                    <select id="vtx-protocol-select" class="hw-input" style="margin-bottom: 8px;">
+                                        <option value="displayport">DisplayPort (HD VTX)</option>
+                                        <option value="none">Tidak ada OSD</option>
+                                    </select>
+                                    <select id="vtx-uart-select" class="hw-input peripheral-uart">
+                                        <option value="UART1" selected>UART1</option>
+                                        <option value="UART2">UART2</option>
+                                        <option value="UART3">UART3</option>
+                                        <option value="UART4">UART4</option>
+                                        <option value="UART5">UART5</option>
+                                        <option value="UART6">UART6</option>
+                                    </select>
+                                </div>
                             </div>
                             
                             <div class="config-item rc-receiver-section">
@@ -526,15 +537,40 @@
                                 <tr>
                                     <th>Mode</th>
                                     <th>Fungsi</th>
+                                    <th>Deskripsi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td>1</td><td>Stabilize</td></tr>
-                                <tr><td>2</td><td>Acro</td></tr>
-                                <tr><td>3</td><td>Loiter</td></tr>
-                                <tr><td>4</td><td>Auto / Mission</td></tr>
-                                <tr><td>5</td><td>Guided</td></tr>
-                                <tr><td>6</td><td>Return to Launch</td></tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Stabilize</td>
+                                    <td>Manual flight dengan stabilisasi otomatis. Drone akan self-level saat stick dilepas.</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Acro</td>
+                                    <td>Mode acrobatic tanpa stabilisasi. Full manual control untuk freestyle/aerobatic.</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Loiter</td>
+                                    <td>GPS hold position. Drone hover di satu titik menggunakan GPS untuk positioning.</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Auto / Mission</td>
+                                    <td>Autonomous flight mengikuti waypoint mission yang sudah diprogram.</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Guided</td>
+                                    <td>Remote guided flight. Drone mengikuti perintah dari ground control station.</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Return to Launch</td>
+                                    <td>Otomatis kembali ke titik takeoff dan landing dengan GPS guidance.</td>
+                                </tr>
                             </tbody>
                         </table>
                         <div class="param-box">
@@ -567,8 +603,78 @@
                                 <span>Disable arming dengan stik command</span>
                             </div>
                         </div>
+                        
+                        <h4>🛡️ ARMING_CHECK Settings</h4>
+                        <p>Parameter <strong>ARMING_CHECK</strong> mengontrol pemeriksaan keamanan sebelum arming:</p>
+                        <table class="config-table">
+                            <thead>
+                                <tr>
+                                    <th>Nilai</th>
+                                    <th>Nama</th>
+                                    <th>Deskripsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>0</td>
+                                    <td>NONE</td>
+                                    <td>⚠️ Bypass semua arming checks (BERBAHAYA!)</td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>ALL</td>
+                                    <td>✅ Enable semua arming checks (DIREKOMENDASIKAN)</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>BAROMETER</td>
+                                    <td>Check barometer/altitude sensor</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>COMPASS</td>
+                                    <td>Check compass/magnetometer</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>GPS</td>
+                                    <td>Check GPS lock dan satelit count</td>
+                                </tr>
+                                <tr>
+                                    <td>16</td>
+                                    <td>INS</td>
+                                    <td>Check inertial navigation system</td>
+                                </tr>
+                                <tr>
+                                    <td>32</td>
+                                    <td>PARAMETERS</td>
+                                    <td>Check parameter consistency</td>
+                                </tr>
+                                <tr>
+                                    <td>64</td>
+                                    <td>RC</td>
+                                    <td>Check radio control connection</td>
+                                </tr>
+                                <tr>
+                                    <td>128</td>
+                                    <td>VOLTAGE</td>
+                                    <td>Check battery voltage levels</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="highlight-box">
+                            <h4>💡 Tips Arming Check:</h4>
+                            <ul>
+                                <li><strong>ARMING_CHECK=1 (ALL)</strong>: Paling aman, semua sensor dicek</li>
+                                <li><strong>Custom value</strong>: Jumlahkan nilai yang diinginkan (contoh: 2+4+64 = 70)</li>
+                                <li><strong>Testing/Debug</strong>: Bisa temporary set ke 0, tapi JANGAN untuk flight!</li>
+                                <li><strong>Common issues</strong>: GPS (8), Compass (4), RC (64) sering jadi masalah</li>
+                            </ul>
+                        </div>
+                        
                         <div class="alert alert-warning">
-                            <strong>⚠️ Safety:</strong> Pastikan switch arming berada di posisi yang aman
+                            <strong>⚠️ Safety:</strong> Pastikan switch arming berada di posisi yang aman dan ARMING_CHECK=1 untuk keamanan maksimal
                         </div>
                     </div>
                 </div>
@@ -693,35 +799,207 @@
                 </div>
             </section>
 
-            <!-- Step 12: Battery Failsafe -->
+            <!-- Step 12: Failsafe Configuration -->
             <section class="step-content" id="step12" style="display:none;">
-                <h2>12. Battery Failsafe</h2>
+                <h2>12. Konfigurasi Failsafe</h2>
                 <div class="instruction-card">
                     <div class="instruction-content">
-                        <h3>Konfigurasi Failsafe</h3>
+                        <p>Failsafe adalah sistem keamanan otomatis yang mengambil kontrol drone ketika terjadi masalah. ArduPilot memiliki 3 jenis failsafe utama:</p>
+                        
+                        <h3>🔋 Battery Failsafe</h3>
+                        <p>Melindungi drone dari kerusakan akibat undervoltage dan memastikan cukup daya untuk landing aman.</p>
+                        
+                        <h4>Battery Failsafe Actions:</h4>
+                        <table class="config-table">
+                            <thead>
+                                <tr>
+                                    <th>Nilai</th>
+                                    <th>Action</th>
+                                    <th>Deskripsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>0</td><td>None</td><td>❌ Tidak ada tindakan (TIDAK AMAN)</td></tr>
+                                <tr><td>1</td><td>Land</td><td>🛬 Landing di tempat saat ini (DIREKOMENDASIKAN)</td></tr>
+                                <tr><td>2</td><td>RTL</td><td>🏠 Return to Launch dan landing</td></tr>
+                                <tr><td>3</td><td>SmartRTL</td><td>🧭 Smart Return (ikuti jalur terbang kembali)</td></tr>
+                                <tr><td>4</td><td>SmartRTL or Land</td><td>🧭🛬 Smart RTL jika memungkinkan, atau Land</td></tr>
+                                <tr><td>5</td><td>Terminate</td><td>⚠️ Matikan motor langsung (BERBAHAYA!)</td></tr>
+                            </tbody>
+                        </table>
+                        
                         <div class="param-list">
                             <div class="param-item">
                                 <code>BATT_FS_CRT_ACT = 1</code>
-                                <span>Critical battery action: Land</span>
+                                <span>Critical battery action: Land immediately</span>
                             </div>
                             <div class="param-item">
-                                <code>BATT_FS_LOW_ACT = 1</code>
-                                <span>Low battery action: Land</span>
+                                <code>BATT_FS_LOW_ACT = 2</code>
+                                <span>Low battery action: Return to Launch</span>
+                            </div>
+                            <div class="param-item">
+                                <code>BATT_ARM_VOLT = 22.1</code>
+                                <span>Minimum voltage untuk arming (6S: 22.1V)</span>
+                            </div>
+                            <div class="param-item">
+                                <code>BATT_CRT_VOLT = 21.0</code>
+                                <span>Critical voltage trigger (6S: 21.0V)</span>
+                            </div>
+                            <div class="param-item">
+                                <code>BATT_LOW_VOLT = 21.6</code>
+                                <span>Low voltage warning (6S: 21.6V)</span>
+                            </div>
+                        </div>
+                        
+                        <h3>📡 RC Failsafe (Radio Control)</h3>
+                        <p>Mengontrol drone ketika koneksi radio terputus atau signal lemah.</p>
+                        
+                        <h4>RC Failsafe Actions:</h4>
+                        <table class="config-table">
+                            <thead>
+                                <tr>
+                                    <th>Nilai</th>
+                                    <th>Action</th>
+                                    <th>Deskripsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>0</td><td>None</td><td>❌ Continue dengan last command (BERBAHAYA)</td></tr>
+                                <tr><td>1</td><td>Land</td><td>🛬 Landing di tempat saat ini</td></tr>
+                                <tr><td>2</td><td>RTL</td><td>🏠 Return to Launch (DIREKOMENDASIKAN)</td></tr>
+                                <tr><td>3</td><td>SmartRTL</td><td>🧭 Smart Return to Launch</td></tr>
+                                <tr><td>4</td><td>SmartRTL or Land</td><td>🧭🛬 Smart RTL atau Land jika tidak bisa</td></tr>
+                                <tr><td>5</td><td>Terminate</td><td>⚠️ Matikan motor (HANYA untuk emergency)</td></tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="param-list">
+                            <div class="param-item">
+                                <code>FS_THR_ENABLE = 1</code>
+                                <span>Enable throttle failsafe</span>
+                            </div>
+                            <div class="param-item">
+                                <code>FS_THR_VALUE = 975</code>
+                                <span>Throttle failsafe PWM value</span>
                             </div>
                             <div class="param-item">
                                 <code>RC_FS_TIMEOUT = 2</code>
-                                <span>Radio failsafe timeout (seconds)</span>
+                                <span>RC timeout dalam detik</span>
+                            </div>
+                            <div class="param-item">
+                                <code>FS_OPTIONS = 0</code>
+                                <span>Failsafe options (advanced)</span>
                             </div>
                         </div>
+                        
+                        <h3>💻 GCS Failsafe (Ground Control Station)</h3>
+                        <p>Backup failsafe ketika koneksi telemetry dengan ground station terputus.</p>
+                        
+                        <div class="param-list">
+                            <div class="param-item">
+                                <code>FS_GCS_ENABLE = 1</code>
+                                <span>Enable GCS failsafe</span>
+                            </div>
+                            <div class="param-item">
+                                <code>FS_TIMEOUT = 5</code>
+                                <span>GCS timeout dalam detik</span>
+                            </div>
+                        </div>
+                        
+                        <div class="highlight-box">
+                            <h4>🔍 Perbedaan RTL vs SmartRTL:</h4>
+                            
+                            <h5>🏠 RTL (Return to Launch) - Traditional:</h5>
+                            <ul>
+                                <li>📍 Terbang langsung ke Home position dalam garis lurus</li>
+                                <li>📏 Menggunakan jarak terdekat (straight line)</li>
+                                <li>🌊 Bisa melewati obstacle yang tidak ada saat takeoff</li>
+                                <li>⚡ Cepat dan sederhana, tidak butuh memory banyak</li>
+                                <li>🎯 Cocok untuk area terbuka tanpa banyak obstacle</li>
+                            </ul>
+                            
+                            <h5>🧭 SmartRTL - Intelligent Path:</h5>
+                            <ul>
+                                <li>🛤️ Mengikuti balik jalur terbang yang sudah dilalui</li>
+                                <li>🧠 Menyimpan "breadcrumb" path di memory selama flight</li>
+                                <li>🛡️ Menghindari obstacle yang sudah dilewati saat terbang keluar</li>
+                                <li>💾 Butuh memory untuk menyimpan path points</li>
+                                <li>🏙️ Ideal untuk urban area atau area dengan banyak obstacle</li>
+                                <li>⚠️ Fallback ke RTL jika memory penuh atau path tidak valid</li>
+                            </ul>
+                            
+                            <h5>📊 Perbandingan Situasi:</h5>
+                            <table class="config-table">
+                                <thead>
+                                    <tr>
+                                        <th>Situasi</th>
+                                        <th>RTL</th>
+                                        <th>SmartRTL</th>
+                                        <th>Rekomendasi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Field terbuka</td>
+                                        <td>✅ Bagus</td>
+                                        <td>✅ Bagus</td>
+                                        <td>RTL (lebih simple)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Area urban</td>
+                                        <td>⚠️ Risiko obstacle</td>
+                                        <td>✅ Sangat bagus</td>
+                                        <td>SmartRTL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terbang jauh</td>
+                                        <td>✅ Reliable</td>
+                                        <td>⚠️ Memory terbatas</td>
+                                        <td>RTL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Low memory FC</td>
+                                        <td>✅ Tidak masalah</td>
+                                        <td>❌ Bisa kehabisan</td>
+                                        <td>RTL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FPV racing</td>
+                                        <td>✅ Cepat</td>
+                                        <td>✅ Aman</td>
+                                        <td>SmartRTL</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="highlight-box">
+                            <h4>💡 Tips Failsafe Configuration:</h4>
+                            <ul>
+                                <li><strong>Battery Priority</strong>: Critical=Land (langsung), Low=RTL (pulang dulu)</li>
+                                <li><strong>RC Failsafe</strong>: RTL/SmartRTL berdasarkan environment</li>
+                                <li><strong>Voltage Settings</strong>: Sesuaikan dengan jumlah cell baterai (3S: 10.5V, 4S: 14.0V, 6S: 21.0V)</li>
+                                <li><strong>Testing</strong>: Selalu test failsafe di simulasi atau area aman</li>
+                                <li><strong>SmartRTL Setup</strong>: Enable dengan <code>SRTL_ENABLE=1</code></li>
+                                <li><strong>Hybrid Option</strong>: "SmartRTL or Land" = best of both worlds</li>
+                            </ul>
+                        </div>
+                        
                         <div class="alert alert-warning">
-                            <strong>⚠️ Penting:</strong> Failsafe adalah fitur keamanan yang kritis
+                            <strong>⚠️ PENTING:</strong> 
+                            <ul>
+                                <li>Jangan pernah set failsafe ke "None" atau "Terminate" kecuali situasi khusus</li>
+                                <li>Test semua failsafe di area terbuka dan aman</li>
+                                <li>Pastikan Home position sudah ter-set sebelum takeoff</li>
+                                <li>Monitor voltage dan signal strength secara real-time</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
                 <div class="checklist">
                     <label class="checkbox-item">
                         <input type="checkbox" class="step-check" data-step="12">
-                        <span>Battery failsafe sudah dikonfigurasi</span>
+                        <span>Failsafe configuration sudah dikonfigurasi dengan aman</span>
                     </label>
                 </div>
             </section>
@@ -760,6 +1038,7 @@
                             <button class="copy-btn" onclick="copyParams()">📋 Copy Parameters</button>
                             <pre id="tuningParams">ANGLE_MAX,6000
 ARMING_CHECK,1
+RC2_REVERSED,1
 ATC_ACCEL_P_MAX,162000
 ATC_ACCEL_R_MAX,162000
 ATC_ACCEL_Y_MAX,56000
@@ -800,6 +1079,18 @@ SERVO_DSHOT_ESC,2</pre>
                         </div>
                     </div>
                 </div>
+                
+                <div class="highlight-box">
+                    <h4>⚠️ Perhatian Khusus: RC2_REVERSED Parameter</h4>
+                    <p><strong>RC2_REVERSED=1</strong> adalah parameter penting yang <em>berbeda dengan Betaflight</em>:</p>
+                    <ul>
+                        <li>🔴 <strong>Betaflight</strong>: Throttle stick naik = throttle naik (normal)</li>
+                        <li>🟢 <strong>ArduPilot</strong>: Perlu RC2_REVERSED=1 untuk matching Betaflight behavior</li>
+                        <li>📡 <strong>Tanpa parameter ini</strong>: Throttle stick akan terbalik (berbahaya!)</li>
+                        <li>✅ <strong>Solusi</strong>: Pastikan RC2_REVERSED=1 sudah ter-set untuk konsistensi</li>
+                    </ul>
+                </div>
+                
                 <div class="checklist">
                     <label class="checkbox-item">
                         <input type="checkbox" class="step-check" data-step="14">

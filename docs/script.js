@@ -248,6 +248,65 @@ const rcProtocols = {
     }
 };
 
+// VTX types database
+const vtxTypes = {
+    "walksnail": {
+        name: "Walksnail/Avatar HD",
+        protocols: ["displayport"],
+        defaultProtocol: "displayport",
+        description: "Digital HD video transmission with OSD overlay support",
+        features: ["HD Video", "OSD Overlay", "DisplayPort"],
+        setupNotes: "Supports multiple font styles via goggle menu"
+    },
+    "dji": {
+        name: "DJI Digital",
+        protocols: ["displayport"],
+        defaultProtocol: "displayport", 
+        description: "DJI digital system with WTF-OSD modification required",
+        features: ["HD Video", "OSD Overlay", "DisplayPort"],
+        setupNotes: "Requires rooting goggles and installing WTFOS + msp-osd module"
+    },
+    "hdzero": {
+        name: "HDZero",
+        protocols: ["displayport"],
+        defaultProtocol: "displayport",
+        description: "HDZero digital video transmission system",
+        features: ["HD Video", "OSD Overlay", "DisplayPort"],
+        setupNotes: "Set OSDx_TXT_RES to 0 or 1 for resolution"
+    },
+    "analog": {
+        name: "Analog/Traditional",
+        protocols: ["none"],
+        defaultProtocol: "none",
+        description: "Traditional analog video transmission",
+        features: ["Analog Video"],
+        setupNotes: "OSD overlay melalui MinimOSD atau built-in FC OSD"
+    }
+};
+
+// VTX protocols database
+const vtxProtocols = {
+    "displayport": {
+        name: "DisplayPort",
+        ardupilotProtocol: "42",
+        baudRate: 115200,
+        description: "DisplayPort protocol for HD VTX OSD overlay",
+        wiring: "Connect VTX DisplayPort TX to FC UART TX pin (single wire)",
+        parameters: [
+            "OSD_TYPE,5",
+            "MSP_OPTIONS,0"
+        ]
+    },
+    "none": {
+        name: "Tidak ada protokol",
+        ardupilotProtocol: "0",
+        baudRate: 0,
+        description: "Tidak menggunakan serial komunikasi dengan VTX",
+        wiring: "Hanya sambung video dan power",
+        parameters: []
+    }
+};
+
 // Peripheral protocol database (updated)
 const peripheralProtocols = {
     "gps1": {
@@ -267,7 +326,7 @@ const peripheralProtocols = {
         wiring: "Connect GPS TX to FC RX, GPS RX to FC TX"
     },
     "vtx": {
-        name: "VTX (OSD DisplayPort)",
+        name: "VTX (OSD)",
         protocol: "DisplayPort",
         ardupilotProtocol: "42",
         baudRate: 115200,
@@ -690,6 +749,43 @@ function updateWiringDiagram(enabledPeripherals) {
                         </div>
                     `;
                 }
+            } else if (peripheral === 'vtx') {
+                // Special handling for VTX
+                const vtxProtocolData = vtxProtocols[config.protocol];
+                const vtxTypeData = vtxTypes[hardwareConfig.vtxType || 'walksnail'];
+                
+                if (vtxProtocolData && vtxTypeData) {
+                    let setupInstructions = '';
+                    if (vtxTypeData.setupNotes) {
+                        setupInstructions += `<div class="setup-steps"><h6>📋 Setup ${vtxTypeData.name}:</h6><p>${vtxTypeData.setupNotes}</p></div>`;
+                    }
+                    
+                    let additionalParams = '';
+                    if (vtxProtocolData.parameters && vtxProtocolData.parameters.length > 0) {
+                        additionalParams += '<div class="additional-params"><h6>⚙️ Parameter Tambahan:</h6>';
+                        vtxProtocolData.parameters.forEach(param => {
+                            additionalParams += `<code>${param}</code><br>`;
+                        });
+                        additionalParams += '</div>';
+                    }
+                    
+                    wiringInstructions += `
+                        <div class="wiring-item">
+                            <h5>🔌 ${vtxTypeData.name} - ${vtxProtocolData.name} (${config.uart})</h5>
+                            <p>${vtxProtocolData.wiring}</p>
+                            <p><strong>Features:</strong> ${vtxTypeData.features.join(', ')}</p>
+                            ${setupInstructions}
+                            ${config.protocol !== 'none' ? `
+                            <div class="param-display">
+                                <h6>🔧 Parameter Serial Port:</h6>
+                                <code>SERIAL${config.uart.replace('UART', '')}_PROTOCOL = ${vtxProtocolData.ardupilotProtocol}</code>
+                                <code>SERIAL${config.uart.replace('UART', '')}_BAUD = ${Math.floor(vtxProtocolData.baudRate / 1000)}</code>
+                            </div>
+                            ` : ''}
+                            ${additionalParams}
+                        </div>
+                    `;
+                }
             } else {
                 // Standard peripheral handling
                 const protocolData = peripheralProtocols[peripheral];
@@ -1102,16 +1198,17 @@ function initializeHardwareConfig() {
         gps2: '',
         motor: 'Emax Eco II 1750KV',
         battery: '6s',
-        frameSize: '5inch',
+        frameSize: '5',
         frameClass: '1', // Quad
         frameType: '18', // Quad X (BF Reversed) - prop-out
-        vtx: 'Walksnail Avatar Mini',
+        vtxType: 'walksnail',
+        vtxModel: 'Avatar Mini',
         notes: '',
         // Peripheral configuration
         peripherals: {
             gps1: { enabled: true, uart: 'UART6' },
             gps2: { enabled: false, uart: 'UART5' },
-            vtx: { enabled: true, uart: 'UART1' },
+            vtx: { enabled: true, uart: 'UART1', protocol: 'displayport' },
             'rc-receiver': { 
                 enabled: true, 
                 uart: 'UART2',
@@ -1152,9 +1249,10 @@ function populateHardwareForm() {
     document.getElementById('gps2-input').value = hardwareConfig.gps2 || '';
     document.getElementById('motor-input').value = hardwareConfig.motor || '';
     document.getElementById('battery-input').value = hardwareConfig.battery || '6s';
-    document.getElementById('frame-size-input').value = hardwareConfig.frameSize || '5inch';
+    document.getElementById('frame-size-input').value = hardwareConfig.frameSize || '5';
     document.getElementById('frame-class-input').value = hardwareConfig.frameClass || '1';
-    document.getElementById('vtx-input').value = hardwareConfig.vtx || '';
+    document.getElementById('vtx-type-select').value = hardwareConfig.vtxType || 'walksnail';
+    document.getElementById('vtx-model-input').value = hardwareConfig.vtxModel || 'Avatar Mini';
     document.getElementById('notes-input').value = hardwareConfig.notes || '';
     
     // Update frame type options based on frame class
@@ -1194,6 +1292,25 @@ function populatePeripheralConfig() {
                 rcConfigDetails.style.opacity = config.enabled ? '1' : '0.5';
                 const rcInputs = rcConfigDetails.querySelectorAll('select');
                 rcInputs.forEach(input => input.disabled = !config.enabled);
+            }
+        } else if (peripheral === 'vtx') {
+            // Special handling for VTX
+            const vtxProtocolSelect = document.getElementById('vtx-protocol-select');
+            const vtxUartSelect = document.getElementById('vtx-uart-select');
+            
+            if (checkbox) checkbox.checked = config.enabled;
+            if (vtxProtocolSelect) vtxProtocolSelect.value = config.protocol || 'displayport';
+            if (vtxUartSelect) {
+                vtxUartSelect.value = config.uart;
+                vtxUartSelect.disabled = !config.enabled;
+            }
+            
+            // Enable/disable VTX config details
+            const vtxConfigDetails = document.querySelector('.vtx-config-details');
+            if (vtxConfigDetails) {
+                vtxConfigDetails.style.opacity = config.enabled ? '1' : '0.5';
+                const vtxInputs = vtxConfigDetails.querySelectorAll('select');
+                vtxInputs.forEach(input => input.disabled = !config.enabled);
             }
         } else {
             // Standard peripheral handling
@@ -1239,6 +1356,36 @@ function updateRcProtocolOptions(receiverType) {
         rcProtocolSelect.value = currentProtocol;
     } else {
         rcProtocolSelect.value = rcReceiverTypes[receiverType].defaultProtocol;
+    }
+}
+
+function updateVtxProtocolOptions() {
+    const vtxTypeSelect = document.getElementById('vtx-type-select');
+    const vtxProtocolSelect = document.getElementById('vtx-protocol-select');
+    
+    if (!vtxTypeSelect || !vtxProtocolSelect) return;
+    
+    const vtxType = vtxTypeSelect.value;
+    const vtxTypeData = vtxTypes[vtxType];
+    
+    // Clear existing options
+    vtxProtocolSelect.innerHTML = '';
+    
+    if (vtxTypeData && vtxTypeData.protocols) {
+        vtxTypeData.protocols.forEach(protocol => {
+            const option = document.createElement('option');
+            option.value = protocol;
+            option.textContent = vtxProtocols[protocol]?.name || protocol;
+            vtxProtocolSelect.appendChild(option);
+        });
+        
+        // Set default protocol
+        vtxProtocolSelect.value = vtxTypeData.defaultProtocol;
+    }
+    
+    // Update VTX peripheral configuration
+    if (hardwareConfig.peripherals && hardwareConfig.peripherals.vtx) {
+        hardwareConfig.peripherals.vtx.protocol = vtxTypeData.defaultProtocol;
     }
 }
 
@@ -1309,6 +1456,21 @@ function addPeripheralEventListeners() {
         rcUartSelect.addEventListener('change', updatePeripheralConfig);
     }
     
+    // VTX type change listener
+    const vtxTypeSelect = document.getElementById('vtx-type-select');
+    if (vtxTypeSelect) {
+        vtxTypeSelect.addEventListener('change', function() {
+            updateVtxProtocolOptions();
+            updateHardwareFromForm();
+        });
+    }
+    
+    // VTX protocol change listener
+    const vtxProtocolSelect = document.getElementById('vtx-protocol-select');
+    if (vtxProtocolSelect) {
+        vtxProtocolSelect.addEventListener('change', updatePeripheralConfig);
+    }
+    
     // Other peripheral UART select listeners
     document.querySelectorAll('.peripheral-uart').forEach(select => {
         if (select.id !== 'rc-uart-select') {
@@ -1345,10 +1507,21 @@ function updatePeripheralConfig() {
         const uartSelect = document.getElementById(`${peripheral}-uart-select`);
         
         if (checkbox && uartSelect) {
-            hardwareConfig.peripherals[peripheral] = {
-                enabled: checkbox.checked,
-                uart: uartSelect.value
-            };
+            if (peripheral === 'vtx') {
+                // Special handling for VTX with protocol selection
+                const vtxProtocolSelect = document.getElementById('vtx-protocol-select');
+                hardwareConfig.peripherals[peripheral] = {
+                    enabled: checkbox.checked,
+                    uart: uartSelect.value,
+                    protocol: vtxProtocolSelect ? vtxProtocolSelect.value : 'displayport'
+                };
+            } else {
+                // Standard peripheral handling
+                hardwareConfig.peripherals[peripheral] = {
+                    enabled: checkbox.checked,
+                    uart: uartSelect.value
+                };
+            }
         }
     });
     
@@ -1368,7 +1541,8 @@ function updateHardwareFromForm() {
         frameSize: document.getElementById('frame-size-input').value,
         frameClass: document.getElementById('frame-class-input').value,
         frameType: document.getElementById('frame-type-input').value,
-        vtx: document.getElementById('vtx-input').value.trim(),
+        vtxType: document.getElementById('vtx-type-select').value,
+        vtxModel: document.getElementById('vtx-model-input').value.trim(),
         notes: document.getElementById('notes-input').value.trim()
     };
     
@@ -1435,7 +1609,7 @@ function updateHardwareSummary() {
         </div>
         <div class="summary-item">
             <span class="summary-label">Ukuran Frame:</span>
-            <span class="summary-value">${hardwareConfig.frameSize}</span>
+            <span class="summary-value">${hardwareConfig.frameSize} inch</span>
         </div>
         <div class="summary-item">
             <span class="summary-label">Frame Configuration:</span>
@@ -1447,7 +1621,7 @@ function updateHardwareSummary() {
         </div>
         <div class="summary-item">
             <span class="summary-label">VTX:</span>
-            <span class="summary-value">${hardwareConfig.vtx || 'Belum diisi'}</span>
+            <span class="summary-value">${vtxTypes[hardwareConfig.vtxType]?.name || 'Belum diisi'} - ${hardwareConfig.vtxModel || ''}</span>
         </div>
         ${hardwareConfig.notes ? `
         <div class="summary-item">
@@ -1627,16 +1801,17 @@ function resetHardwareConfig() {
             gps2: '',
             motor: 'Emax Eco II 1750KV',
             battery: '6s',
-            frameSize: '5inch',
+            frameSize: '5',
             frameClass: '1', // Quad
             frameType: '18', // Quad X (BF Reversed) - prop-out
-            vtx: 'Walksnail Avatar Mini',
+            vtxType: 'walksnail',
+            vtxModel: 'Avatar Mini',
             notes: '',
             // Peripheral configuration
             peripherals: {
                 gps1: { enabled: true, uart: 'UART6' },
                 gps2: { enabled: false, uart: 'UART5' },
-                vtx: { enabled: true, uart: 'UART1' },
+                vtx: { enabled: true, uart: 'UART1', protocol: 'displayport' },
                 'rc-receiver': { 
                     enabled: true, 
                     uart: 'UART2',

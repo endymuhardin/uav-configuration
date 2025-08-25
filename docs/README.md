@@ -1,6 +1,6 @@
-# 🚁 Panduan Interaktif Setup ArduPilot Nazgul
+# 🚁 Panduan Interaktif Setup ArduPilot
 
-Panduan interaktif untuk setup ArduPilot pada drone Nazgul dengan SpeedyBee F405 V4.
+Panduan interaktif universal untuk setup ArduPilot pada semua jenis hardware drone.
 
 ## 📋 Fitur Panduan
 
@@ -12,11 +12,12 @@ Panduan interaktif untuk setup ArduPilot pada drone Nazgul dengan SpeedyBee F405
 
 ## 🛠️ Hardware yang Didukung
 
-- **FC**: SpeedyBee F405 V4
-- **ESC**: SpeedyBee BLS 55A (DShot300)
-- **Radio Receiver**: Matek RP4TD
-- **GPS**: MicoAir M10G-5883
-- **Motor**: Emax Eco II 1750KV
+- **Flight Controller**: Semua FC yang mendukung ArduPilot (F4, F7, H7)
+- **ESC**: BLHeli_S, BLHeli_32, DShot protokol
+- **Radio Receiver**: ExpressLRS, Crossfire, FrSky, Spektrum, dll
+- **GPS**: Module GPS standar dengan protokol NMEA/UBX
+- **VTX**: DJI, Walksnail, HDZero, Analog
+- **Motor**: Semua motor brushless dengan KV sesuai baterai
 
 ## 📖 Cara Menggunakan
 
