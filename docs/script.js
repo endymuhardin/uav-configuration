@@ -1261,6 +1261,12 @@ function populateHardwareForm() {
     
     // Populate peripheral configuration
     populatePeripheralConfig();
+    
+    // Update VTX protocol options based on selected VTX type
+    updateVtxProtocolOptions();
+    
+    // Update peripheral display (wiring diagrams, serial table)
+    updatePeripheralDisplay();
 }
 
 function populatePeripheralConfig() {
@@ -1526,6 +1532,7 @@ function updatePeripheralConfig() {
     });
     
     updateHardwareSummary();
+    updatePeripheralDisplay();
     saveHardwareConfig();
 }
 
