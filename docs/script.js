@@ -1591,7 +1591,6 @@ function initializeHardwareConfig() {
         escProtocol: 'dshot300', // ESC Protocol
         fcOrientation: '0', // FC Orientation (Normal)
         vtxType: 'walksnail',
-        vtxModel: 'Avatar Mini',
         notes: '',
         // Peripheral configuration
         peripherals: {
@@ -1647,7 +1646,6 @@ function populateHardwareForm() {
     document.getElementById('frame-size-input').value = hardwareConfig.frameSize || '5';
     document.getElementById('frame-class-input').value = hardwareConfig.frameClass || '1';
     document.getElementById('vtx-type-select').value = hardwareConfig.vtxType || 'walksnail';
-    document.getElementById('vtx-model-input').value = hardwareConfig.vtxModel || 'Avatar Mini';
     document.getElementById('notes-input').value = hardwareConfig.notes || '';
     
     // Update frame type options based on frame class
@@ -2006,7 +2004,6 @@ function updateHardwareFromForm() {
         escProtocol: document.getElementById('esc-protocol-select').value,
         fcOrientation: document.getElementById('fc-orientation-select').value,
         vtxType: document.getElementById('vtx-type-select').value,
-        vtxModel: document.getElementById('vtx-model-input').value.trim(),
         notes: document.getElementById('notes-input').value.trim()
     };
     
@@ -2121,7 +2118,7 @@ function updateHardwareSummary() {
         </div>
         <div class="summary-item">
             <span class="summary-label">VTX:</span>
-            <span class="summary-value">${vtxTypes[hardwareConfig.vtxType]?.name || 'Belum diisi'} - ${hardwareConfig.vtxModel || ''}</span>
+            <span class="summary-value">${vtxTypes[hardwareConfig.vtxType]?.name || 'Belum diisi'}</span>
         </div>
         ${hardwareConfig.notes ? `
         <div class="summary-item">
@@ -2305,7 +2302,6 @@ function resetHardwareConfig() {
             frameClass: '1', // Quad
             frameType: '18', // Quad X (BF Reversed) - prop-out
             vtxType: 'walksnail',
-            vtxModel: 'Avatar Mini',
             notes: '',
             // Peripheral configuration
             peripherals: {
