@@ -120,9 +120,9 @@ const motorMappings = {
             diagram: "quad-x-bf.png"
         },
         "12": { // Quad X (DJI)
-            positions: ["Front Right CCW", "Front Right CW", "Back Right CCW", "Back Right CW"],
+            positions: ["Front Right", "Front Left", "Back Right", "Back Left"],
             rotations: ["CCW", "CW", "CCW", "CW"],
-            description: "DJI motor order",
+            description: "DJI deadcat configuration - wider front for camera clearance",
             diagram: "quad-x-dji.png"
         }
     },
